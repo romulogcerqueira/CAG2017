@@ -2,4 +2,4 @@
 *.blg
 *.log
 *.gz
-.latexconfig
+.latexcfg
