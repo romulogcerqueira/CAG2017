@@ -1,0 +1,11 @@
+{
+  "projectPath": "/home/romulo/workspace/papers/CAG2017",
+  "title": "LaTeX-Plus Project",
+  "root": "elsarticle-template-3-num.tex",
+  "program": "pdflatex",
+  "latexmkOptions": "-bibtex -pdf -shell-escape",
+  "output": ".latex",
+  "openOutput": "true",
+  "postAction": "link",
+  "postPath": ""
+}

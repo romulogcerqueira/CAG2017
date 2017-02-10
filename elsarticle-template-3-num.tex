@@ -57,6 +57,8 @@
 %% for the whole article with \linenumbers after \end{frontmatter}.
 \usepackage{lineno}
 
+\usepackage[utf8]{inputenc}
+
 %% Avoids linenumbers to collide with text for 5p format:
 \setlength\linenumbersep{3pt}
 
@@ -115,10 +117,16 @@
 %% \author[label1,label2]{<author name>}
 %% \address[label1]{<address>}
 %% \address[label2]{<address>}
+\author[senai,ufba]{Rômulo Cerqueira}
+\author[senai]{Tiago Trocoli}
+\author[senai]{Gustavo Neves}
+\author[ufba]{Luciano Oliveira}
+\author[senai]{Sylvain Joyeux}
+\author[senai,dfki]{Jan Albiez}
 
-\author{}
-
-\address{}
+\address[senai]{Brazilian Institute of Robotics, SENAI CIMATEC, Salvador, Bahia, Brazil}
+\address[ufba]{Intelligent Vision Research Lab, Federal University of Bahia, Salvador, Bahia, Brazil}
+\address[dfki]{Robotics Innovation Center, DFKI GmbH, Bremen, Germany}
 
 \begin{abstract}
 %% Text of abstract
@@ -161,8 +169,9 @@
 
 %% References with bibTeX database:
 
+\nocite{*}
 \bibliographystyle{model3-num-names}
-\bibliography{<your-bib-database>}
+\bibliography{elsarticle-template-3-num}
 
 %% Authors are advised to submit their bibtex database files. They are
 %% requested to list a bibtex style file in the manuscript if they do
