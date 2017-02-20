@@ -111,7 +111,7 @@
 %% \address{Address\fnref{label3}}
 %% \fntext[label3]{}
 
-\title{}
+\title{A Novel GPU-based Sonar Simulation for Real-Time Applications}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{<author name>}
@@ -135,9 +135,7 @@
 
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
-
-%% MSC codes here, in the form: \MSC code \sep code
-%% or \MSC[2008] code \sep code (2000 is the default)
+Synthetic Sensor Data \sep Sonar Imaging  \sep GPU-based processing \sep Robot Construction Kit (Rock) \sep Underwater Robotics.
 
 \end{keyword}
 
@@ -148,8 +146,119 @@
 %%
 \linenumbers
 
-%% main text
-\section{}
+\section{Introduction}
+\label{}
+
+% ----------------------------------------------------------------------------------
+
+\section{Sonar Background}
+\label{}
+
+\subsection{Underwater Sonar Devices}
+\label{}
+
+% ----------------------------------------------------------------------------------
+
+
+\section{Closely-related Works}
+\label{}
+
+% ----------------------------------------------------------------------------------
+
+\section{GPU-based Sonar Simulation Modeling}
+\label{dev}
+
+The goal of this work is to simulate any kind of underwater sonar by vertex and fragment processing, with a low computational-time cost. The complete pipeline of this implementation, from the virtual scene to the synthetic acoustic image, is seen in Fig. \ref{fig:sonar_sim} and detailed in the following subsections. The sonar simulation is written in C++ with OpenCV~\footnote{http://opencv.org/} support as ROCK~\footnote{http://rock-robotics.org/} packages.
+
+\subsection{Underwater Environment}
+\label{dev:uwscene}
+
+The Rock-Gazebo integration \cite{watanabe2015} provides the underwater scenario and allow real-time Hardware-in-the-Loop simulations, where Gazebo handles the physical engines and the Rock's graphics tools are responsible by the scene visualization. The graphical data in Rock are based on OpenSceneGraph~\footnote{http://www.openscenegraph.org/} library, a open source C/C++ 3D graphics toolkit built on OpenGL. The osgOcean~\footnote{http://wiki.ros.org/osgOcean} library is used to simulate the ocean's visual effects, and the ocean buoyancy is defined by the Gazebo plugin as described in \cite{watanabe2015}.
+
+All scene's aspects, such as terrain, robot parts (including sensors and joints) and others objects presented in the environment, are defined by SDF files, which uses the SDFormat~\footnote{http://sdformat.org}, a XML format used to describe simulated models and environments.
+
+Each component described in the SDF file becomes a ROCK component, which is based on the Orocos RTT (Real Time Toolkit)~\footnote{http://www.orocos.org/rtt} and provides ports, properties and operations as its communication layer. When the models are loaded, ROCK-Gazebo creates ports to allow other system components to interact with the simulated models \cite{cerqueira2016}.
+
+\subsection{Shader Rendering}
+\label{dev:shader}
+
+Shaders run on the graphic card and allow to take full control of the rendering pipeline process. The OpenGL Shading Language (GLSL)~\footnote{https://www.opengl.org/documentation/glsl/} is a high-level language with a C-based syntax which handles the graphics pipeline on the GPU (Graphics Processing Unit). In order to simulate the sonar sensoring, the fragment and vertex shaders are designed as a camera in an orthographic projection, with a desired position, orientation and field of view. Then the 2D sonar data is computed as:
+
+\begin{itemize}
+    \item \textit{Depth} is the camera focal length and is calculated by the euclidean distance to object's surface point;
+    \item \textit{Intensity} presents the echo reflection energy based on an object's surface normal.
+\end{itemize}
+
+Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also defined by bump mapping and material properties. Bump mapping is a normal-perturbation rendering technique to simulate bumps and wrinkles on the object's surface by passing textures and modifying the normal directions. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN(tangent, bitangent and normal) matrix is used to convert the normal values to world space.
+
+% Since bump maps are built in tangent space, inteporlating the normal vertex and the texture,
+
+% Both intensity and depth data are normalized in the [0,1] interval.
+
+% These data are normalized between $0.0$ and $1.0$, where means, respectively, no echo energy and maximum echo energy for intensity data. For depth data, the minimum value portrays a close object while the maximum value represents a far object, limited by sonar max range. Angle distortion has $0.0$ value in center column, and $1.0$ value in both border columns which presents FOV-X half value. At the end, the shader process gives a 3-channel matrix data of intensity, depth and angle distortion stored in each channel.
+
+% Talk about bump mapping (+ TBN Matrix) and material properties here
+
+% Bump mapping is a texturebased
+% rendering approach for simulating lighting effects
+% caused by patterned irregularities on otherwise locally smooth
+% surfaces. By encoding such surface patterns in texture maps,
+% bump mapping simulates a surface’s irregular lighting
+% appearance without the complexity and expense of modeling
+% the patterns as true geometric perturbations to the surface.
+% Bump mapping combines per-fragment lighting with
+% surface normal perturbations supplied by a texture, in order to
+% simulate lighting interactions on bumpy surfaces. This effect is
+% achieved without requiring excessive geometric tessellation of
+% the surface. As an example, bump mapping can be used to
+% makes surfaces appear as if they have bricks protruding from
+% them, and mortar between the bricks.
+% Most real-world surfaces such as brick walls or cobblestones
+% have small-scale bumpy features that are too fine to
+% represent with highly tessellated geometry
+
+\subsection{Synthetic Sonar Data}
+\label{dev:sonardata}
+
+The 3-channel matrix is processed in order to simulate the virtual sonar data. Initially the matrix is splitted in beam parts. The angular distortion is radially spaced over the horizontal field of view, so each column is correlated with its respective beam, according to sonar bearings, as seen in Fig. \ref{fig:sonar_sim}.
+
+Each beam sub-image (with its respective columns) is converted into bin intensities using the depth and intensity values from shader process. In a real sonar, the bin number is proportional to the real distance from the sensor. In other words, the initial bins represent the closest distances, while the latest bins are the furthest ones. Therefore, a depth histogram is evaluated to associate each pixel with its respective bin, according to the depth channel. This information is used to calculate the intensity of each bin.
+
+Due to acoustic attenuation in the water, the final bins have less echo strength than the first ones, because energy is lost in the environment. In order to correct for this, the sonar uses an energy normalization that applies a time varying gain to spreading losses in the bins. In this simulation approach, the accumulated intensity in each bin is normalized as
+\begin{equation}
+    \label{eq:1}
+    I_{bin} = \sum\limits_{x=1}^n \frac{1}{n} \times S(i_{x}) \, ,
+\end{equation}
+where $I_{bin}$ is the accumulated intensity in the bin after the energy normalization, $x$ is the pixel in the shader matrix, $n$ is the depth histogram value (number of pixels) of that bin, $S(i_{x})$ is the sigmoid function and $i_{x}$ is the intensity value of the pixel $x$.
+
+Finally, the shader image resolution needs to be big enough to fill all bins. If the number of bins is greater than 750, the depth histogram will contain some blank spaces that will reflect in the final sonar image as "black holes". To avoid this problem, it is necessary to distribute the sonar intensity data by applying a simple linear interpolation.
+
+\subsection{Noise Model}
+\label{dev:noise}
+
+Imaging sonar systems are perturbed by a multiplicative noise known as speckle. It is caused by coherent processing of backscattered signals from multiple distributed targets, that degrades image quality and the visual evaluation. The noisy image has been expressed as \cite{lee1980}:
+
+\begin{equation}
+\label{eq:2}
+y(t) = x(t) \times n(t) \, ,
+\end{equation}
+
+where $t$ is the time instant, $y(t)$ is the noised image, $x(t)$ is the free-noise image and $n(t)$ is the speckle noise matrix. This kind of noise is well-modeled as a Gaussian distribution. The physical explanation is provided by the Central Limit of Theorem, which states that the sum of many independent and identically distributed random variables tends to behave a Gaussian random variable \cite{papoulis2002}. For a more realistic sensing, a Gaussian distribution is built and applied as speckle noise in the simulated sonar image. After that, the simulation sonar data process is done.
+
+\subsection{ROCK's Sonar Structure}
+\label{}
+
+To export and display the sonar image, the simulated data is encapsulated as ROCK's sonar data type and provided as an output port of ROCK's component.
+
+
+% ----------------------------------------------------------------------------------
+
+\section{Results and Discussion}
+\label{}
+
+% ----------------------------------------------------------------------------------
+
+\section{Conclusion and Outlook}
 \label{}
 
 %% The Appendices part is started with the command \appendix;

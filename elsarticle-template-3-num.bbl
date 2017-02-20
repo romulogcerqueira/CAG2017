@@ -1,4 +1,4 @@
-\begin{thebibliography}{31}
+\begin{thebibliography}{4}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -14,251 +14,6 @@
 \providecommand{\bibinfo}[2]{#2}
 \ifx\xfnm\undefined \def\xfnm[#1]{\unskip,\space#1}\fi
 %Type = Inproceedings
-\bibitem[{Albiez et~al.(2015)Albiez, Joyeux, Gaudig, Hilljegerdes, Kroffke,
-  Schoo et~al.}]{albiez2015}
-\bibinfo{author}{Albiez\xfnm[ J.]}, \bibinfo{author}{Joyeux\xfnm[ S.]},
-  \bibinfo{author}{Gaudig\xfnm[ C.]}, \bibinfo{author}{Hilljegerdes\xfnm[ J.]},
-  \bibinfo{author}{Kroffke\xfnm[ S.]}, \bibinfo{author}{Schoo\xfnm[ C.]},
-  et~al.
-\newblock \bibinfo{title}{{FlatFish} - a compact auv for subsea resident
-  inspection tasks}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the MTS/IEEE OCEANS 2015}.
-  \bibinfo{address}{Washington DC, USA}; \bibinfo{year}{2015}, p.
-  \bibinfo{pages}{1--8}.
-%Type = Inproceedings
-\bibitem[{Bell and Linnett(1997)}]{bell1997}
-\bibinfo{author}{Bell\xfnm[ J.M.]}, \bibinfo{author}{Linnett\xfnm[ L.M.]}.
-\newblock \bibinfo{title}{Simulation and analysis of synthetic sides-can sonar
-  images}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the IEEE Radar, Sonar and
-  Navigation}. \bibinfo{year}{1997}, p. \bibinfo{pages}{219--226}.
-%Type = Inproceedings
-\bibitem[{Cerqueira et~al.(2016)Cerqueira, Trocoli, Neves, Rebou{\c c}as,
-  Joyeux and Albiez}]{cerqueira2016}
-\bibinfo{author}{Cerqueira\xfnm[ R.]}, \bibinfo{author}{Trocoli\xfnm[ T.]},
-  \bibinfo{author}{Neves\xfnm[ G.]}, \bibinfo{author}{Rebou{\c c}as\xfnm[ L.]},
-  \bibinfo{author}{Joyeux\xfnm[ S.]}, \bibinfo{author}{Albiez\xfnm[ J.]}.
-\newblock \bibinfo{title}{Custom shader and 3d rendering for computationally
-  efficient sonar simulation}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the SIBGRAPI 2016}.
-  \bibinfo{address}{S\~{a}o Jos\'{e} dos Campos, Brazil};
-  \bibinfo{year}{2016},.
-%Type = Article
-\bibitem[{Cho and Yu(2015)}]{cho2015}
-\bibinfo{author}{Cho\xfnm[ H.]}, \bibinfo{author}{Yu\xfnm[ S.]}.
-\newblock \bibinfo{title}{Real-time sonar image enhancement for auv-based
-  acoustic vision}.
-\newblock \bibinfo{journal}{Journal of Ocean Engineering}
-  \bibinfo{year}{2015};:\bibinfo{pages}{568--579}.
-%Type = Incollection
-\bibitem[{Coiras and Groen(2009)}]{coiras2009}
-\bibinfo{author}{Coiras\xfnm[ E.]}, \bibinfo{author}{Groen\xfnm[ J.]}.
-\newblock \bibinfo{title}{Simulation and 3d reconstruction of side-looking
-  sonar images}.
-\newblock In: \bibinfo{editor}{In-Tech\xfnm[]}, editor.
-  \bibinfo{booktitle}{Advances in Sonar Technology};
-  chap.~\bibinfo{chapter}{1}. \bibinfo{year}{2009}, p. \bibinfo{pages}{1--14}.
-%Type = Inproceedings
-\bibitem[{DeMarco et~al.(2015)DeMarco, West and Howard}]{demarco2015}
-\bibinfo{author}{DeMarco\xfnm[ K.]}, \bibinfo{author}{West\xfnm[ M.]},
-  \bibinfo{author}{Howard\xfnm[ A.]}.
-\newblock \bibinfo{title}{A computationally-efficient 2d imaging sonar model
-  for underwater robotics simulations in gazebo}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the MTS/IEEE OCEANS 2015}.
-  \bibinfo{address}{Washington DC, USA}; \bibinfo{year}{2015}, p.
-  \bibinfo{pages}{1--8}.
-%Type = Inproceedings
-\bibitem[{Dos~Santos et~al.(2016)Dos~Santos, Zaffari, Duarte, Fernandes,
-  Drews-Jr. and Botelho}]{dosantos2016}
-\bibinfo{author}{Dos~Santos\xfnm[ M.M.]}, \bibinfo{author}{Zaffari\xfnm[ G.]},
-  \bibinfo{author}{Duarte\xfnm[ A.]}, \bibinfo{author}{Fernandes\xfnm[ D.]},
-  \bibinfo{author}{Drews-Jr.\xfnm[ P.]}, \bibinfo{author}{Botelho\xfnm[ S.]}.
-\newblock \bibinfo{title}{A modified topological descriptor for forward looking
-  sonar images}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the MTS/IEEE OCEANS 2016}.
-  \bibinfo{address}{Shangai, China}; \bibinfo{year}{2016}, p.
-  \bibinfo{pages}{1--8}.
-%Type = Book
-\bibitem[{Drumheller(1998)}]{drumheller1998}
-\bibinfo{author}{Drumheller\xfnm[ D.S.]}.
-\newblock \bibinfo{title}{Introduction to Wave Propagation in Nonlinear Fluids
-  and Solids}.
-\newblock \bibinfo{publisher}{Cambridge University Press};
-  \bibinfo{year}{1998}.
-%Type = Article
-\bibitem[{Fallon et~al.(2013)Fallon, Folkesson, McClelland and
-  Leonard}]{fallon2013}
-\bibinfo{author}{Fallon\xfnm[ M.F.]}, \bibinfo{author}{Folkesson\xfnm[ J.]},
-  \bibinfo{author}{McClelland\xfnm[ H.]}, \bibinfo{author}{Leonard\xfnm[
-  J.J.]}.
-\newblock \bibinfo{title}{Relocating underwater features autonomously using
-  sonar-based slam}.
-\newblock \bibinfo{journal}{Journal of Ocean Engineering}
-  \bibinfo{year}{2013};:\bibinfo{pages}{500--513}.
-%Type = Inproceedings
-\bibitem[{Forouher et~al.(2011)Forouher, Hartmann, Litza and
-  Maehle}]{forouher2011}
-\bibinfo{author}{Forouher\xfnm[ D.]}, \bibinfo{author}{Hartmann\xfnm[ J.]},
-  \bibinfo{author}{Litza\xfnm[ M.]}, \bibinfo{author}{Maehle\xfnm[ E.]}.
-\newblock \bibinfo{title}{Sonar-based fastslam in an underwater environment
-  using walls as features}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the ICAR 2011}.
-  \bibinfo{address}{Tallinn, Estonia}; \bibinfo{year}{2011}, p.
-  \bibinfo{pages}{588--593}.
-%Type = Article
-\bibitem[{Ganesan et~al.(2015)Ganesan, Chitre and Brekke}]{ganesan2015}
-\bibinfo{author}{Ganesan\xfnm[ V.]}, \bibinfo{author}{Chitre\xfnm[ M.]},
-  \bibinfo{author}{Brekke\xfnm[ E.]}.
-\newblock \bibinfo{title}{Robust underwater obstacle detection and collision
-  avoidance}.
-\newblock \bibinfo{journal}{Autonomous Robots}
-  \bibinfo{year}{2015};:\bibinfo{pages}{1--21}.
-%Type = Inproceedings
-\bibitem[{Guth et~al.(2014)Guth, Silveira, Botelho, Drews~Jr. and
-  Ballester}]{guth2014}
-\bibinfo{author}{Guth\xfnm[ F.]}, \bibinfo{author}{Silveira\xfnm[ L.]},
-  \bibinfo{author}{Botelho\xfnm[ S.]}, \bibinfo{author}{Drews~Jr.\xfnm[ P.]},
-  \bibinfo{author}{Ballester\xfnm[ P.]}.
-\newblock \bibinfo{title}{Underwater slam: Challenges, state of the art,
-  algorithms and a new biologically-inspired approach}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the BIOROB 2014}.
-  \bibinfo{year}{2014}, p. \bibinfo{pages}{981--986}.
-%Type = Inproceedings
-\bibitem[{Guerneve and Petillot(2015)}]{guerneve2015}
-\bibinfo{author}{Guerneve\xfnm[ T.]}, \bibinfo{author}{Petillot\xfnm[ Y.]}.
-\newblock \bibinfo{title}{Underwater 3d reconstruction using blueview imaging
-  sonar}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the MTS/IEEE OCEANS 2015}.
-  \bibinfo{year}{2015}, p. \bibinfo{pages}{1--7}.
-%Type = Article
-\bibitem[{He et~al.(2012)He, Liang, Nian, Yan, Li and Shujing}]{he2012}
-\bibinfo{author}{He\xfnm[ B.]}, \bibinfo{author}{Liang\xfnm[ Y.]},
-  \bibinfo{author}{Nian\xfnm[ R.]}, \bibinfo{author}{Yan\xfnm[ T.]},
-  \bibinfo{author}{Li\xfnm[ M.]}, \bibinfo{author}{Shujing\xfnm[ Z.]}.
-\newblock \bibinfo{title}{Auv slam and experiments using a mechanical scanning
-  forward-looking sonar}.
-\newblock \bibinfo{journal}{Sensors}
-  \bibinfo{year}{2012};:\bibinfo{pages}{9386--9410}.
-%Type = Article
-\bibitem[{Hover et~al.(2012)Hover, Eustice, Kim, Englot, Johannsson, Kaess
-  et~al.}]{hover2012}
-\bibinfo{author}{Hover\xfnm[ F.]}, \bibinfo{author}{Eustice\xfnm[ R.]},
-  \bibinfo{author}{Kim\xfnm[ A.]}, \bibinfo{author}{Englot\xfnm[ B.]},
-  \bibinfo{author}{Johannsson\xfnm[ H.]}, \bibinfo{author}{Kaess\xfnm[ M.]},
-  et~al.
-\newblock \bibinfo{title}{Advanced perception, navigation and planning for
-  autonomous in-water ship hull inspection}.
-\newblock \bibinfo{journal}{International Journal of Robotics Research}
-  \bibinfo{year}{2012};:\bibinfo{pages}{1445--1464}.
-%Type = Inproceedings
-\bibitem[{Hurt\'{o}s et~al.(2013)Hurt\'{o}s, Cuf\'{i} and Salvi}]{hurtos2013}
-\bibinfo{author}{Hurt\'{o}s\xfnm[ N.]}, \bibinfo{author}{Cuf\'{i}\xfnm[ X.]},
-  \bibinfo{author}{Salvi\xfnm[ J.]}.
-\newblock \bibinfo{title}{A novel blending technique for two-dimensional
-  forward-looking sonar mosaicing}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the MTS/IEEE OCEANS 2013}.
-  \bibinfo{year}{2013}, p. \bibinfo{pages}{27--33}.
-%Type = Phdthesis
-\bibitem[{Hurt\'{o}s(2014)}]{hurtos2014a}
-\bibinfo{author}{Hurt\'{o}s\xfnm[ N.]}.
-\newblock \bibinfo{title}{Forwad-looking sonar mosaicing for underwater
-  environments}.
-\newblock Ph.D. thesis; Universitat de Girona; \bibinfo{year}{2014}.
-%Type = Inproceedings
-\bibitem[{Hurt\'{o}s et~al.(2014)Hurt\'{o}s, Palomeras, Carrera, Bechlioulis,
-  Karras, Heshmati-alamari et~al.}]{hurtos2014b}
-\bibinfo{author}{Hurt\'{o}s\xfnm[ N.]}, \bibinfo{author}{Palomeras\xfnm[ N.]},
-  \bibinfo{author}{Carrera\xfnm[ M.]}, \bibinfo{author}{Bechlioulis\xfnm[ C.]},
-  \bibinfo{author}{Karras\xfnm[ G.C.]}, \bibinfo{author}{Heshmati-alamari\xfnm[
-  S.]}, et~al.
-\newblock \bibinfo{title}{Sonar-based chain following using an autonomous
-  underwater vehicle}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the IEEE/RSJ IROS 2014}.
-  \bibinfo{year}{2014}, p. \bibinfo{pages}{1978--1983}.
-%Type = Inproceedings
-\bibitem[{Johannsson et~al.(2010)Johannsson, Kaess, Englot, Hover and
-  Leonard}]{johannsson2010}
-\bibinfo{author}{Johannsson\xfnm[ H.]}, \bibinfo{author}{Kaess\xfnm[ M.]},
-  \bibinfo{author}{Englot\xfnm[ B.]}, \bibinfo{author}{Hover\xfnm[ F.]},
-  \bibinfo{author}{Leonard\xfnm[ J.J.]}.
-\newblock \bibinfo{title}{Imaging sonar-aided navigation for autonomous
-  underwater harbor surveillance}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the IROS 2010}.
-  \bibinfo{year}{2010}, p. \bibinfo{pages}{4396--4403}.
-%Type = Article
-\bibitem[{Lee(1980)}]{lee1980}
-\bibinfo{author}{Lee\xfnm[ J.]}.
-\newblock \bibinfo{title}{Digital image enhancement and noise filtering by use
-  of local statistics}.
-\newblock \bibinfo{journal}{IEEE Trans Pattern Anal Mach Intell}
-  \bibinfo{year}{1980};:\bibinfo{pages}{165--168}.
-%Type = Book
-\bibitem[{Loizou et~al.(2008)Loizou, Pattichis and Pattichis}]{loizou2008}
-\bibinfo{author}{Loizou\xfnm[ P.]}, \bibinfo{author}{Pattichis\xfnm[ C.S.]},
-  \bibinfo{author}{Pattichis\xfnm[ C.]}.
-\newblock \bibinfo{title}{Despeckle Filtering Algorithms and Software for
-  Ultrasound Imaging}.
-\newblock \bibinfo{publisher}{Morgan \& Claypool Publishers};
-  \bibinfo{year}{2008}.
-%Type = Misc
-\bibitem[{nau(????)}]{naufragiosdobrasil}
-\bibinfo{title}{Naufr\'{a}gio vapor do jequitaia}.
-\newblock \bibinfo{howpublished}{\url{http://www.naufragiosdobrasil.com.br/}};
-  ????
-\newblock \bibinfo{note}{(Accessed on 10/09/2016)}.
-%Type = Book
-\bibitem[{Papoulis and Pillai(2002)}]{papoulis2002}
-\bibinfo{author}{Papoulis\xfnm[ A.]}, \bibinfo{author}{Pillai\xfnm[ S.]}.
-\newblock \bibinfo{title}{Probability, random variables and stochastic
-  processes}.
-\newblock \bibinfo{publisher}{McGraw Hill}; \bibinfo{year}{2002}.
-%Type = Article
-\bibitem[{Paull et~al.(2014)Paull, Saeedi, Seto and Li}]{paull2014}
-\bibinfo{author}{Paull\xfnm[ L.]}, \bibinfo{author}{Saeedi\xfnm[ S.]},
-  \bibinfo{author}{Seto\xfnm[ M.]}, \bibinfo{author}{Li\xfnm[ H.]}.
-\newblock \bibinfo{title}{Auv navigation and localization: A review}.
-\newblock \bibinfo{journal}{IEEE Journal of Oceanic Engineering}
-  \bibinfo{year}{2014};\bibinfo{volume}{39}(\bibinfo{number}{1}):\bibinfo{pages}{131--149}.
-%Type = Book
-\bibitem[{Ribas et~al.(2010)Ribas, Ridao and Neira}]{ribas2010}
-\bibinfo{author}{Ribas\xfnm[ D.]}, \bibinfo{author}{Ridao\xfnm[ P.]},
-  \bibinfo{author}{Neira\xfnm[ J.]}.
-\newblock \bibinfo{title}{Underwater SLAM for Structured Environments using an
-  Imaging Sonar}.
-\newblock \bibinfo{publisher}{Springer-Verlag Berlin Heidelberg};
-  \bibinfo{year}{2010}.
-%Type = Misc
-\bibitem[{row(????)}]{rowe}
-\bibinfo{title}{Rowe technologies}.
-\newblock \bibinfo{howpublished}{\url{http://rowetechinc.com/products.html}};
-  ????
-\newblock \bibinfo{note}{(Accessed on 10/10/2016)}.
-%Type = Article
-\bibitem[{Sa{\c c} et~al.(2015)Sa{\c c}, Lebleb{\.i}c{\.i}o{\u g}lu and
-  Bozda{\u g}i~Akar}]{sac2015}
-\bibinfo{author}{Sa{\c c}\xfnm[ H.]}, \bibinfo{author}{Lebleb{\.i}c{\.i}o{\u
-  g}lu\xfnm[ K.]}, \bibinfo{author}{Bozda{\u g}i~Akar\xfnm[ G.]}.
-\newblock \bibinfo{title}{2d high-frequency forward-looking sonar simulator
-  based on continuous surfaces approach}.
-\newblock \bibinfo{journal}{Turkish Journal of Electrical Engineering and
-  Computer Sciences}
-  \bibinfo{year}{2015};(\bibinfo{number}{23}):\bibinfo{pages}{2289--2303}.
-%Type = Misc
-\bibitem[{tri(????)}]{tritech}
-\bibinfo{title}{Gemini 720i (300m) - multibeam imaging sonar}.
-\newblock
-  \bibinfo{howpublished}{\url{http://www.tritech.co.uk/product/gemini-720i-300m-multibeam-imaging-sonar}};
-  ????
-\newblock \bibinfo{note}{(Accessed on 10/09/2016)}.
-%Type = Inproceedings
-\bibitem[{Walter et~al.(2008)Walter, Hover and Leonard}]{walter2008}
-\bibinfo{author}{Walter\xfnm[ M.]}, \bibinfo{author}{Hover\xfnm[ F.]},
-  \bibinfo{author}{Leonard\xfnm[ J.]}.
-\newblock \bibinfo{title}{Slam for ship hull inspection using exactly sparse
-  extended information filters}.
-\newblock In: \bibinfo{booktitle}{Proceedings of the ICRA 2008}.
-  \bibinfo{year}{2008}, p. \bibinfo{pages}{1463--1470}.
-%Type = Inproceedings
 \bibitem[{Watanabe et~al.(2015)Watanabe, Neves, Cerqueira, Trocoli, Reis,
   Joyeux et~al.}]{watanabe2015}
 \bibinfo{author}{Watanabe\xfnm[ T.]}, \bibinfo{author}{Neves\xfnm[ G.]},
@@ -267,12 +22,31 @@
 \newblock \bibinfo{title}{The rock-gazebo integration and a real-time auv
   simulation}.
 \newblock In: \bibinfo{booktitle}{Proceedings of 12th Latin American Robotics
-  Symposium ({LARS}'15)}. \bibinfo{address}{Uberl\~{a}ndia, Brazil};
+  Symposium ({LARS}'15)}. \bibinfo{address}{Uberlândia, Brazil};
   \bibinfo{year}{2015}, p. \bibinfo{pages}{132--138}.
+%Type = Inproceedings
+\bibitem[{Cerqueira et~al.(2016)Cerqueira, Trocoli, Neves, Oliveira, Joyeux and
+  Albiez}]{cerqueira2016}
+\bibinfo{author}{Cerqueira\xfnm[ R.]}, \bibinfo{author}{Trocoli\xfnm[ T.]},
+  \bibinfo{author}{Neves\xfnm[ G.]}, \bibinfo{author}{Oliveira\xfnm[ L.]},
+  \bibinfo{author}{Joyeux\xfnm[ S.]}, \bibinfo{author}{Albiez\xfnm[ J.]}.
+\newblock \bibinfo{title}{Custom shader and 3d rendering for computationally
+  efficient sonar simulation}.
+\newblock In: \bibinfo{booktitle}{Proceedings of 28th Conference on Graphics,
+  Patterns and Images ({SIGRAPH}'16)}. \bibinfo{address}{São José dos Campos,
+  Brazil}; \bibinfo{year}{2016}, p. \bibinfo{pages}{1--5}.
+%Type = Article
+\bibitem[{Lee(1980)}]{lee1980}
+\bibinfo{author}{Lee\xfnm[ J.]}.
+\newblock \bibinfo{title}{Digital image enhancement and noise filtering by use
+  of local statistics}.
+\newblock \bibinfo{journal}{IEEE Trans Pattern Anal Mach Intell}
+  \bibinfo{year}{1980};:\bibinfo{pages}{165--168}.
 %Type = Book
-\bibitem[{Wait(2002)}]{waite2002}
-\bibinfo{author}{Wait\xfnm[ A.D.]}.
-\newblock \bibinfo{title}{Sonar for Practising Engineers}.
-\newblock \bibinfo{publisher}{Wiley}; \bibinfo{year}{2002}.
+\bibitem[{Papoulis and Pillai(2002)}]{papoulis2002}
+\bibinfo{author}{Papoulis\xfnm[ A.]}, \bibinfo{author}{Pillai\xfnm[ S.]}.
+\newblock \bibinfo{title}{Probability, random variables and stochastic
+  processes}.
+\newblock \bibinfo{publisher}{McGraw Hill}; \bibinfo{year}{2002}.
 
 \end{thebibliography}
