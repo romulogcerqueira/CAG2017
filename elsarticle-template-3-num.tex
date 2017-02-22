@@ -146,73 +146,55 @@ Synthetic Sensor Data \sep Sonar Imaging  \sep GPU-based processing \sep Robot C
 \linenumbers
 
 \section{Introduction}
-\label{}
+\label{introduction}
+
+XXXXXXXXXXXXXXXXXXXXXX
 
 % ----------------------------------------------------------------------------------
 
 \section{Sonar Background}
 \label{sonar:background}
 
-Sonars are echo-ranging devices that use acoustic energy to locate and survey objects in a desired area underwater. The sonar's transducer emits an acoustic signal (or ping) until they hit with any object or be completely absorbed. When the ultrasonic wave collides with a surface, part of this energy is reflected and other one is refracted. Then the sonar data is built by plotting the echo measured back versus time of acoustic signal.
+Sonars are echo-ranging devices that use acoustic energy to locate and survey objects in a desired area underwater. The sonar's transducer emits an acoustic signal (or ping) until they hit with any object or be completely absorbed. When the sound wave collides with a surface, part of this energy is reflected and other one is refracted. Then the sonar data is built by plotting the echo measured back versus time of acoustic signal.
 
-A single beam transmitted from a sonar is seen in Fig. XX. The horizontal and vertical beamwidths are represented by the azimuth $\theta_{B}$ and elevation $\phi_{B}$ angles respectively, where each sonar record along the beam is named bin. Since the speed of sound underwater is known or can be measured, the time axis effectively corresponds to distance from the device. The backscattered acoustic power in each bin determines the intensity value.
+A single beam transmitted from a sonar is seen in Fig. XX. The horizontal and vertical beamwidths are represented by the azimuth $\theta_{B}$ and elevation $\phi_{B}$ angles respectively, where each sampling along the beam is named bin. Since the speed of sound underwater is known or can be measured, the time axis effectively corresponds to distance from the device. The backscattered acoustic power in each bin determines the intensity value.
 
-The array of transducer readings, with different azimuth directions, forms the final sonar image. Since all incoming signals converge on the same point, the reflected echoes could have originated anywhere along the corresponding elevation width. Therefore, the 3D information is lost in the projection into a 2D image \cite{hurtos2014b}.
+The array of transducer readings, with different azimuth directions, forms the final sonar image. Since all incoming signals converge on the same point, the reflected echoes could have originated anywhere along the corresponding elevation arc at a fixed range. Therefore, the 3D information is lost in the projection into a 2D image \cite{hurtos2014b}.
+
+According to this operation principle, the projection of a 3D point in the sonar image following a nonlinear model depends on the vertical beamwidth of the point. Approximating this elevation angle to the limit (with zero-elevation plane), leads to a linear model in which the sonar can be represented as an orthographic camera \cite{johannsson2010}.
+
+\subsection{Sonar Characteristics}
 
 Although the sonar devices address the main shortcomings of optical sensors, they present more difficult data interpretation, such as:
 
 \begin{enumerate}[(a)]
     \item Shadowing: It is caused by objects blocking the ultrasonic waves transmission and causing regions behind them without acoustic feedback;
-    \item Nonuniform resolution: The amount of pixels used to represent a record intensity grow as its range increases.
+    \item Nonuniform resolution: The amount of pixels used to represent a record intensity grow as its range increases;
     \item Changes in viewpoint: Imaging the same scene from different viewpoints can cause occlusions, shadows movements and significant alterations of observable objects. For instance, when an outstanding object is insonified, its shadow gets shortened as the sonar becomes closer to it;
     \item Low SNR (Signal-to-Noise Ratio): The sonar suffers from low SNR mainly due the very-long-range scanning and the presence of speckle noise introduced caused by acoustic wave interferences \cite{abbott1973}.
     % \item Inhomogeneous Insonification: Since the water is a loss energy transmission medium, the farthest bins present less intensity than the closest ones.
 \end{enumerate}
 
-\subsection{Imaging Sonar Devices}
+\subsection{Underwater Sonar Devices}
 
-The most common types of acoustic sonars are MSIS (Mechanical Scanning Imaging Sonar) and FLS (Forward-Looking Sonar). In the first one (Fig. XX), with one beam per reading, the sonar image is built for each pulse; these images are usually shown on a display pulse by pulse, and the head position reader is rotated according to motor step angle. After a full $360^{\circ}$ sector reading (or the desired sector defined by left and right limit angles), the accumulated sonar data is overwritten. Since the vehicle is moving during the data acquisition process, a undistortion method need to be applied. This sonar device is useful for obstacle avoidance \cite{ganesan2015} and navigation \cite{ribas2010} applications.
+The most common types of acoustic sonars are MSIS (Mechanical Scanning Imaging Sonar) and FLS (Forward-Looking Sonar). In the first one (Fig. XX), with one beam per reading, the sonar image is built for each pulse; these images are usually shown on a display pulse by pulse, and the head position reader is rotated according to motor step angle. After a full $360^{\circ}$ sector reading (or the desired sector defined by left and right limit angles), the accumulated sonar data is overwritten. This sonar device is useful for obstacle avoidance \cite{ganesan2015} and navigation \cite{ribas2010} applications.
 
 For the FLS, with \textit{n} beams being read simultaneously, the current data is overwritten by the next one with a high framerate, similar to a streaming video imagery for real-time applications. This imaging sonar is commonly used for navigation \cite{fallon2013}, mosaicing \cite{hurtos2014a} and target tracking \cite{liu2016} approaches.
-%
-% The sonar reading modes are shown in Figure XX.
-
-% \begin{figure}[h]
-% \centering
-% \subfigure[][]{
-% 	\includegraphics[width=0.47\columnwidth]{figs/sonar_swarths_msis}
-%     \label{fig:swarths:msis}
-% }
-% \subfigure[][]{
-% 	\includegraphics[width=0.45\columnwidth]{figs/sonar_swarths_fls}
-%     \label{fig:swarths:fls}
-% }
-
-% Different categories of sonars exists, depending on
-% frequency, transducer design and echo processing methods.
-%
-%
-%
-
-%
-
-\subsection{Underwater Sonar Devices}
-\label{}
 
 % ----------------------------------------------------------------------------------
 
 \section{Closely-related Works}
-\label{}
+\label{relatedworks}
 
-% Several models have been used to simulate sonar data. \cite{waite2002} applied frequency-domain signal processing to generate synthetic aperture sonar image. In this method, the acoustic image was created by expressing the Fourier transform of the received signal in terms of the transmitted signal. Simplifications in the frequency domain model resulted in a basic illumination model.
-%
-% An application of optical ray tracing to the simulation of underwater side-scan sonar imagery was presented in \cite{bell1997}. The sonar images were generated by the use of acoustic signals represented by rays. The process of projecting rays is repeated for a 2D-array, representing all angles the sonar can emit signal. Then a 3D point cloud is constructed from the ray detection point with high computational costs.
-%
-% The basic methodology of 2D forward-looking sonar simulation, using optical ray tracing combined with processing in the frequency domain, was proposed in \cite{sac2015}. The average simulation time of $2.5$ minutes for one simulated image prevents its evaluation in real time.
-%
-% In \cite{demarco2015}, a 2D forward-looking sonar was proposed using acoustic tubes instead of rays. This implementation added noise to the point cloud generated by rays before converting it into a sonar image, but the material reflectance was statically defined. It resulted in same intensity values for all points on a single object.
-%
-% We are not aware of any previous work which customizes the 3D rendering pipeline to generate underwater sonar images -- the present work therefore represents an important innovation in sonar simulation. Another contribution is that the method proposed herein is able to reproduce any type of underwater sonar images, as seen in evaluation tests with two kind of simulated sonars.
+Recent works have been proposed models based on raytracing and tube tracing techniques to simulate sonar data. An application of optical ray tracing to the simulation of underwater side-scan sonar imagery was formulated by Bell \cite{bell1997}. The images were generated by the use of acoustic signals represented by rays. The process of projecting rays is repeated for a 2D-array, representing all angles the sonar can emit signal.
+
+Waite \cite{waite2002} applied frequency-domain signal processing to generate synthetic aperture sonar image. In this method, the acoustic image was created by expressing the Fourier transform of the received signal in terms of the transmitted signal. For 2D forward-looking sonar simulations, Saç \cite{sac2015} described his model using optical ray tracing also processed in frequency domain.
+
+In DeMarco \cite{demarco2015}, a 2D forward-looking sonar was proposed using acoustic tubes instead of rays. This implementation added noise to the point cloud generated by rays before converting it into a sonar image. Since the material reflectance was statically reflected, it resulted in same intensity values for all points on a single object.
+
+% Gueriot, Coiras, Our last work...
+
+We are not aware of any previous work which manipulates the depth and normal directly on shader rendering to generate the underwater sonar images -- the present work therefore presents an important innovation in sonar simulation. Another contribution is the method proposed herein is able to reproduce any type of underwater sonar images, as seen in evaluation testes with two kind of sonar devices.
 
 % ----------------------------------------------------------------------------------
 
@@ -224,50 +206,30 @@ The goal of this work is to simulate any kind of underwater sonar by vertex and 
 \subsection{Underwater Environment}
 \label{dev:uwscene}
 
-The Rock-Gazebo integration \cite{watanabe2015} provides the underwater scenario and allows real-time Hardware-in-the-Loop simulations, where Gazebo handles the physical engines and the Rock's graphics tools are responsible by the scene visualization. The graphical data in Rock are based on OpenSceneGraph~\footnote{http://www.openscenegraph.org/} library, a open source C/C++ 3D graphics toolkit built on OpenGL. The osgOcean~\footnote{http://wiki.ros.org/osgOcean} library is used to simulate the ocean's visual effects, and the ocean buoyancy is defined by the Gazebo plugin as described in \cite{watanabe2015}.
+The Rock-Gazebo integration \cite{watanabe2015} provides the underwater scenario and allows real-time Hardware-in-the-Loop simulations, where Gazebo handles the physical engines and the Rock's graphics tools are responsible by the scene visualization. The graphical data in Rock are based on OpenSceneGraph~\footnote{http://www.openscenegraph.org/} library, an open source C/C++ 3D graphics toolkit built on OpenGL. The osgOcean~\footnote{http://wiki.ros.org/osgOcean} library is used to simulate the ocean's visual effects, and the ocean buoyancy is defined by the Gazebo plugin as described in \cite{watanabe2015}.
 
-All scene's aspects, such as terrain, robot parts (including sensors and joints) and others objects presented in the environment, are defined by SDF files, which uses the SDFormat~\footnote{http://sdformat.org}, a XML format used to describe simulated models and environments.
+All scene's aspects, such as terrain, robot parts (including sensors and joints) and others objects presented in the environment are defined by SDF files, which uses the SDFormat~\footnote{http://sdformat.org}, a XML format used to describe simulated models and environments.
 
 Each component described in the SDF file becomes a ROCK component, which is based on the Orocos RTT (Real Time Toolkit)~\footnote{http://www.orocos.org/rtt} and provides ports, properties and operations as its communication layer. When the models are loaded, ROCK-Gazebo creates ports to allow other system components to interact with the simulated models \cite{cerqueira2016}.
 
 \subsection{Shader Rendering}
 \label{dev:shader}
-% Talk about the orthographic camera here
 
-Shaders run on the graphic card and allow to take full control of the rendering pipeline process. The OpenGL Shading Language (GLSL)~\footnote{https://www.opengl.org/documentation/glsl/} is a high-level language with a C-based syntax which handles the graphics pipeline on the GPU (Graphics Processing Unit). In order to simulate the sonar sensoring, the fragment and vertex shaders are designed as a camera in an orthographic projection, with a desired position, orientation and field of view. Then the 2D sonar data is computed as:
+Shaders run on the graphic card and allow to take full control of the rendering pipeline process. The OpenGL Shading Language (GLSL)~\footnote{https://www.opengl.org/documentation/glsl/} is a high-level language with a C-based syntax which handles the graphics pipeline on the GPU (Graphics Processing Unit). The underwater scene is sampled by a virtual orthographic camera, whose optical axis is aligned with the intended viewing direction of the imaging sonar. Using custom fragment and vertex shaders, the sonar data is computed as:
 
-\begin{itemize}
+\begin{itemize}[(a)]
     \item \textit{Depth} is the camera focal length and is calculated by the euclidean distance to object's surface point;
-    \item \textit{Intensity} presents the echo reflection energy based on an object's surface normal.
+    \item \textit{Intensity} presents the echo reflection energy based on an object's surface normal;
+    \item \textit{Angle distortion} is the angle formed from the camera center column to the camera boundary column, for both directions.
 \end{itemize}
 
-Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also defined by bump mapping and material properties. Bump mapping is a normal-perturbation rendering technique to simulate bumps and wrinkles on the object's surface by passing textures and modifying the normal directions. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN(tangent, bitangent and normal) matrix is used to convert the normal values to world space.
+These data are normalized in [0,1] interval, where means no energy and maximum echo energy for intensity data respectively. For depth data, the minimum value portrays a close object while the maximum value represents a far object, limited by the sonar maximum range. Angle distortion value is zero in image center column which increases for both borders to present the FOV-X half value.
 
-% Since bump maps are built in tangent space, inteporlating the normal vertex and the texture,
+Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also defined by bump mapping and material properties. Bump mapping is a perturbation rendering technique to simulate irregularities on the object's surface by passing textures and modifying the normal directions. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN (tangent, bitangent and normal) matrix is used to convert the normal values to world space. The different scenes representation is seen in Fig. XX.
 
-% Both intensity and depth data are normalized in the [0,1] interval.
+Moreover, the reflectance allows to describe properly the intensity back from observable objects in shader processing according their material properties (e.g. aluminium has more reflectance than wood and plastic), as seen in Fig. XX.
 
-% These data are normalized between $0.0$ and $1.0$, where means, respectively, no echo energy and maximum echo energy for intensity data. For depth data, the minimum value portrays a close object while the maximum value represents a far object, limited by sonar max range. Angle distortion has $0.0$ value in center column, and $1.0$ value in both border columns which presents FOV-X half value. At the end, the shader process gives a 3-channel matrix data of intensity, depth and angle distortion stored in each channel.
-
-% Talk about bump mapping (+ TBN Matrix) and material properties here
-
-% Bump mapping is a texturebased
-% rendering approach for simulating lighting effects
-% caused by patterned irregularities on otherwise locally smooth
-% surfaces. By encoding such surface patterns in texture maps,
-% bump mapping simulates a surface’s irregular lighting
-% appearance without the complexity and expense of modeling
-% the patterns as true geometric perturbations to the surface.
-% Bump mapping combines per-fragment lighting with
-% surface normal perturbations supplied by a texture, in order to
-% simulate lighting interactions on bumpy surfaces. This effect is
-% achieved without requiring excessive geometric tessellation of
-% the surface. As an example, bump mapping can be used to
-% makes surfaces appear as if they have bricks protruding from
-% them, and mortar between the bricks.
-% Most real-world surfaces such as brick walls or cobblestones
-% have small-scale bumpy features that are too fine to
-% represent with highly tessellated geometry
+At the end, the shader process gives a 3-channel matrix data of intensity, depth and angle distortion stored in each channel.
 
 \subsection{Synthetic Sonar Data}
 \label{dev:sonardata}
@@ -308,10 +270,14 @@ To export and display the sonar image, the simulated data is encapsulated as ROC
 \section{Results and Discussion}
 \label{}
 
+XXXXXXXXXXXXXXXXXXXXXX
+
 % ----------------------------------------------------------------------------------
 
 \section{Conclusion and Outlook}
 \label{}
+
+XXXXXXXXXXXXXXXXXXXXXX
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
