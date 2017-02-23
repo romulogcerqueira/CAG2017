@@ -190,7 +190,7 @@ Recent works have been proposed models based on raytracing and tube tracing tech
 
 Waite \cite{waite2002} applied frequency-domain signal processing to generate synthetic aperture sonar image. In this method, the acoustic image was created by expressing the Fourier transform of the acoustic pulse used to ensonifying the scene. For 2D forward-looking sonar simulations, Saç et al \cite{sac2015} described his model using optical ray tracing also processed in frequency domain. Gu et al \cite{gu2013} modeled a synthetic forward-looking sonar where the ultrasound beams were formed by a set of rays and the objects by small polygons.
 
-A tube tracing approach was used by Gueriot \cite{gueriot2010} to simulate forward-looking sonar frames. The wave propagation is presented as a series of rays always orthogonal to the current local wave front. The intersection between a tube and a scene element define a tube footprint. In DeMarco \cite{demarco2015}, the acoustic tubes are used to generate a 3D point cloud of insonified scene before converting it into a sonar frame. Since the material reflectance was statically reflected, it resulted in same intensity values for all points on a single object.
+A tube tracing approach was used by Gueriot et al \cite{gueriot2010} to simulate multibeam sonar frames. The wave propagation is presented as a series of rays always orthogonal to the current local wave front. The intersection between a tube and a scene element define a tube footprint. In DeMarco \cite{demarco2015}, the acoustic tubes are used to generate a 3D point cloud of insonified scene before converting it into a sonar frame. Since the material reflectance was statically reflected, it resulted in same intensity values for all points on a single object.
 
 We are not aware of any previous work which manipulates the depth and normal directly on shader rendering to generate the underwater sonar images -- the present work therefore presents an important innovation in sonar simulation. Another contribution is the method proposed herein is able to reproduce any type of underwater sonar images, as seen in evaluation testes with two kind of sonar devices.
 
@@ -232,18 +232,18 @@ At the end, the shader process gives a 3-channel matrix data of intensity, depth
 \subsection{Synthetic Sonar Data}
 \label{dev:sonardata}
 
-The 3-channel matrix is processed in order to simulate the virtual sonar data. Initially the matrix is divided in beam parts. The angular distortion is radially spaced over the horizontal field of view, so each column is correlated with its respective beam, according to sonar bearings, as seen in Fig. XX.
+The 3D shader matrix is processed in order to build the corresponding acoustic representation. Since the angular distortion is radially spaced over the horizontal field of view, where all pixels in the same column have the same angle value, the first step is to split the image in number of beam parts. Each column is correlated with its respective beam, according to sonar bearings, as seen in Fig. XX.
 
-Each beam sub-image (with its respective columns) is converted into bin intensities using the depth and intensity values from shader process. In a real sonar, the bin number is proportional to the real distance from the sensor. In other words, the initial bins represent the closest distances, while the latest bins are the furthest ones. Therefore, a depth histogram is evaluated to associate each pixel with its respective bin, according to the depth channel. This information is used to calculate the intensity of each bin.
+Each beam subimage is converted into bin intensities using the depth and intensity channels. In a real imaging sonar, the echo measured back is sampled over time and the bin number is proportional to sensor's range. In other words, the initial bins represent the closest distances, while the latest bins are the furthest ones. Therefore, a depth histogram is evaluated to group the subimage pixels with their respective bins, according to depth channel. This information is used to calculate the accumulated intensity of each bin.
 
-Due to acoustic attenuation in the water, the final bins have less echo strength than the first ones, because energy is lost in the environment. In order to correct for this, the sonar uses an energy normalization that applies a time varying gain to spreading losses in the bins. In this simulation approach, the accumulated intensity in each bin is normalized as
+Due to acoustic beam spreading and absorption in the water, the final bins have less echo strength than the first ones, because the energy is lost two-way in the environment. In order to solve it, the sonar uses a time-varying gain for range dependence compensation which spread losses in the bins \cite{urich2013}. In this simulation approach, the accumulated intensity in each bin is normalized as
 \begin{equation}
     \label{eq:1}
     I_{bin} = \sum\limits_{x=1}^n \frac{1}{n} \times S(i_{x}) \, ,
 \end{equation}
-where $I_{bin}$ is the accumulated intensity in the bin after the energy normalization, $x$ is the pixel in the shader matrix, $n$ is the depth histogram value (number of pixels) of that bin, $S(i_{x})$ is the sigmoid function and $i_{x}$ is the intensity value of the pixel $x$.
+where $I_{bin}$ is the intensity in the bin after the energy normalization, $x$ is the pixel in the shader matrix, $n$ is the depth histogram value (number of pixels) of that bin, $S(i_{x})$ is the sigmoid function and $i_{x}$ is the intensity value of the pixel $x$.
 
-Finally, the shader image resolution needs to be big enough to fill all bins. If the number of bins is greater than 750, the depth histogram will contain some blank spaces that will reflect in the final sonar image as "black holes". To avoid this problem, it is necessary to distribute the sonar intensity data by applying a simple linear interpolation.
+Finally, the sonar image resolution needs to be big enough to fill all bins informations. In this case, the number of bins involved is directly proportional to the sonar image resolution.
 
 \subsection{Noise Model}
 \label{dev:noise}
@@ -255,7 +255,9 @@ Imaging sonar systems are perturbed by a multiplicative noise known as speckle. 
 y(t) = x(t) \times n(t) \, ,
 \end{equation}
 
-where $t$ is the time instant, $y(t)$ is the noised image, $x(t)$ is the free-noise image and $n(t)$ is the speckle noise matrix. This kind of noise is well-modeled as a Gaussian distribution. The physical explanation is provided by the Central Limit of Theorem, which states that the sum of many independent and identically distributed random variables tends to behave a Gaussian random variable \cite{papoulis2002}. For a more realistic sensing, a Gaussian distribution is built and applied as speckle noise in the simulated sonar image. After that, the simulation sonar data process is done.
+where $t$ is the time instant, $y(t)$ is the noised image, $x(t)$ is the free-noise image and $n(t)$ is the speckle noise matrix. This kind of noise is well-modeled as a Gaussian distribution. The physical explanation is provided by the Central Limit of Theorem, which states that the sum of many independent and identically distributed random variables tends to behave a Gaussian random variable \cite{papoulis2002}.
+
+For a more realistic sensing, a Gaussian distribution is built following a non-uniform distribution, skewed towards low values, and applied as speckle noise in the simulated sonar image. After that, the simulation sonar data process is done.
 
 \subsection{ROCK's Sonar Structure}
 \label{}
