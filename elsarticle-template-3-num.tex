@@ -131,7 +131,9 @@
 \address[dfki]{Robotics Innovation Center, DFKI GmbH, Bremen, Germany}
 
 \begin{abstract}
-XXXXXXXXXXXXXXXXXXXXXX
+
+This paper introduces a novel method for simulating underwater sonar sensors by vertex and fragment processing. The virtual scenario used is composed of the integration between the Gazebo simulator and the Robot Construction Kit (ROCK) framework. A 3-channel matrix with depth and intensity buffers and angular distortion values is extracted from OpenSceneGraph 3D scene frames by shader rendering, and subsequently fused and processed to generate the synthetic sonar data. To export and display simulation resources, this approach was written in C++ as ROCK packages. The method is evaluated on two use cases: the virtual acoustic images from a mechanical scanning sonar and forward-looking sonar simulations.
+
 \end{abstract}
 
 \begin{keyword}
@@ -150,7 +152,15 @@ Synthetic Sensor Data \sep Sonar Imaging  \sep GPU-based processing \sep Robot C
 \section{Introduction}
 \label{introduction}
 
-XXXXXXXXXXXXXXXXXXXXXX
+When designing and programming autonomous robotic systems, simulation plays an important role. This applies to physically correct simulations (which are needed to design the hardware but take longer to calculate), as well as to simulations which are not completely physically correct but run in real-time. The latter kind of simulation is important when it comes to developing and testing the control system of autonomous robots, especially the higher level parts. It requires the availability of an applicable simulation platform for rapid prototyping and reproducible virtual environments and sensors to test the decision making algorithms in the control system.
+
+When dealing with autonomous underwater vehicles (AUVs), a real-time simulation plays a key role. Underwater robots usually demand expensive hardware and their target domain can be difficult to access depending on the application. Since an AUV can only scarcely communicate back via mostly unreliable acoustic communication, the robot has to be able to make decisions completely autonomously. While the part dealing with the analysis and interpretation of sensor data can be thoroughly tested on recorded data, for the test and verification of the vehicle's \emph{reaction} to this data, a simulation is needed to reduce the risk of vehicle damage or even vehicle loss in the real world.
+
+Due the AUV acts below the photic zone, with high turbidity and hugh light scattering, the image acquisition by optical devices is limited by short ranges and visibility conditions. Knowing these limitations, the high-frequency sonars systems have been used on navigation and perception applications. Acoustic waves are significantly less affected by water attenuation, facilitating operation at greater ranges even as low to zero visibility conditions with a fast refresh rate. Thus, sonar devices address the main shortcomings of optical sensors though at the expense of providing, in general, noisy data of lower resolution and more difficult interpretation.
+
+In the FlatFish project \cite{albiez2015} was developed an interface to integrate the Gazebo real-time simulator~\footnote{http://gazebosim.org} into the software framework ROCK~\footnote{http://rock-robotics.org/} as presented in \cite{watanabe2015}. With this integration it is able to simulate basic underwater physics and underwater camera systems. The missing part, needed by most underwater robots, was the sonar system.
+
+This paper presents an imaging sonar simulator which manipulates the rendering pipeline to compute a sonar image with a low computation cost.
 
 % ----------------------------------------------------------------------------------
 
@@ -282,7 +292,7 @@ At the end, the shader process gives a 3-channel matrix data of intensity, depth
 \subsection{Synthetic Sonar Data}
 \label{dev:sonardata}
 
-The 3D shader matrix is processed in order to build the corresponding acoustic representation. Since the angular distortion is radially spaced over the horizontal field of view, where all pixels in the same column have the same angle value, the first step is to split the image in number of beam parts. Each column is correlated with its respective beam, according to sonar bearings, as seen in Fig. XX.
+The 3D shader matrix is processed in order to build the corresponding acoustic representation. Since the angular distortion is radially spaced over the horizontal field of view, where all pixels in the same column have the same angle value, the first step is to split the image in number of beam parts. Each column is correlated with its respective beam, according to sonar bearings, as seen in Fig. \ref{fig:sonar_sim} .
 
 Each beam subimage is converted into bin intensities using the depth and intensity channels. In a real imaging sonar, the echo measured back is sampled over time and the bin number is proportional to sensor's range. In other words, the initial bins represent the closest distances, while the latest bins are the furthest ones. Therefore, a depth histogram is evaluated to group the subimage pixels with their respective bins, according to depth channel. This information is used to calculate the accumulated intensity of each bin.
 
