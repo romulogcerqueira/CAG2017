@@ -39,9 +39,10 @@
 %% use the graphics package for simple commands
 %% \usepackage{graphics}
 %% or use the graphicx package for more complicated commands
-%% \usepackage{graphicx}
+\usepackage{graphicx}
 %% or use the epsfig package if you prefer to use the old commands
 %% \usepackage{epsfig}
+\usepackage{subfigure}
 
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amssymb}
@@ -58,6 +59,7 @@
 \usepackage{lineno}
 
 \usepackage[utf8]{inputenc}
+\usepackage{caption}
 
 %% Avoids linenumbers to collide with text for 5p format:
 \setlength\linenumbersep{3pt}
@@ -153,35 +155,65 @@ XXXXXXXXXXXXXXXXXXXXXX
 % ----------------------------------------------------------------------------------
 
 \section{Background}
-\label{sonar:background}
+\label{background}
 
 \subsection{Sonar Image Model}
+\label{sonar:model}
 
 Sonars are echo-ranging devices that use acoustic energy to locate and survey objects in a desired area underwater. The sonar's transducer emits an acoustic signal (or ping) until they hit with any object or be completely absorbed. When the sound wave collides with a surface, part of this energy is reflected, while other is refracted. Then the sonar data is built by plotting the echo measured back versus time of acoustic signal.
 
-A single beam transmitted from a sonar is seen in Fig. XX. The horizontal and vertical beamwidths are represented by the azimuth $\theta_{B}$ and elevation $\phi_{B}$ angles respectively, where each sampling along the beam is named bin. Since the speed of sound underwater is known or can be measured, the time axis effectively corresponds to distance from the device. The backscattered acoustic power in each bin determines the intensity value.
+A single beam transmitted from a sonar is seen in Fig. \ref{fig:sonar_geometry}. The horizontal and vertical beamwidths are represented by the azimuth $\psi$ and elevation $\theta$ angles respectively, where each sampling along the beam is named bin. Since the speed of sound underwater is known or can be measured, the time axis effectively corresponds to distance from the device. The backscattered acoustic power in each bin determines the intensity value.
 
-The array of transducer readings, with different azimuth directions, forms the final sonar image. Since all incoming signals converge on the same point, the reflected echoes could have originated anywhere along the corresponding elevation arc at a fixed range. Therefore, the 3D information is lost in the projection into a 2D image \cite{hurtos2014b}.
+The array of transducer readings, with different azimuth directions, forms the final sonar image. Since all incoming signals converge on the same point, the reflected echoes could have originated anywhere along the corresponding elevation arc at a fixed range. Therefore, the 3D information is lost in the projection into a 2D image \cite{huang2015}.
 
 According to this operation principle, the projection of a 3D point in the sonar image following a nonlinear model depends on the vertical beamwidth of the point. Approximating this elevation angle to the limit (with zero-elevation plane), leads to a linear model in which the sonar can be represented as an orthographic camera \cite{johannsson2010}.
 
+\begin{figure}[h]
+    \includegraphics[width=\columnwidth]{figs/sonar_geometry}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{Imaging sonar geometry \cite{huang2015}. By the projection process, all 3D points belong the same elevation arc (represented as dashed red line) will be represented to the same image point in the 2D plane. So the range $r$ and the azimuth angle $\psi$ are measured, however the elevation angle $\theta$ is lost.}
+    \label{fig:sonar_geometry}
+\end{figure}
+
+% ----------------------------------------------------------------------------------
+
 \subsection{Sonar Characteristics}
+\label{sonar:characteristics}
 
 Although the sonar devices address the main shortcomings of optical sensors, they present more difficult data interpretation, such as:
 
 \begin{enumerate}[(a)]
     \item Shadowing: This effect is caused by objects blocking the ultrasonic waves transmission and causing regions behind them without acoustic feedback. These regions are defined by a black spot in the image occluding part of the scene;
-    \item Nonuniform resolution: The amount of pixels used to represent an intensity record grow as its range increases;
-    \item Changes in viewpoint: Imaging the same scene from different viewpoints can cause occlusions, shadows movements and significant alterations of observable objects. For instance, when an outstanding object is insonified, its shadow gets shortened as the sonar becomes closer to it;
+    \item Non-uniform resolution: The amount of pixels used to represent an intensity record grow as its range increases;
+    \item Changes in viewpoint: Imaging the same scene from different viewpoints can cause occlusions, shadows movements and significant alterations of observable objects \cite{hurtos2014b}. For instance, when an outstanding object is insonified, its shadow gets shortened as the sonar becomes closer to it;
     \item Low SNR (Signal-to-Noise Ratio): The sonar suffers from low SNR mainly due the very-long-range scanning and the presence of speckle noise introduced caused by acoustic wave interferences \cite{abbott1973}.
     % \item Inhomogeneous Insonification: Since the water is a loss energy transmission medium, the farthest bins present less intensity than the closest ones.
 \end{enumerate}
 
+% ----------------------------------------------------------------------------------
+
 \subsection{Underwater Sonar Devices}
+\label{sonar:devices}
 
-The most common types of acoustic sonars are MSIS (Mechanical Scanning Imaging Sonar) and FLS (Forward-Looking Sonar). In the first one (Fig. XX), with one beam per reading, the sonar image is built for each pulse; these images are usually shown on a display pulse by pulse, and the head position reader is rotated according to motor step angle. After a full $360^{\circ}$ sector reading (or the desired sector defined by left and right limit angles), the accumulated sonar data is overwritten. This sonar device is useful for obstacle avoidance \cite{ganesan2015} and navigation \cite{ribas2010} applications.
+The most common types of acoustic sonars are MSIS (Mechanical Scanning Imaging Sonar) and FLS (Forward-Looking Sonar). In the first one (Fig. \ref{fig:swarths:msis}), with one beam per reading, the sonar image is built for each pulse; these images are usually shown on a display pulse by pulse, and the head position reader is rotated according to motor step angle. After a full $360^{\circ}$ sector reading (or the desired sector defined by left and right limit angles), the accumulated sonar data is overwritten. In contrast, the acquisition of a scan image involves a relatively long time and introduces distortions due the vehicle movement. This sonar device is useful for obstacle avoidance \cite{ganesan2015} and navigation \cite{ribas2010} applications.
 
-For the FLS, with \textit{n} beams being read simultaneously, the current data is overwritten by the next one with a high framerate, similar to a streaming video imagery for real-time applications. This imaging sonar is commonly used for navigation \cite{fallon2013}, mosaicing \cite{hurtos2014a} and target tracking \cite{liu2016} approaches.
+For the FLS, as seen in Fig. \ref{fig:swarths:fls}, with \textit{n} beams being read simultaneously, the whole forward view is scanned and the current data is overwritten by the next one with a high framerate, similar to a streaming video imagery for real-time applications. This imaging sonar is commonly used for navigation \cite{fallon2013}, mosaicing \cite{hurtos2014a}, target tracking \cite{liu2016} and 3D reconstruction \cite{huang2015} approaches.
+
+\begin{figure}[h]
+    \centering
+    \subfigure[][]{
+    	\includegraphics[width=0.9\columnwidth]{figs/sonar_swarths_msis}
+        \label{fig:swarths:msis}
+    }
+    \subfigure[][]{
+    	\includegraphics[width=0.9\columnwidth]{figs/sonar_swarths_fls}
+        \label{fig:swarths:fls}
+    }
+    \captionsetup{justification=centering}
+    \caption{Different underwater sonar readings: Mechanically Scanned Imaging Sonar \subref{fig:swarths:msis} and Forward-Looking Sonar \subref{fig:swarths:fls}.}
+    \label{fig:sonar_devices}
+\end{figure}
 
 % ----------------------------------------------------------------------------------
 
@@ -194,14 +226,26 @@ Waite \cite{waite2002} applied frequency-domain signal processing to generate sy
 
 A tube tracing approach was used by Gueriot et al \cite{gueriot2010} to simulate multibeam sonar frames. The wave propagation is presented as a series of rays always orthogonal to the current local wave front. The intersection between a tube and a scene element define a tube footprint. In DeMarco \cite{demarco2015}, the acoustic tubes are used to generate a 3D point cloud of insonified scene before converting it into a sonar frame. Since the material reflectance was statically reflected, it resulted in same intensity values for all points on a single object.
 
-The proposed approach herein entails several novelties. As opposed to the previous works, the depth and normal values are directly manipulated during the scene formation, which generate sonar frames with a low computational cost and allow the usage by real-time applications. Also, this method is able to reproduce any type of underwater sonar images, as seen in evaluation tests with two kind of sonar devices.
+The proposed approach herein entails several novelties. As opposed to the related works, the depth and normal values are directly manipulated during the scene formation, which generate sonar frames with a low computational cost and allow the usage by real-time applications. Also, this method is able to reproduce any type of underwater sonar images, as seen in evaluation tests with two kind of sonar devices.
+
+In addition to our previous work \cite{cerqueira2016}, the normal data can also be defined by bump mapping technique and material's reflectivity. The speckle noise is modeled as a non-uniform Gaussian distribution and added to sonar image.
 
 % ----------------------------------------------------------------------------------
 
-\section{GPU-based Sonar Simulation Modeling}
+\section{GPU-based Sonar Simulation}
 \label{dev}
 
-The goal of this work is to simulate any kind of underwater sonar by vertex and fragment processing, with a low computational-time cost. The complete pipeline of this implementation, from the virtual scene to the synthetic acoustic image, is seen in Fig. XX and detailed in the following subsections. The sonar simulation is written in C++ with OpenCV~\footnote{http://opencv.org/} support as Rock~\footnote{http://rock-robotics.org/} packages.
+The goal of this work is to simulate any kind of underwater sonar by vertex and fragment processing, with a low computational-time cost. The complete pipeline of this implementation, from the virtual scene to the synthetic acoustic image, is seen in Fig. \ref{fig:sonar_sim} and detailed in the following subsections. The sonar simulation is written in C++ with OpenCV~\footnote{http://opencv.org/} support as Rock~\footnote{http://rock-robotics.org/} packages.
+
+\begin{figure*}[ht]
+    \includegraphics[width=0.85\paperwidth]{figs/sonar_sim}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{A graphical representation of the individual steps to get from the OpenSceneGraph scene to a sonar beam data structure.}
+    \label{fig:sonar_sim}
+\end{figure*}
+
+% ----------------------------------------------------------------------------------
 
 \subsection{Underwater Environment}
 \label{dev:uwscene}
@@ -211,6 +255,8 @@ The Rock-Gazebo integration \cite{watanabe2015} provides the underwater scenario
 All scene's aspects, such as terrain, robot parts (including sensors and joints) and others objects presented in the environment are defined by SDF files, which uses the SDFormat~\footnote{http://sdformat.org}, a XML format used to describe simulated models and environments.
 
 Each component described in the SDF file becomes a Rock component, which is based on the Orocos RTT (Real Time Toolkit)~\footnote{http://www.orocos.org/rtt} and provides ports, properties and operations as its communication layer. When the models are loaded, Rock-Gazebo creates ports to allow other system components to interact with the simulated models \cite{cerqueira2016}.
+
+% ----------------------------------------------------------------------------------
 
 \subsection{Shader Rendering}
 \label{dev:shader}
@@ -231,6 +277,8 @@ Moreover, the reflectance allows to describe properly the intensity back from ob
 
 At the end, the shader process gives a 3-channel matrix data of intensity, depth and angle distortion stored in each channel.
 
+% ----------------------------------------------------------------------------------
+
 \subsection{Synthetic Sonar Data}
 \label{dev:sonardata}
 
@@ -247,6 +295,8 @@ where $I_{bin}$ is the intensity in the bin after the energy normalization, $x$ 
 
 Finally, the sonar image resolution needs to be big enough to fill all bins informations. In this case, the number of bins involved is in direct proportion to the sonar image resolution.
 
+% ----------------------------------------------------------------------------------
+
 \subsection{Noise Model}
 \label{dev:noise}
 
@@ -259,20 +309,58 @@ y(t) = x(t) \times n(t) \, ,
 
 where $t$ is the time instant, $y(t)$ is the noised image, $x(t)$ is the free-noise image and $n(t)$ is the speckle noise matrix. This kind of noise is well-modeled as a Gaussian distribution. The physical explanation is provided by the Central Limit of Theorem, which states that the sum of many independent and identically distributed random variables tends to behave a Gaussian random variable \cite{papoulis2002}.
 
-A Gaussian distribution is built following a non-uniform distribution, skewed towards low values (Fig. XX), and applied as speckle noise in the simulated sonar image. After that, the simulation sonar data process is done.
+A Gaussian distribution is built following a non-uniform distribution, skewed towards low values, as seen in Fig. \ref{fig:sonar_sim}, and applied as speckle noise in the simulated sonar image. After that, the simulation sonar data process is done.
 
 \subsection{Rock's Sonar Structure}
-\label{}
+\label{dev:rock}
 
 To export and display the sonar image, the simulated data is encapsulated as Rock's sonar data type and provided as an output port of Rock's component.
 
-
 % ----------------------------------------------------------------------------------
 
-\section{Results and Discussion}
-\label{}
+\section{Experimental Results}
+\label{results}
 
-XXXXXXXXXXXXXXXXXXXXXX
+In order to evaluate the proposed method, the synthetic images generated by the sonar simulator on different scenarios are presented here. The experiments were performed on a computer with Ubuntu 16.04 64 bits, Intel Core i7 3540M processor running at 3 GHz with 16GB DDR3 RAM memory and Nvidia GF108GLM video card.
+
+The first experiment performed a FLS with the following configuration: field of view of $120^{\circ}$ by $20^{\circ}$; 256 beams simultaneously; 500 bins per each beam; range set at $60m$; and angle tilt between the sonar and AUV at $20^{\circ}$.
+
+% In order to evaluate the proposed method, the synthetic images generated by the underwater sonar simulator are presented here. The virtual scenario consisted of the FlatFish robot, a manifold on the seabed and a grid around the robot, as seen in Figs. \ref{fig:uwscene1} and \ref{fig:uwscene2}, respectively.
+
+% \begin{figure}[!h]
+% \includegraphics[width=0.85\columnwidth]{figs/uwscene1}
+% \centering
+% \captionsetup{justification=centering}
+% \caption{FlatFish AUV in ROCK-Gazebo underwater scene.}
+% \label{fig:uwscene1}
+% \end{figure}
+%
+% \begin{figure}[!h]
+% \includegraphics[width=0.84\columnwidth]{figs/uwscene2}
+% \centering
+% \captionsetup{justification=centering}
+% \caption{The underwater scenario used in the MSIS simulation.}
+% \label{fig:uwscene2}
+% \end{figure}
+%
+% The first experiment performed a FLS with the following configuration: field of view of $120^{\circ}$ by $20^{\circ}$; 256 beams simultaneously; 500 bins per each beam; range set at $60m$; and angle tilt between the sonar and AUV at $20^{\circ}$. The manifold model was ensonified to generate the shader matrix from the OpenSceneGraph scene. The frontal face of the target and its shadow, as well as the portion of the seabed, are clearly visible in the FLS image, as seen in Fig. \ref{fig:sim:fls}.
+%
+% \begin{figure}[!h]
+% \includegraphics[width=0.92\columnwidth]{figs/sonar_fls_sim}
+% \centering
+% \caption{The simulated FLS image.}
+% \label{fig:sim:fls}
+% \end{figure}
+%
+% A MSIS on top of the robot was simulated in the second experiment. It was configured as follows: field of view of $3^{\circ}$ by $35^{\circ}$; 500 bins in the single beam; $360^{\circ}$ sector scan reading; range set at $10m$; and a motor step angle of $1.8^{\circ}$. The rotation of the sonar head position produced the synthetic sonar image of the grid surrounding the robot seen in Fig. \ref{fig:sim:msis}.
+%
+% \begin{figure}[h]
+% \includegraphics[width=0.9\columnwidth]{figs/sonar_msis_sim}
+% \centering
+% \captionsetup{justification=centering}
+% \caption{The corresponding simulated MSIS image of surrounding grid.}
+% \label{fig:sim:msis}
+% \end{figure}
 
 % ----------------------------------------------------------------------------------
 
@@ -297,6 +385,7 @@ XXXXXXXXXXXXXXXXXXXXXX
 %%   \citet{key}         ==>>  Author [#]
 
 %% References with bibTeX database:
+\newpage
 
 \nocite{*}
 \bibliographystyle{model3-num-names}
