@@ -132,7 +132,7 @@
 
 \begin{abstract}
 
-This paper introduces a novel method for simulating underwater sonar sensors by vertex and fragment processing. The virtual scenario used is composed of the integration between the Gazebo simulator and the Robot Construction Kit (ROCK) framework. A 3-channel matrix with depth and intensity buffers and angular distortion values is extracted from OpenSceneGraph 3D scene frames by shader rendering, and subsequently fused and processed to generate the synthetic sonar data. To export and display simulation resources, this approach was written in C++ as ROCK packages. The method is evaluated on two use cases: the virtual acoustic images from a mechanical scanning sonar and forward-looking sonar simulations.
+Simulating realistic sensor data is essential for tuning algorithms and applications and avoid the risks on real-world trials, according the acquisition characteristics and operation domain. In contrast to other robotic fields, the simulation of underwater robotics systems is more difficult, due to complexity to reproduce realistic models of sensors, hydrodynamic forces acting on the robot and the environments where the operations take place. This paper introduces an innovative underwater imaging sonar simulator by vertex and fragment processing on GPU (Graphics Processing Unit). The virtual scenario is composed of the integration between Gazebo simulator and the Rock (Robot Construction Kit) framework. The OpenSceneGraph 3D frame is processed during shader rendering in order to compute a 3-channel matrix with depth and intensity buffers and angular distortion values, and subsequently fused to build the sonar image. Additional characteristics of imaging sonars such as speckle noise, material properties and object's surface irregularities are also addressed and introduced in sonar frame. To export and display simulation resources, this approach was written in C++ with OpenCV support as Rock packages. The method is evaluated by simulating two kind of imaging sonar devices in different scenarios with huge fidelity and high frame rate. 
 
 \end{abstract}
 
@@ -160,7 +160,7 @@ Due the AUV acts below the photic zone, with high turbidity and hugh light scatt
 
 In the FlatFish project \cite{albiez2015} was developed an interface to integrate the Gazebo real-time simulator~\footnote{http://gazebosim.org} into the software framework ROCK~\footnote{http://rock-robotics.org/} as presented in \cite{watanabe2015}. With this integration it is able to simulate basic underwater physics and underwater camera systems. The missing part, needed by most underwater robots, was the sonar system.
 
-This paper presents an imaging sonar simulator which manipulates the rendering pipeline to compute a sonar image with a low computation cost.
+This paper presents a computationally efficient imaging sonar simulator which manipulates the rendering pipeline to compute a sonar image.
 
 % ----------------------------------------------------------------------------------
 
@@ -238,7 +238,7 @@ A tube tracing approach was used by Gueriot et al \cite{gueriot2010} to simulate
 
 The proposed approach herein entails several novelties. As opposed to the related works, the depth and normal values are directly manipulated during the scene formation, which generate sonar frames with a low computational cost and allow the usage by real-time applications. Also, this method is able to reproduce any type of underwater sonar images, as seen in evaluation tests with two kind of sonar devices.
 
-In addition to our previous work \cite{cerqueira2016}, the normal data can also be defined by bump mapping technique and material's reflectivity. The speckle noise is modeled as a non-uniform Gaussian distribution and added to sonar image.
+In addition to our previous work \cite{cerqueira2016}, the normal data can also be defined by bump mapping technique and material's reflectivity. Moreover, the speckle noise is modeled as a non-uniform Gaussian distribution and added to sonar image.
 
 % ----------------------------------------------------------------------------------
 
@@ -260,9 +260,9 @@ The goal of this work is to simulate any kind of underwater sonar by vertex and 
 \subsection{Underwater Environment}
 \label{dev:uwscene}
 
-The Rock-Gazebo integration \cite{watanabe2015} provides the underwater scenario and allows real-time Hardware-in-the-Loop simulations, where Gazebo handles the physical engines and the Rock's graphics tools are responsible by the scene visualization. The graphical data in Rock are based on OpenSceneGraph~\footnote{http://www.openscenegraph.org/} library, an open source C/C++ 3D graphics toolkit built on OpenGL. The osgOcean~\footnote{http://wiki.ros.org/osgOcean} library is used to simulate the ocean's visual effects, and the ocean buoyancy is defined by the Gazebo plugin as described in Watanabe et al \cite{watanabe2015}.
+The Rock-Gazebo integration \cite{watanabe2015} provides the underwater scenario and allows real-time Hardware-in-the-Loop simulations, where Gazebo handles the physical engines and the Rock's visualization tools are responsible by the scene rendering. The graphical data in Rock are based on OpenSceneGraph~\footnote{http://www.openscenegraph.org/} library, an open source C/C++ 3D graphics toolkit built on OpenGL. The osgOcean~\footnote{http://wiki.ros.org/osgOcean} library is used to simulate the ocean's visual effects, and the ocean buoyancy is defined by the Gazebo plugin as described in Watanabe et al \cite{watanabe2015}.
 
-All scene's aspects, such as terrain, robot parts (including sensors and joints) and others objects presented in the environment are defined by SDF files, which uses the SDFormat~\footnote{http://sdformat.org}, a XML format used to describe simulated models and environments.
+All scene's aspects, such as world model, robot parts (including sensors and joints) and others objects presented in the environment are defined by SDF files, which uses the SDFormat~\footnote{http://sdformat.org}, a XML format used to describe simulated models and environments for Gazebo. Also, the vehicle and sensor robot description must contain a geometry file. Visual geometries used by the rendering engine are provided in COLLADA format and the collision geometries in STL data.
 
 Each component described in the SDF file becomes a Rock component, which is based on the Orocos RTT (Real Time Toolkit)~\footnote{http://www.orocos.org/rtt} and provides ports, properties and operations as its communication layer. When the models are loaded, Rock-Gazebo creates ports to allow other system components to interact with the simulated models \cite{cerqueira2016}.
 
@@ -281,9 +281,63 @@ Shaders run on the graphic card and grant to take full control of the rendering 
 
 These data are normalized in [0,1] interval, where means no energy and maximum echo energy for intensity data respectively. For depth data, the minimum value portrays a close object while the maximum value represents a far one, limited by the sonar maximum range. Angle distortion value is zero in image center column which increases for both borders to present the horizontal fiel-of-view half value.
 
-Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also be defined by bump mapping and material properties. Bump mapping is a perturbation rendering technique to simulate irregularities on the object's surface by passing textures and modifying the normal directions. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN (Tangent, Bitangent and Normal) matrix is used to convert the normal values to world space. The different scenes representation is seen in Fig. XX.
+Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also be defined by bump mapping and material properties. Bump mapping is a perturbation rendering technique to simulate irregularities on the object's surface by passing textures and modifying the normal directions. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN (Tangent, Bitangent and Normal) matrix is used to convert the normal values to world space. The different scenes representation is seen in Fig. \ref{fig:sonar_bump_mapping}.
 
-Moreover, the reflectance allows to describe properly the intensity back from observable objects in shader processing according their material properties (e.g. aluminium has more reflectance than wood and plastic), as seen in Fig. XX.
+\begin{figure*}[ht]
+    \centering
+    \subfigure[][]{
+        \includegraphics[width=0.23\paperwidth]{figs/bump_0}
+        \label{fig:bump_0}
+    }
+    \subfigure[][]{
+        \includegraphics[width=0.23\paperwidth]{figs/bump_1}
+        \label{fig:bump_1}
+    }
+    \subfigure[][]{
+        \includegraphics[width=0.23\paperwidth]{figs/bump_2}
+        \label{fig:bump_2}
+    }
+    \subfigure[][]{
+        \includegraphics[width=0.23\paperwidth]{figs/bump_3}
+        \label{fig:bump_3}
+    }
+    \subfigure[][]{
+        \includegraphics[width=0.23\paperwidth]{figs/bump_4}
+        \label{fig:bump_4}
+    }
+    \subfigure[][]{
+        \includegraphics[width=0.23\paperwidth]{figs/bump_5}
+        \label{fig:bump_5}
+    }
+    \captionsetup{justification=centering}
+    \caption{Shader rendering with and without bump mapping processing: sphere without texture \subref{fig:bump_0} and with texture \subref{fig:bump_3}; their respective shader image representation in \subref{fig:bump_1} and \subref{fig:bump_4}, where the blue is the normal channel and green is the depth one; and the final acoustic representation in \subref{fig:bump_2} and \subref{fig:bump_5}. By bump mapping technique, the texture changes the normal directions and the sonar image are more reliable in comparison to real objects appearances.}
+    \label{fig:sonar_bump_mapping}
+\end{figure*}
+
+Moreover, the reflectance allows to describe properly the intensity back from observable objects in shader processing according their material properties (e.g. aluminium has more reflectance than wood and plastic). If a object present a desired reflectance, its value must be positive. As seen in Fig. \ref{fig:sonar_reflectances}, when the normal values are directly proportional to the reflectance value $R$.
+
+\begin{figure}[h]
+    \centering
+    \subfigure[][]{
+    	\includegraphics[width=0.47\columnwidth]{figs/reflectance_0}
+        \label{fig:reflectance:0}
+    }
+    \subfigure[][]{
+    	\includegraphics[width=0.47\columnwidth]{figs/reflectance_0_35}
+        \label{fig:reflectance:0.35}
+    }
+    \subfigure[][]{
+    	\includegraphics[width=0.47\columnwidth]{figs/reflectance_1_40}
+        \label{fig:reflectance:1.40}
+    }
+    \subfigure[][]{
+    	\includegraphics[width=0.47\columnwidth]{figs/reflectance_2_12}
+        \label{fig:reflectance:2.12}
+    }
+    \captionsetup{justification=centering}
+    \caption{Examples of different reflectance values $R$ on shader image representation, where blue is the normal channel and green is the depth channel: raw image \subref{fig:reflectance:0}; $R = 0.35$ \subref{fig:reflectance:0.35}; $R = 1.40$ \subref{fig:reflectance:1.40}; and $R = 2.12$ \subref{fig:reflectance:2.12}.}
+    \label{fig:sonar_reflectances}
+\end{figure}
 
 At the end, the shader process gives a 3-channel matrix data of intensity, depth and angle distortion stored in each channel.
 
@@ -393,6 +447,10 @@ XXXXXXXXXXXXXXXXXXXXXX
 %%   \cite{key}          ==>>  [#]
 %%   \cite[chap. 2]{key} ==>>  [#, chap. 2]
 %%   \citet{key}         ==>>  Author [#]
+
+\section*{Acknowledgment}
+%
+The authors would like to thank Shell Brazil and ANP for financing the work and SENAI CIMATEC and DFKI RIC for the great institutional support.
 
 %% References with bibTeX database:
 \newpage
