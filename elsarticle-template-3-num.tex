@@ -160,7 +160,7 @@ Due the AUV acts below the photic zone, with high turbidity and hugh light scatt
 
 In the FlatFish project \cite{albiez2015} was developed an interface to integrate the Gazebo real-time simulator~\footnote{http://gazebosim.org} into the software framework ROCK~\footnote{http://rock-robotics.org/} as presented in \cite{watanabe2015}. With this integration it is able to simulate basic underwater physics and underwater camera systems. The missing part, needed by most underwater robots, was the sonar system.
 
-This paper presents a computationally efficient imaging sonar simulator which manipulates the rendering pipeline to compute a sonar image.
+This paper presents a computationally efficient sonar simulator which manipulates the rendering pipeline to compute a sonar image by two kind of imaging sonar devices.
 
 % ----------------------------------------------------------------------------------
 
@@ -195,7 +195,7 @@ Although the sonar devices address the main shortcomings of optical sensors, the
 
 \begin{enumerate}[(a)]
     \item Shadowing: This effect is caused by objects blocking the ultrasonic waves transmission and causing regions behind them without acoustic feedback. These regions are defined by a black spot in the image occluding part of the scene;
-    \item Non-uniform resolution: The amount of pixels used to represent an intensity record grow as its range increases;
+    \item Non-uniform resolution: The amount of pixels used to represent an intensity record grow as its range increases. This fact causes image distortions and object flatness;
     \item Changes in viewpoint: Imaging the same scene from different viewpoints can cause occlusions, shadows movements and significant alterations of observable objects \cite{hurtos2014b}. For instance, when an outstanding object is insonified, its shadow gets shortened as the sonar becomes closer to it;
     \item Low SNR (Signal-to-Noise Ratio): The sonar suffers from low SNR mainly due the very-long-range scanning and the presence of speckle noise introduced caused by acoustic wave interferences \cite{abbott1973}.
     % \item Inhomogeneous Insonification: Since the water is a loss energy transmission medium, the farthest bins present less intensity than the closest ones.
@@ -285,7 +285,7 @@ In this work, the underwater scene is sampled by a virtual orthographic camera, 
 
 These data are normalized in [0,1] interval, where means no energy and maximum echo energy for intensity data respectively. For depth data, the minimum value portrays a close object while the maximum value represents a far one, limited by the sonar maximum range. Angle distortion value is zero in image center column which increases for both borders to present the half value of horizontal field-of-view.
 
-Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also be defined by bump mapping and material properties. Bump mapping is a perturbation rendering technique to simulate irregularities on the object's surface by passing textures and modifying the normal directions. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN (Tangent, Bitangent and Normal) matrix is used to convert the normal values to world space. The different scenes representation is seen in Fig. \ref{fig:sonar_bump_mapping}.
+Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also be defined by bump mapping and material properties. Bump mapping is a perturbation rendering technique to simulate irregularities on the object's surface by passing textures and modifying the normal directions. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN (Tangent, Bitangent and Normal) matrix is computed to convert the normal values to world space. The different scenes representation is seen in Fig. \ref{fig:sonar_bump_mapping}.
 
 \begin{figure*}[ht]
     \centering
@@ -368,7 +368,7 @@ Finally, the sonar image resolution needs to be big enough to fill all bins info
 \subsection{Noise Model}
 \label{dev:noise}
 
-Imaging sonar systems are perturbed by a multiplicative noise known as speckle. It is caused by coherent processing of backscattered signals from multiple distributed targets, that degrades image quality and the visual evaluation. The noisy image has been expressed as \cite{lee1980}:
+Imaging sonar systems are perturbed by a multiplicative noise known as speckle. It is caused by coherent processing of backscattered signals from multiple distributed targets, that degrades image quality and the visual evaluation. Speckle noise results in constructive and destructive interferences which are shown as bright and dark dots in the image. The noisy image has been expressed as \cite{lee1980}:
 
 \begin{equation}
 \label{eq:2}
@@ -388,8 +388,10 @@ To export and display the sonar image, the simulated data is encapsulated as Roc
 
 % ----------------------------------------------------------------------------------
 
-\section{Experimental Results}
+\section{Results and Discussion}
 \label{results}
+
+\subsection{Experiment Settings}
 
 For quantitative evaluation of the proposed simulator, the experiments were conducted by using the 3D model of FlatFish AUV equipped with two MSIS and FLS sensors on different scenarios, as seen in Figure XX.
 
@@ -403,9 +405,17 @@ For quantitative evaluation of the proposed simulator, the experiments were cond
 
 The FLS is located in AUV's bottom with the following configuration: field of view of $120^{\circ}$ by $20^{\circ}$; 256 beams simultaneously; 1000 bins per each beam; range set at $60m$; and angle tilt between the sonar and AUV at $20^{\circ}$. The MSIS sensors are located in AUV's top and rear and are set as follows: It was configured as follows: field of view of $3^{\circ}$ by $35^{\circ}$; 500 bins in the single beam; $360^{\circ}$ sector scan reading; range set at $10m$; and a motor step angle of $1.8^{\circ}$.
 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+\subsection{Experimental Evaluation}
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 \subsection{Computation time}
 
-In order to evaluate the proposed method, the synthetic images generated by the sonar simulator on different scenarios are presented here. The experiments were performed on a computer with Ubuntu 16.04 64 bits, Intel Core i7 3540M processor running at 3 GHz with 16GB DDR3 RAM memory and Nvidia GF108GLM video card.
+In order to evaluate the proposed method, the synthetic images generated by the sonar simulator on different scenarios are presented here. The experiments were performed on a computer with Ubuntu 16.04 64 bits, Intel Core i7 3540M processor running at 3 GHz with 16GB DDR3 RAM memory and NVIDIA GF108GLM video card.
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 % \begin{figure}[!h]
 % \includegraphics[width=0.85\columnwidth]{figs/uwscene1}
