@@ -132,7 +132,7 @@
 
 \begin{abstract}
 
-Simulating realistic sensor data is essential for tuning algorithms and applications and avoid the risks on real-world trials, according the acquisition characteristics and operation domain. In contrast to other robotic fields, the simulation of underwater robotics systems is more difficult, due to complexity to reproduce realistic models of sensors, hydrodynamic forces acting on the robot and the environments where the operations take place. This paper introduces an innovative underwater imaging sonar simulator by vertex and fragment processing on GPU (Graphics Processing Unit). The virtual scenario is composed of the integration between Gazebo simulator and the Rock (Robot Construction Kit) framework. The OpenSceneGraph 3D frame is processed during shader rendering in order to compute a 3-channel matrix with depth and intensity buffers and angular distortion values, and subsequently fused to build the sonar image. Additional characteristics of imaging sonars such as speckle noise, material properties and object's surface irregularities are also addressed and introduced in sonar frame. To export and display simulation resources, this approach was written in C++ with OpenCV support as Rock packages. The method is evaluated by simulating two kind of imaging sonar devices in different scenarios with huge fidelity and high frame rate. 
+Simulating realistic sensor data is essential for tuning algorithms and applications and avoid the risks on real-world trials, according the acquisition characteristics and operation domain. In contrast to other robotic fields, the simulation of underwater robotics systems is more difficult, due to complexity to reproduce realistic models of sensors, hydrodynamic forces acting on the robot and the environments where the operations take place. This paper introduces an innovative underwater imaging sonar simulator by vertex and fragment processing on GPU (Graphics Processing Unit). The virtual scenario is composed of the integration between Gazebo simulator and the Rock (Robot Construction Kit) framework. The OpenSceneGraph 3D frame is processed during shader rendering in order to compute a 3-channel matrix with depth and intensity buffers and angular distortion values, and subsequently fused to build the sonar image. Additional characteristics of imaging sonars such as speckle noise, material properties and object's surface irregularities are also addressed and introduced in sonar frame. To export and display simulation resources, this approach was written in C++ with OpenCV support as Rock packages. The method is evaluated by simulating two kind of imaging sonar devices in different scenarios with huge fidelity and high frame rate.
 
 \end{abstract}
 
@@ -221,7 +221,7 @@ For the FLS, as seen in Fig. \ref{fig:swarths:fls}, with \textit{n} beams being 
         \label{fig:swarths:fls}
     }
     \captionsetup{justification=centering}
-    \caption{Different underwater sonar readings: Mechanically Scanned Imaging Sonar \subref{fig:swarths:msis} and Forward-Looking Sonar \subref{fig:swarths:fls}.}
+    \caption{Different underwater sonar readings: Mechanically Scanning Imaging Sonar \subref{fig:swarths:msis} and Forward-Looking Sonar \subref{fig:swarths:fls}.}
     \label{fig:sonar_devices}
 \end{figure}
 
@@ -247,7 +247,7 @@ In addition to our previous work \cite{cerqueira2016}, the normal data can also 
 
 The goal of this work is to simulate any kind of underwater sonar by vertex and fragment processing, with a low computational-time cost. The complete pipeline of this implementation, from the virtual scene to the synthetic acoustic image, is seen in Fig. \ref{fig:sonar_sim} and detailed in the following subsections. The sonar simulation is written in C++ with OpenCV~\footnote{http://opencv.org/} support as Rock~\footnote{http://rock-robotics.org/} packages.
 
-\begin{figure*}[ht]
+\begin{figure*}[!htb]
     \includegraphics[width=0.85\paperwidth]{figs/sonar_sim}
     \centering
     \captionsetup{justification=centering}
@@ -271,7 +271,9 @@ Each component described in the SDF file becomes a Rock component, which is base
 \subsection{Shader Rendering}
 \label{dev:shader}
 
-Shaders run on the graphic card and grant to take full control of the rendering pipeline process. The OpenGL Shading Language (GLSL)~\footnote{https://www.opengl.org/documentation/glsl/} is a high-level language with a C-based syntax which handles the graphics pipeline on the GPU (Graphics Processing Unit). The underwater scene is sampled by a virtual orthographic camera, whose optical axis is aligned with the intended viewing direction of the imaging sonar. By programming custom fragment and vertex shaders, the sonar data is computed as:
+Modern graphics hardware presents programmable tasks embedded in Graphical Processing Unit (GPU). Based on parallel computing, this approach can speed up 3D graphics processing and reduce the computational effort of Central Processing Unit (CPU).
+
+The OpenGL Shading Language (GLSL)~\footnote{https://www.opengl.org/documentation/glsl/} is a high-level language with a C-based syntax which allow more direct control of graphics pipeline avoiding to use low-level or hardware-specific languages. In this work, the underwater scene is sampled by a virtual orthographic camera, whose optical axis is aligned with the intended viewing direction of the imaging sonar. By programming the fragment and vertex shaders, the sonar data is computed as:
 
 \begin{itemize}[(a)]
     \item \textit{Depth} is the camera focal length and is calculated by the euclidean distance to object's surface point;
@@ -279,34 +281,34 @@ Shaders run on the graphic card and grant to take full control of the rendering 
     \item \textit{Angle distortion} is the angle formed from the camera center column to the camera boundary column, for both directions.
 \end{itemize}
 
-These data are normalized in [0,1] interval, where means no energy and maximum echo energy for intensity data respectively. For depth data, the minimum value portrays a close object while the maximum value represents a far one, limited by the sonar maximum range. Angle distortion value is zero in image center column which increases for both borders to present the horizontal fiel-of-view half value.
+These data are normalized in [0,1] interval, where means no energy and maximum echo energy for intensity data respectively. For depth data, the minimum value portrays a close object while the maximum value represents a far one, limited by the sonar maximum range. Angle distortion value is zero in image center column which increases for both borders to present the half value of horizontal field-of-view.
 
 Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also be defined by bump mapping and material properties. Bump mapping is a perturbation rendering technique to simulate irregularities on the object's surface by passing textures and modifying the normal directions. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN (Tangent, Bitangent and Normal) matrix is used to convert the normal values to world space. The different scenes representation is seen in Fig. \ref{fig:sonar_bump_mapping}.
 
 \begin{figure*}[ht]
     \centering
     \subfigure[][]{
-        \includegraphics[width=0.23\paperwidth]{figs/bump_0}
+        \includegraphics[width=0.27\paperwidth]{figs/bump_0}
         \label{fig:bump_0}
     }
     \subfigure[][]{
-        \includegraphics[width=0.23\paperwidth]{figs/bump_1}
+        \includegraphics[width=0.27\paperwidth]{figs/bump_1}
         \label{fig:bump_1}
     }
     \subfigure[][]{
-        \includegraphics[width=0.23\paperwidth]{figs/bump_2}
+        \includegraphics[width=0.27\paperwidth]{figs/bump_2}
         \label{fig:bump_2}
     }
     \subfigure[][]{
-        \includegraphics[width=0.23\paperwidth]{figs/bump_3}
+        \includegraphics[width=0.27\paperwidth]{figs/bump_3}
         \label{fig:bump_3}
     }
     \subfigure[][]{
-        \includegraphics[width=0.23\paperwidth]{figs/bump_4}
+        \includegraphics[width=0.27\paperwidth]{figs/bump_4}
         \label{fig:bump_4}
     }
     \subfigure[][]{
-        \includegraphics[width=0.23\paperwidth]{figs/bump_5}
+        \includegraphics[width=0.27\paperwidth]{figs/bump_5}
         \label{fig:bump_5}
     }
     \captionsetup{justification=centering}
@@ -371,7 +373,9 @@ Imaging sonar systems are perturbed by a multiplicative noise known as speckle. 
 y(t) = x(t) \times n(t) \, ,
 \end{equation}
 
-where $t$ is the time instant, $y(t)$ is the noised image, $x(t)$ is the free-noise image and $n(t)$ is the speckle noise matrix. This kind of noise is well-modeled as a Gaussian distribution. The physical explanation is provided by the Central Limit of Theorem, which states that the sum of many independent and identically distributed random variables tends to behave a Gaussian random variable \cite{papoulis2002}.
+where $t$ is the time instant, $y(t)$ is the noised image, $x(t)$ is the free-noise image and $n(t)$ is the speckle noise matrix.
+
+This kind of noise is well-modeled as a Gaussian distribution. The physical explanation is provided by the Central Limit of Theorem, which states that the sum of many independent and identically distributed random variables tends to behave a Gaussian random variable \cite{papoulis2002}.
 
 A Gaussian distribution is built following a non-uniform distribution, skewed towards low values, as seen in Fig. \ref{fig:sonar_sim}, and applied as speckle noise in the simulated sonar image. After that, the simulation sonar data process is done.
 
@@ -385,9 +389,48 @@ To export and display the sonar image, the simulated data is encapsulated as Roc
 \section{Experimental Results}
 \label{results}
 
+For quantitative evaluation of the proposed simulator, the experiments were conducted by using the 3D model of FlatFish AUV equipped with two MSIS and FLS sensors on different scenarios, as seen in Figure XX.
+
+\begin{figure}[!h]
+    \includegraphics[width=\columnwidth]{figs/uwscene1}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{FlatFish AUV in ROCK-Gazebo underwater scene.}
+    \label{fig:uwscene1}
+\end{figure}
+
+The FLS is located in AUV's bottom with the following configuration: field of view of $120^{\circ}$ by $20^{\circ}$; 256 beams simultaneously; 1000 bins per each beam; range set at $60m$; and angle tilt between the sonar and AUV at $20^{\circ}$. The MSIS sensors are located in AUV's top and rear and are set as follows: It was configured as follows: field of view of $3^{\circ}$ by $35^{\circ}$; 500 bins in the single beam; $360^{\circ}$ sector scan reading; range set at $10m$; and a motor step angle of $1.8^{\circ}$.
+
+\subsection{Computation time}
+
 In order to evaluate the proposed method, the synthetic images generated by the sonar simulator on different scenarios are presented here. The experiments were performed on a computer with Ubuntu 16.04 64 bits, Intel Core i7 3540M processor running at 3 GHz with 16GB DDR3 RAM memory and Nvidia GF108GLM video card.
 
+% \begin{figure}[!h]
+% \includegraphics[width=0.85\columnwidth]{figs/uwscene1}
+% \centering
+% \captionsetup{justification=centering}
+% \caption{FlatFish AUV in ROCK-Gazebo underwater scene.}
+% \label{fig:uwscene1}
+% \end{figure}
+%
+% \begin{figure}[!h]
+% \includegraphics[width=0.92\columnwidth]{figs/sonar_fls_sim}
+% \centering
+% \caption{The simulated FLS image.}
+% \label{fig:sim:fls}
+% \end{figure}
+%
+% \begin{figure}[h]
+% \includegraphics[width=0.9\columnwidth]{figs/sonar_msis_sim}
+% \centering
+% \captionsetup{justification=centering}
+% \caption{The corresponding simulated MSIS image of surrounding grid.}
+% \label{fig:sim:msis}
+% \end{figure}
+
 The first experiment performed a FLS with the following configuration: field of view of $120^{\circ}$ by $20^{\circ}$; 256 beams simultaneously; 500 bins per each beam; range set at $60m$; and angle tilt between the sonar and AUV at $20^{\circ}$.
+
+% Moreover, the efficient computational-time grants its usage in real time applications. For 150 sampling frames, one multibeam data is produced every 121.44ms and singlebeam data every 8.5\textit{ms}, much faster than listed by authors in \cite{demarco2015} (1\textit{s}) and \cite{sac2015} (2.5\textit{min}).
 
 % In order to evaluate the proposed method, the synthetic images generated by the underwater sonar simulator are presented here. The virtual scenario consisted of the FlatFish robot, a manifold on the seabed and a grid around the robot, as seen in Figs. \ref{fig:uwscene1} and \ref{fig:uwscene2}, respectively.
 
@@ -431,7 +474,7 @@ The first experiment performed a FLS with the following configuration: field of 
 \section{Conclusion and Outlook}
 \label{}
 
-XXXXXXXXXXXXXXXXXXXXXX
+We presented a method using the shader engine of modern graphic cards to simulate different kinds of sonars in a time-efficient way. The system is already used with success in our underwater projects as an extension of the Gazebo simulator. Future work will focus mainly on add a simple refraction model and extend the 3D world by material properties to allow for different sonar reflections.
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
