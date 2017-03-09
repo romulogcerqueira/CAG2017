@@ -403,41 +403,62 @@ For the evaluation of the proposed simulator, the experiments were conducted by 
     \label{fig:uwscene}
 \end{figure}
 
-The MSIS sensors are located in AUV's top and back and they are configured as follows: field of view of $3^{\circ}$ by $35^{\circ}$, 500 bins in the single beam, a full $360^{\circ}$ sector scan reading, range set at $20m$ and a motor step of $1.8^{\circ}$. By other hand, the FLS takes place in AUV's bottom with the following set: field of view of $120^{\circ}$ by $20^{\circ}$, 256 beams simultaneously, 1000 bins per each beam, range set at $60m$ and angle tilt between the sonar and AUV of $20^{\circ}$.
+The MSIS sensors are located in AUV's top and back and they are configured as follows: field of view of $3^{\circ}$ by $35^{\circ}$, 500 bins in the single beam, a full $360^{\circ}$ sector scan reading and a motor step of $1.8^{\circ}$. By other hand, the FLS takes place in AUV's bottom with the following set: field of view of $120^{\circ}$ by $20^{\circ}$, 256 beams simultaneously, 1000 bins per each beam and angle tilt between the sonar and AUV of $20^{\circ}$.
 
 \subsection{Experimental Evaluation}
 
-XXXXXXXXXXXXXXXX
+The virtual FLS from FlatFish AUV was used to insonify scenes in two scenarios. The first one is composed by the docking station in parallel with a pipeline on the seabed, as seen in Fig. \ref{fig:fls_scene1}. The target's surface is well-defined in the simulated acoustic frame, as seen in Fig. \ref{fig:fls_sim1}, even as the shadows and speckle noise. Given the docking station is metal-made, the texture and reflectivity were set, resulting in a higher intensity shape in comparison with the other targets. Due the sensor configuration and the robot position and similar to real frames, the initial bins usually present a blind region, caused by absence of objects at lower ranges.
+
+The second scenario presents the FlatFish in front of a manifold model on a non-uniform seabed, as seen in Fig. \ref{fig:fls_scene2}. The target model was insonified to generate the sonar frame from the underwater scene. The frontal face of the target and the shadow behind it, as well the portion of the seabed and the degraded data by noise, are clearly visible in the FLS image. The blind region is also represented here.
 
 \begin{figure*}[ht]
     \centering
     \subfigure[][]{
-        \includegraphics[width=0.35\paperwidth,height=5cm]{figs/fls_scene1}
+        \includegraphics[width=0.42\paperwidth,height=5cm]{figs/fls_scene1}
         \label{fig:fls_scene1}
     }
     \subfigure[][]{
-        \includegraphics[width=0.35\paperwidth,height=5cm]{figs/fls_sim1}
+        \includegraphics[width=0.42\paperwidth,height=5cm]{figs/fls_sim1}
         \label{fig:fls_sim1}
     }
     \subfigure[][]{
-        \includegraphics[width=0.35\paperwidth,height=5cm]{figs/fls_scene2}
+        \includegraphics[width=0.42\paperwidth,height=5cm]{figs/fls_scene2}
         \label{fig:fls_scene2}
     }
     \subfigure[][]{
-        \includegraphics[width=0.35\paperwidth,height=5cm]{figs/fls_sim2}
+        \includegraphics[width=0.42\paperwidth,height=5cm]{figs/fls_sim2}
         \label{fig:fls_sim2}
     }
+    \captionsetup{justification=centering}
+    \caption{Forward-looking sonar simulation experiments: Figs. \subref{fig:fls_scene1} and \subref{fig:fls_scene2} presents the trials underwater scenarios and Figs. \subref{fig:fls_sim1} and \subref{fig:fls_sim2} are the following acoustic representations, respectively.}
+    \label{fig:fls}
+\end{figure*}
+
+The MSIS device is simulated in more two experiments. The FlatFish robot in a big textured tank composed the first scene, as seen in Fig. XX. Even as the first scenario of FLS experiment, the reflectivity and texture were set to the target. The rotation of the frontal sonar head position, by a complete $360^{\circ}$ scanning, produced the acoustic frame of tank walls, seen in Fig. XX.
+
+The second experiment involves the vehicle's movement during the data acquisition process. The scene contains a grid around the AUV, as seen in Fig. XX, and the frontal MSIS is used. This trial induces a distortion in the final acoustic frame, because the relative sensor's position with respect to surrounding object changes while the sonar image is being built, as seen in Fig. XX.
+
+\begin{figure*}[ht]
+    \centering
     \subfigure[][]{
-        \includegraphics[width=0.35\paperwidth,height=5cm]{figs/fls_scene1}
-        \label{fig:fls_scene1}
+        \includegraphics[width=0.42\paperwidth,height=5cm]{figs/msis_scene1}
+        \label{fig:msis_scene1}
     }
     \subfigure[][]{
-        \includegraphics[width=0.35\paperwidth,height=5cm]{figs/fls_sim1}
-        \label{fig:fls_sim1}
+        \includegraphics[width=0.42\paperwidth,height=5cm]{figs/msis_sim1}
+        \label{fig:msis_sim1}
+    }
+    \subfigure[][]{
+        \includegraphics[width=0.42\paperwidth,height=5cm]{figs/msis_scene2}
+        \label{fig:msis_scene2}
+    }
+    \subfigure[][]{
+        \includegraphics[width=0.42\paperwidth,height=5cm]{figs/msis_sim1}
+        \label{fig:msis_sim2}
     }
     \captionsetup{justification=centering}
-    \caption{XXXXXXX.}
-    \label{fig:msis:1}
+    \caption{Mechanical Scanning Imaging Sonar trials: the underwater scenes represented in Figs. \subref{fig:msis_scene1} and \subref{fig:msis_scene2} and their following simulated frames in Figs. \subref{fig:msis_sim2} and \subref{fig:msis_sim2}.}
+    \label{fig:msis}
 \end{figure*}
 
 \subsection{Computation time}
@@ -446,7 +467,7 @@ The performance evaluation for this approach was determined as part of suitable 
 
 The elapsed time of each sonar data is stored to compute the mean and standard deviation metrics, after $500$ iterations, as presented in Tables \ref{table:fls} and \ref{table:msis}. After changing the device parameters, such as number of bins, number of beams and field of view, the proposed approach generated the sonar frames with a high frame rate, for both sonar types. Given the Tritech Gemini 720i, a real forward-looking sonar sensor with a field of view of $120^{\circ}$ by $20^{\circ}$ and 256 beams presents a maximum update rate of 15 frames per second, the results grant the usage of the sonar simulator for real-time applications. Also, the MSIS data built by the simulator is able to complete a $360^{\circ}$ scan sufficiently time short in comparison with a real sonar as Tritech Micron DST.
 
-Moreover, since the number of bins is directly proportional to sonar image resolution, as explained in Section \ref{dev:sonardata}, this is also correlated with the computation time. When the number of bins is bigger, the simulator will have a bigger scene frame to compute and generate the sonar data.
+Moreover, since the number of bins is directly proportional to sonar image resolution, as explained in Section \ref{dev:sonardata}, this is also correlated with the computation time. When the number of bins increases, the simulator will have a bigger scene frame to compute and generate the sonar data.
 
 \begin{table*}[htb]
     \caption{Processing time to generate FLS frames with different parameters.}
@@ -491,7 +512,7 @@ Moreover, since the number of bins is directly proportional to sonar image resol
 
 We presented a GPU-based approach for imaging sonar simulation. By the evaluation results on different scenarios, the targets were well-defined on simulated sonar frames. The same model was able to reproduce the sensoring of two kind of sonar devices (FLS and MSIS). Moreover, the real sonar image singularities, such as speckle noise, surface irregularities, shadows, material properties and shapes are also addressed and represented on the synthetic acoustic images.
 
-In addition, the processing time was calculated with different sonar parameters (field of view, number of bins and number of beams). The vertex and fragment processing during the underwater scene rendering accelerates the sonar image building and the mean and standard deviation metrics certified the performance is much closer to real imaging sonars. Therefore, the results granted the usage of this imaging sonar simulator by real-time applications.
+In addition, the processing time was calculated with different sonar parameters (field of view, number of bins and number of beams). The vertex and fragment processing during the underwater scene rendering accelerates the sonar image building and the mean and standard deviation metrics certified the performance is much closely to real imaging sonars. Therefore, the results granted the usage of this imaging sonar simulator by real-time applications.
 
 Next steps will focus on insert additive noise on resulting sonar frame and qualitative and computation-efficiency evaluations with other imaging sonar simulators.
 
