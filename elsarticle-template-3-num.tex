@@ -120,11 +120,11 @@
 %% \address[label1]{<address>}
 %% \address[label2]{<address>}
 \author[senai,ufba]{Rômulo Cerqueira} \ead{romulo.cerqueira@ufba.br}
-\author[senai]{Tiago Trocoli}
+\author[senai]{Tiago Trocoli} \ead{trocolit@gmail.com}
 \author[senai]{Gustavo Neves}
-\author[ufba]{Luciano Oliveira}
 \author[senai]{Sylvain Joyeux}
 \author[senai,dfki]{Jan Albiez}
+\author[ufba]{Luciano Oliveira}
 
 \address[senai]{Brazilian Institute of Robotics, SENAI CIMATEC, Salvador, Bahia, Brazil}
 \address[ufba]{Intelligent Vision Research Lab, Federal University of Bahia, Salvador, Bahia, Brazil}
@@ -132,7 +132,11 @@
 
 \begin{abstract}
 
-Simulating realistic sensor data is of underlying importance to assist the algorithms and control systems evaluation, avoiding the risks and costs of real-life experiments in field robotics. Particularly in underwater robotics domain, this is so due the complexity to reproduce reasonable model of sensors, hydrodynamic forces acting on the robot and environments where the operations take place. This paper introduces an innovative underwater imaging sonar simulator by vertex and fragment processing on GPU (Graphics Processing Unit). The virtual scenario is composed by the integration between Gazebo simulator and the Rock (Robot Construction Kit) framework. The OpenSceneGraph 3D frame is processed during shader rendering in order to compute a 3-channel matrix with depth and intensity buffers and angular distortion values, which is subsequently fused to build the sonar image. Additional characteristics of imaging sonars such as speckle noise, material properties and object's surface irregularities are also addressed and introduced in sonar frame. To export and display simulation resources, this approach was written in C++ with OpenCV support as Rock packages. The method is evaluated by simulating two kind of imaging sonar devices in different scenarios with huge fidelity and high frame rate.
+Sonar simulation requires large computational effort, due the complex physics related on underwater environment, that turn the challenge of reproduce sonar sensor data a non trivial task. However simulating sonar data allows algorithm and control system evaluations with no need to be present in real underwater environment, reducing cost and risks in field experiments, specially, in underwater robotics domain. Based on Graphics Processing Unit (GPU), our work proposes a novel underwater imaging sonar simulator which rely on OpenGL Shading Language (GLSL) chain. Our virtual underwater scene is built on three frameworks, OpenSceneGraph (OSG) reproduces the ocean visual effects, Gazebo deals with physics effects and the Robot Construction Kit (Rock) lets control the sonar on underwater enviroment. Our sonar simulation returns 3-channel matrix as raw data, composed, respectively, by echo intensity, distance to target object and angle distortion information, built around objects shapes and material properties existing in 3D virtual scene. Then, these raw data are treated and after added speckle noise, characteristic sonar noise, to display realistic sonar image. Our evaluation shows the proposed method is capable to operate with high frame rate with good image sonar quality in different virtual underwater scenes.
+
+
+
+% Simulating realistic sensor data is of underlying importance to assist the algorithms and control systems evaluation, avoiding the risks and costs of real-life experiments in field robotics. Particularly in underwater robotics domain, this is so due the complexity to reproduce reasonable model of sensors, hydrodynamic forces acting on the robot and environments where the operations take place. This paper introduces an innovative underwater imaging sonar simulator by vertex and fragment processing on GPU (Graphics Processing Unit). The virtual scenario is composed by the integration between Gazebo simulator and the Rock (Robot Construction Kit) framework. The OpenSceneGraph 3D frame is processed during shader rendering in order to compute a 3-channel matrix with depth and intensity buffers and angular distortion values, which is subsequently fused to build the sonar image. Additional characteristics of imaging sonars such as speckle noise, material properties and object's surface irregularities are also addressed and introduced in sonar frame. To export and display simulation resources, this approach was written in C++ with OpenCV support as Rock packages. The method is evaluated by simulating two kind of imaging sonar devices in different scenarios with huge fidelity and high frame rate.
 
 \end{abstract}
 
