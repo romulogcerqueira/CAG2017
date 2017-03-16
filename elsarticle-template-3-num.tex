@@ -122,9 +122,9 @@
 \author[senai,ufba]{Rômulo Cerqueira} \ead{romulo.cerqueira@ufba.br}
 \author[senai]{Tiago Trocoli} \ead{trocolit@gmail.com}
 \author[senai]{Gustavo Neves}
+\author[ufba]{Luciano Oliveira}
 \author[senai]{Sylvain Joyeux}
 \author[senai,dfki]{Jan Albiez}
-\author[ufba]{Luciano Oliveira}
 
 \address[senai]{Brazilian Institute of Robotics, SENAI CIMATEC, Salvador, Bahia, Brazil}
 \address[ufba]{Intelligent Vision Research Lab, Federal University of Bahia, Salvador, Bahia, Brazil}
@@ -294,7 +294,7 @@ In this work, the underwater scene is sampled by a virtual camera, whose optical
     \item \textit{Angular distortion} is the angle formed from the camera center column to the camera boundary column, for both directions.
 \end{itemize}
 
-These data are normalized in [0,1] interval, where means no energy and maximum echo energy for intensity data respectively. For depth data, the minimum value portrays a close object while the maximum value represents a far one, limited by the sonar maximum range. Angle distortion value is zero in image center column which increases for both borders to present the half value of horizontal field-of-view.
+These data are normalized in [0,1] interval, where means no energy and maximum echo energy for intensity data respectively. For depth data, the minimum value portrays a close object while the maximum value represents a far one, limited by the sonar maximum range. Angle distortion value is zero in image center column which increases for both borders to present the half value of horizontal field of view.
 
 Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also be defined by bump mapping and material properties. Bump mapping is a perturbation rendering technique to simulate wrinkles on the object's surface by passing textures and modifying the normal directions on shaders. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN (Tangent, Bitangent and Normal) matrix is computed to convert the normal values to world space. The different scenes representation is seen in Fig. \ref{fig:sonar_bump_mapping}.
 
@@ -365,7 +365,7 @@ The 3D shader matrix is processed in order to build the corresponding acoustic r
 
 Each beam subimage is converted into bin intensities using the depth and intensity channels. In a real imaging sonar, the echo measured back is sampled over time and the bin number is proportional to sensor's range. In other words, the initial bins represent the closest distances, while the latest bins are the furthest ones. Therefore, a distance histogram is evaluated to group the subimage pixels with their respective bins, according to depth channel. This information is used to calculate the accumulated intensity of each bin.
 
-Due to acoustic beam spreading and absorption in the water, the final bins have less echo strength than the first ones, because the energy is lost two-way in the environment. In order to solve it, the sonar devices use a energy normalization based on time-varying gain for range dependence compensation which spread losses in the bins \cite{urick2013}. In this simulation approach, the accumulated intensity in each bin is normalized as
+Due to acoustic beam spreading and absorption in the water, the final bins have less echo strength than the first ones, because the energy is lost two-way in the environment. In order to solve this, the sonar devices use a energy normalization based on time-varying gain for range dependence compensation which spread losses in the bins \cite{urick2013}. In this simulation approach, the accumulated intensity in each bin is normalized as
 
 \begin{equation}
     \label{eq:1}
@@ -412,7 +412,7 @@ For the evaluation of the proposed simulator, the experiments were conducted by 
 
 The virtual FLS from FlatFish AUV was used to insonify scenes in three scenarios. A docking station, in parallel with a pipeline on the seabed, composes the first scenario, as seen in Fig. \ref{fig:fls_scene1}. The target's surface is well-defined in the simulated acoustic frame, as seen in Fig. \ref{fig:fls_sim1}, even as the shadows and speckle noise. Given the docking station is metal-made, the texture and reflectivity were set, resulting in a higher intensity shape in comparison with the other targets.
 
-The second scenario presents the vehicle in front of a manifold model on a non-uniform seabed, as seen in Fig. \ref{fig:fls_scene2}. The target model was insonified to generate the sonar frame from the underwater scene. The frontal face of the target and the shadow behind it, as well the portion of the seabed and the degraded data by noise, are clearly visible in the FLS image.
+The second scenario presents the vehicle in front of a manifold model on a non-uniform seabed, as seen in Fig. \ref{fig:fls_scene2}. The target model was insonified to generate the sonar frame from the underwater scene. The frontal face of the target, as well the portion of the seabed and the degraded data by noise, are clearly visible in the FLS image. Also, a long acoustic shadow is formed behind the manifold, occluding part of the scene.
 
 The third scenario contains a SSIV (SubSea Isolation Valve) structure connected with a pipeline in the bottom, presented in Fig. \ref{fig:fls_scene3}. The targets' shapes are well-defined, such as their shadows.
 
