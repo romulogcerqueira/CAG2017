@@ -123,7 +123,7 @@ Although the sonar devices address the main shortcomings of optical sensors, the
     \item Shadowing: This effect is caused by objects blocking the sound waves transmission and causing regions behind them without acoustic feedback. These regions are defined by a black spot in the image occluding part of the scene;
     \item Non-uniform resolution: The amount of pixels used to represent an intensity record grow as its range increases. This fact causes image distortions and object flatness;
     \item Changes in viewpoint: Imaging the same scene from different viewpoints can cause occlusions, shadows movements and significant alterations of observable objects \cite{hurtos2014}. For instance, when an outstanding object is insonified, its shadow gets shortened as the sonar becomes closer;
-    \item Low SNR (Signal-to-Noise Ratio): The sonar suffers from low SNR mainly due the very-long-range scanning and the presence of speckle noise introduced caused by acoustic wave interferences \cite{abbott1973}.
+    \item Low SNR (Signal-to-Noise Ratio): The sonar suffers from low SNR mainly due the very-long-range scanning and the presence of speckle noise introduced caused by acoustic wave interferences \cite{abbott1979}.
     % \item Inhomogeneous Insonification: Since the water is a loss energy transmission medium, the farthest bins present less intensity than the closest ones.
 \end{enumerate}
 
@@ -352,7 +352,7 @@ Due the sensor configuration and the robot position, the initial bins usually pr
         \label{fig:fls_sim3}
     }
     \captionsetup{justification=centering}
-    \caption{Forward-looking sonar simulation experiments: \subref{fig:fls_scene1}, \subref{fig:fls_scene2} and \subref{fig:fls_scene3} present the trials of underwater, while \subref{fig:fls_sim1}, \subref{fig:fls_sim2} and \subref{fig:fls_sim3} are the following acoustic representations of each scenario, respectively.}
+    \caption{Forward-looking sonar simulation experiments: \subref{fig:fls_scene1}, \subref{fig:fls_scene2} and \subref{fig:fls_scene3} present the virtual underwater trials, while \subref{fig:fls_sim1}, \subref{fig:fls_sim2} and \subref{fig:fls_sim3} are the following acoustic representations of each scenario, respectively.}
     \label{fig:fls}
 \end{figure*}
 
@@ -389,7 +389,7 @@ The last scenario presents the AUV over oil and gas structures on the sea bottom
         \label{fig:msis_sim3}
     }
     \captionsetup{justification=centering}
-    \caption{Mechanical Scanning Imaging Sonar trials: the underwater scenes represented in Figs. \subref{fig:msis_scene1}, \subref{fig:msis_scene2} and \subref{fig:msis_scene3} and their following simulated frames in Figs. \subref{fig:msis_sim1}, \subref{fig:msis_sim2} and \subref{fig:msis_sim3}.}
+    \caption{Mechanical Scanning Imaging Sonar experiments: the underwater scenes presented \subref{fig:msis_scene1}, \subref{fig:msis_scene2} and \subref{fig:msis_scene3} and the following simulated frames in \subref{fig:msis_sim1}, \subref{fig:msis_sim2} and \subref{fig:msis_sim3}, respectively.}
     \label{fig:msis}
 \end{figure*}
 
@@ -407,18 +407,18 @@ Moreover, since the number of bins is directly proportional to sonar image resol
     \caption{Processing time to generate FLS frames with different parameters.}
     \label{table:fls}
     \begin{center}
-        \begin{tabular}{| c | c | c | c | c |}
+        \begin{tabular}{| c | c | c | c | c | c | c |}
             \hline
-            \#Beams & \#Bins & Field of view & Average time ($ms$) & Std dev ($ms$) \\
+            \# of samples & \# of beams & \# of bins & Field of view & Average time ($ms$) & Std dev ($ms$) & Frame rate ($fps$) \\
             \hline
-            128     & 500       & $120^{\circ}$ x $20^{\circ}$        & 54.7   & 0.00373812  \\ \hline
-            128     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 72.3	& 0.00894485  \\ \hline
-            256     & 500       & $120^{\circ}$ x $20^{\circ}$        & 198.7	    & 0.0170872   \\ \hline
-            256     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 218.2	& 0.0119873   \\ \hline
-            128     & 500       & $90^{\circ}$ x $15^{\circ}$         & 77.4	& 0.0118534   \\ \hline
-            128     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 94.6	& 0.0102294   \\ \hline
-            256     & 500       & $90^{\circ}$ x $15^{\circ}$         & 260.8	& 0.0184956   \\ \hline
-            256     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 268.7	    & 0.0166807   \\ \hline
+            500     & 128     & 500       & $120^{\circ}$ x $20^{\circ}$        & 54.7    & 3.7   & 18.3 \\ \hline
+            500     & 128     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 72.3	& 8.9   & 13.8 \\ \hline
+            500     & 256     & 500       & $120^{\circ}$ x $20^{\circ}$        & 198.7	& 17.1  & 5.0  \\ \hline
+            500     & 256     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 218.2	& 11.9  & 4.6  \\ \hline
+            500     & 128     & 500       & $90^{\circ}$ x $15^{\circ}$         & 77.4	& 11.8  & 12.9 \\ \hline
+            500     & 128     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 94.6	& 10.2  & 10.6 \\ \hline
+            500     & 256     & 500       & $90^{\circ}$ x $15^{\circ}$         & 260.8	& 18.5  & 3.8  \\ \hline
+            500     & 256     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 268.7	& 16.7  & 3.7  \\ \hline
         \end{tabular}
     \end{center}
 \end{table*}
@@ -427,14 +427,14 @@ Moreover, since the number of bins is directly proportional to sonar image resol
     \caption{Processing time to generate MSIS samples with different parameters.}
     \label{table:msis}
     \begin{center}
-        \begin{tabular}{| c | c | c | c |}
+        \begin{tabular}{| c | c | c | c | c | c |}
             \hline
-            Number of Bins & Field of View & Mean ($sec$) & Standard Deviation ($sec$) \\
+            \# of samples & \# of bins & Field of view & Average time ($ms$) & Std dev ($ms$) & Frame rate ($fps$) \\
             \hline
-            500       & $3^{\circ}$ x $35^{\circ}$        & 0.00881959	& 0.000709754  \\ \hline
-            1000      & $3^{\circ}$ x $35^{\circ}$        & 0.0345122	& 0.0015794    \\ \hline
-            500       & $2^{\circ}$ x $20^{\circ}$        & 0.0103457	& 0.000665683  \\ \hline
-            1000      & $2^{\circ}$ x $20^{\circ}$        & 0.0417138	& 0.00368668   \\ \hline
+            500     & 500       & $3^{\circ}$ x $35^{\circ}$        & 8.8	    & 0.7  & 113.4 \\ \hline
+            500     & 1000      & $3^{\circ}$ x $35^{\circ}$        & 34.5	& 1.6  & 29.0  \\ \hline
+            500     & 500       & $2^{\circ}$ x $20^{\circ}$        & 10.3	& 0.6  & 96.7  \\ \hline
+            500     & 1000      & $2^{\circ}$ x $20^{\circ}$        & 41.7	& 3.7  & 24.0  \\ \hline
         \end{tabular}
     \end{center}
 \end{table*}
