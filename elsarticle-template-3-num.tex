@@ -1,4 +1,3 @@
-
 \documentclass[final,5p,times]{elsarticle}
 \usepackage{graphicx}
 \usepackage{subfigure}
@@ -11,6 +10,7 @@
 \usepackage{hyphenat}
 
 \hyphenation{com-pu-ta-tion-al-time}
+\hyphenation{promis-es}
 
 %% Avoids linenumbers to collide with text for 5p format:
 \setlength\linenumbersep{3pt}
@@ -38,12 +38,12 @@
 
 \begin{abstract}
 
-Sonar simulation requires great computational effort, due to the complexity of acoustic physics related to the underwater environment. This fact turns the challenge of reproducing sensor data into a non-trivial task. On the other hand, simulation of sonar data makes algorithms and control system evaluations avoid the presence of real underwater environment; that reduces the cost and risks in field experiments, specially involving underwater robotics domain. This paper proposes a novel underwater imaging sonar simulator, which relies on OpenGL shading language (GLSL) chain. The virtual underwater scene is built on three frameworks: (i) OpenSceneGraph (OSG) reproduces the ocean visual effects, (ii) Gazebo deals with physics effects, and (iii) Robot Construction Kit (Rock) lets control the sonar on underwater environment. Our sonar simulation returns a matrix comprised of the echo intensity, the distance to the target object and angle distortion information, being calculated on object shapes and material properties in the 3D rendered scene. Sonar-based speckle noise and object material properties are also considered as the part of the sonar image. Our evaluation demonstrated that the proposed method is able to operate with high frame rate, as well as realistic sonar image quality in different virtual underwater scenarios.
+Sonar simulation requires great computational effort, due to the complexity of acoustic physics related to the underwater environment. This fact turns the challenge of reproducing sensor data into a non-trivial task. On the other hand, simulation of sonar operation data allows to evaluate algorithms and control systems without going to the real underwater environment; that reduces the costs and risks of in-field experiments. This paper proposes a novel underwater imaging sonar simulator, which uses the OpenGL shading language (GLSL) chain. The virtual underwater simulation is built based on three frameworks: (i) OpenSceneGraph (OSG) reproduces the ocean visual effects, (ii) Gazebo deals with physics effects, and (iii) the Robot Construction Kit (Rock) controls the sonar in underwater environments. The proposed sonar simulation returns a matrix comprised of the echo intensity, the distance to the target object and the angle distortion, being calculated on object shapes and material properties in the 3D rendered scene. Sonar-based speckle noise and object material properties are also considered as the part of the sonar image. Our evaluation demonstrated that the proposed method is able to operate with high frame rate, as well as realistic sonar image quality in different virtual underwater scenarios.
 
 \end{abstract}
 
 \begin{keyword}
-Simulated sensor data \sep sonar imaging  \sep GPU-based processing \sep Robot Construction Kit (Rock) \sep Underwater robotics.
+Simulated sensor data \sep sonar imaging \sep GPU-based processing \sep Robot Construction Kit (Rock) \sep Underwater robotics.
 
 \end{keyword}
 
@@ -58,48 +58,51 @@ Simulated sensor data \sep sonar imaging  \sep GPU-based processing \sep Robot C
 \label{introduction}
 
 % Importance of simulation for autonomous robots
-Simulation is an useful tool on designing and programming autonomous robot systems. That allow evaluating robot behavior, without the physical hardware, or algorithms and control systems in real-time trials, without the need to run costly and time-consuming live experiments. Real-time applications usually require simulation platforms for rapid prototyping and realistic environments and sensors, in order to tuning decision making algorithms.
+Simulation is an useful tool on designing and programming autonomous robot systems. That allows evaluating robot behavior, without the physical hardware, or algorithms and control systems in real-time trials, with no need to run costly and time-consuming field experiments. Real-time applications usually require simulation platforms for rapid prototyping and realistic environments and sensors, in order to tuning decision making algorithms.
 
-% Simulation for AUVs (this paragraph should be rewritten)
-In underwater domain, simulation play a key role. Autonomous underwater vehicles (AUVs) usually demand expensive hardware and a restrictive operational environment. Due to environment constraints, which avoid the AUV communicating with ground station via a totally reliable acoustic link, the robot must be able to make completely autonomous decisions. While the analysis and interpretation of sensor data can be thoroughly tested on recorded data, for testing and evaluation of vehicle's motion responses for this data, a simulation is needed to tuning control parameters and avoid involved risks on real world drives.
+% Simulation for AUVs
+When dealing with autonomous underwater vehicles (AUVs), the 
+simulation facilities are specially relevant. AUVs usually demand expensive 
+hardware and perform long-term data gathering operations taking place 
+in a restrictive domain. Since the AUV is not connected by an umbilical 
+cable and the underwater communication occurs through unreliable 
+acoustic links, the robot must able to make completely autonomous 
+decisions, with low-to-zero external assistance. According to latest promises, while the analysis and interpretation of sensor data can be performed 
+in a post-processing step, a real-time simulation is needed for testing 
+and evaluation of vehicle's motion responses, avoiding involved risks 
+on real world drives.
 
 % Importance of Imaging sonars
-Since AUVs act below the photic zone, with high turbidity and huge light scattering, the quality of image acquisition by optical devices is limited by short ranges that can be artificially illuminated, and clear visibility conditions. To tackle that limitations, high-frequency sonars have been used primarily on AUVs' navigation and perception systems rather than optical cameras for underwater applications. Acoustic waves emitted by sonars are significantly less affected by water attenuation, aiding operation at greater ranges even as low-to-zero visibility conditions, with a fast refresh rate. Sonar devices usually solve the main shortcomings of optical sensors at the expense of providing noisy data of lower resolution and more difficult interpretation.
+In addition to previous operational constraints, the AUVs act below the photic zone, with high turbidity and huge light scattering, where the quality of image acquisition by optical devices is limited by short ranges that can be artificially illuminated, and clear visibility conditions. To tackle that limitations, high-frequency sonars have been used primarily on AUVs' navigation and perception systems rather than optical cameras for underwater applications. Acoustic waves emitted by sonars are significantly less affected by water attenuation, aiding operation at greater ranges even as low-to-zero visibility conditions, with a fast refresh rate. Sonar devices usually solve the main shortcomings of optical sensors at the expense of providing noisy data of lower resolution and more difficult interpretation.
 
 % Related works
-Knowing the sonar benefits, recent works proposed ray tracing- and tube tracing-based techniques to simulate acoustic data with very accurate results, but at a high computational cost \cite{bell1997,waite2002,sac2015,demarco2015,gu2013,kwak2015}. Bell \cite{bell1997} proposed a simulator using optical ray tracing for underwater side-scan sonar imagery; images were generated by the use of acoustic signals represented by rays, which are repeatedly processed forming a 2D-array, representing all angles that the sonar can emit signal. Waite \cite{waite2002} used of frequency-domain signal processing to generate synthetic aperture sonar frames; in this method, the acoustic image was created by expressing the Fourier transform of the acoustic pulse used to insonifying the scene. For forward-looking sonar simulations, Saç \textit{et al} \cite{sac2015} described the sonar model by computing the ray tracing in frequency domain; when a ray hits an object in 3D space, three parameters are calculated to process the acoustic data: the Euclidean distance from the sonar axis, the intensity of returned signal by Lambert Illumination model and the surface normal; the reverberation and shadow phenomena are also addressed. DeMarco \textit{et al} \cite{demarco2015} used Gazebo and Robot Operating System (ROS~\footnote{http://www.ros.org/}) integration to simulate the acoustic sound pulses by ray tracing technique and produce a 3D point cloud of covered area; since the material reflectivity was statically defined, the final sonar image presented the same intensity values for all points on a single object. Gu \textit{et al} \cite{gu2013} modeled a forward-looking device where the ultrasound beams were formed by a set of rays; however, the acoustic image is significantly limited by its representation by only two colors: white, when the ray strike an object, and black for shadow areas. Kwak \textit{et al} \cite{kwak2015} evolved the previous approach by adding a sound pressure attenuation to produce the gray-scale sonar frame, while the other physical characteristics related to sound transmission are disregarded.
+Knowing the sonar benefits and singularities, recent works proposed ray tracing- and tube tracing-based techniques to simulate acoustic data with very accurate results, but at a high computational cost \cite{bell1997,coiras2009,gueriot2010,sac2015,demarco2015,gu2013,kwak2015}. Bell \cite{bell1997} proposed a simulator using optical ray tracing for underwater side-scan sonar imagery; images were generated by the use of acoustic signals represented by rays, which are repeatedly processed forming a 2D-array, representing all angles that the sonar can emit signal. Coiras and Groen \cite{coiras2009} used of frequency-domain signal processing to generate synthetic aperture sonar frames; in this method, the acoustic image was created by expressing the Fourier transform of the acoustic pulse used to insonify the scene. For forward-looking sonar simulations, Guériot and Sintes \cite{gueriot2010} introduces a volume-based approach of energy interacting with the scene and collected by the receiving sonar; the sound propagation is defined by series of acoustic tubes always orthogonal to the current sonar view, where the reverberation and objects' surface irregularities are also addressed. Saç \textit{et al} \cite{sac2015} described the sonar model by computing the ray tracing in frequency domain; when a ray hits an object in 3D space, three parameters are calculated to process the acoustic data: the Euclidean distance from the sonar axis, the intensity of returned signal by Lambert Illumination model and the surface normal; the reverberation and shadow phenomena are also addressed. DeMarco \textit{et al} \cite{demarco2015} used Gazebo and Robot Operating System (ROS) \cite{quigley2009} integration to simulate the acoustic sound pulses by ray tracing technique and produce a 3D point cloud of covered area; since the material reflectivity was statically defined, the final sonar image presented the same intensity values for all points on a single object. Gu \textit{et al} \cite{gu2013} modeled a forward-looking device where the ultrasound beams were formed by a set of rays; however, the acoustic image is significantly limited by its representation by only two colors: white, when the ray strike an object, and black for shadow areas. Kwak \textit{et al} \cite{kwak2015} evolved the previous approach by adding a sound pressure attenuation to produce the gray-scale sonar frame, while the other physical characteristics related to sound transmission are disregarded.
 
 \subsection{Contributions}
 
-This paper introduces an imaging sonar simulation method can overcome the main limitations of existing approaches. As opposed to \cite{bell1997,waite2002,sac2015,demarco2015,gu2013,kwak2015}, the same model here is able to reproduce two different kind of sonar devices. Also, the intensity measured back from the objects in underwater scene depends of accumulated energy based on surface normal directions, instead of statically defined by the user \cite{demarco2015} or binary representation \cite{gu2013, kwak2015}. 
+This paper introduces an imaging sonar simulation method can overcome 
+the main limitations of existing approaches. As opposed to \cite{bell1997,coiras2009,gueriot2010,sac2015,demarco2015,gu2013,kwak2015}, where 
+the presented models simulate a specific sonar type, our model is able to 
+reproduce two kind of sonar devices. Also, the underwater scene is 
+processed during the pipeline rendering on GPU, accelerating the 
+simulation process and grants the real-time usage, in comparison to 
+methods in \cite{bell1997,coiras2009,sac2015,demarco2015}. The intensity measured back from the insonified objects depends of the accumulated energy based on surface normal directions, instead of statically defined by the user \cite{demarco2015} or binary representation \cite{gu2013, kwak2015}. In addition to our previous work \cite{cerqueira2016}, the normal data can also be defined by bump mapping technique and material's reflectivity. Moreover, the speckle noise is modeled as a non-uniform Gaussian distribution and added to final sonar image, a missing part in \cite{gueriot2010,gu2013,kwak2015,sac2015}.
 
-% mesmo modelo pode reproduzir diferentes tipos de sonars
-% aceleração por customização da GPU
-% adição de ruído multiplicativo
-% bump mapping
-% material properties
-% intensidade dos materiais
-% real-time
-
-% The proposed approach herein entails several novelties. As opposed to the related works, the depth and normal values are directly manipulated during the scene formation, which generate sonar frames with a low computational cost and allow the usage by real-time applications. Also, this method is able to reproduce any type of underwater sonar images, as seen in evaluation tests with two kind of sonar devices.
-
-In addition to our previous work \cite{cerqueira2016}, the normal data can also be defined by bump mapping technique and material's reflectivity. Moreover, the speckle noise is modeled as a non-uniform Gaussian distribution and added to final sonar image.
+The main goal here is to build qualitative and low time-consuming acoustic frames, according to underwater sonar image formation and operational modes (Sec. \ref{sonar:operation}). The shader matrix with depth and normal buffers and angular distortion values is extracted from underwater scene, and subsequently fused to generate the simulated sonar data - as described in Sec. \ref{dev}. The qualitative and time evaluation results for two different sonar devices, presented in Sec. \ref{results}, allow the simulator usage by real-time applications.
 
 % ----------------------------------------------------------------------------------
 
-\section{Sonar operation}
-\label{background}
+\section{Imaging Sonar operation}
+\label{sonar:operation}
 
-\subsection{Sonar image model}
-\label{sonar:model}
+% \subsection{Sonar image model}
+% \label{sonar:model}
 
-Sonars are echo-ranging devices that use acoustic energy to locate and survey objects in a desired underwater area. The sonar transducer emits pulses of sound waves (or ping) until they hit with any object or be completely absorbed. When the acoustic signal collides with a surface, part of this energy is reflected, while other is refracted. Then the sonar data is built by plotting the echo measured back versus time of acoustic signal. The transducer reading in a given direction forms a \textit{beam}.
+Sonars are echo-ranging devices that use acoustic energy to locate and survey objects in a desired area. The sonar transducer emits pulses of sound waves (or ping) until they hit with any object or be completely absorbed. When the acoustic signal collides with a surface, part of this energy is reflected, while other is refracted. The sonar data is built by plotting the echo measured back versus time of acoustic signal. The transducer reading in a given direction forms a \textit{beam}. A single beam transmitted from a sonar is illustrated in Fig. \ref{fig:sonar_geometry}. The horizontal and vertical beamwidths are represented by the azimuth $\psi$ and elevation $\theta$ angles, respectively, where each sampling along the beam is named as \textit{bin}. The sonar covered area is defined by $r_{min}$ and $r_{max}$. Since the speed of sound underwater is known, or can be measured, the time delay between the emitted pulses and their echoes reveal how far the objects are (distance $r$), as well as how fast they are moving. The backscattered acoustic power in each bin determines the intensity value.
 
-A single beam transmitted from a sonar is seen in Fig. \ref{fig:sonar_geometry}. The horizontal and vertical beamwidths are represented by the azimuth $\psi$ and elevation $\theta$ angles respectively, where each sampling along the beam is named \textit{bin}. The $x$-axis is perpendicular to the sonar array, the $y$-axis is to the right, $z$-axis points down and the covered area is defined by $r_{min}$ and $r_{max}$. Since the speed of sound underwater is known or can be measured, the time delay between the emitted pulses and their echoes reveals how far the objects are (distance $r$) and how fast they are moving. The backscattered acoustic power in each bin determines the intensity value.
+With different azimuth directions, the array of transducer readings, forms the final sonar image. Since all incoming signals converge to the same point, the reflected echoes could have been originated anywhere along the corresponding elevation arc at a fixed range, as depicted in Fig. \ref{fig:sonar_geometry}. In the acoustic representation, the 3D information is lost in the projection into a 2D image \cite{huang2015}.
 
-The array of transducer readings, with different azimuth directions, forms the final sonar image. Since all incoming signals converge on the same point, the reflected echoes could have originated anywhere along the corresponding elevation arc at a fixed range, as seen in Fig. \ref{fig:sonar_geometry}. Therefore, the 3D information is lost in the projection into a 2D image \cite{huang2015}.
-
-\begin{figure}[h]
+\begin{figure}[t]
     \includegraphics[width=\columnwidth]{figs/sonar_geometry}
     \centering
     \captionsetup{justification=centering}
@@ -112,46 +115,47 @@ The array of transducer readings, with different azimuth directions, forms the f
 \subsection{Sonar characteristics}
 \label{sonar:characteristics}
 
-Although the sonar devices address the main shortcomings of optical sensors, they present more difficult data interpretation, such as:
+Although the sonar devices overcome the main limitations of optical sensors, they present more difficult data interpretation, such as:
 
 \begin{enumerate}[(a)]
-    \item Shadowing: This effect is caused by objects blocking the sound waves transmission and causing regions behind them without acoustic feedback. These regions are defined by a black spot in the image occluding part of the scene;
+    \item Shadowing: This effect is caused by objects blocking the sound waves transmission and causing regions behind, without acoustic feedback. These regions are defined by a black spot in the image occluding part of the scene;
     \item Non-uniform resolution: The amount of pixels used to represent an intensity record grow as its range increases. This fact causes image distortions and object flatness;
-    \item Changes in viewpoint: Imaging the same scene from different viewpoints can cause occlusions, shadows movements and significant alterations of observable objects \cite{hurtos2014}. For instance, when an outstanding object is insonified, its shadow gets shortened as the sonar becomes closer;
-    \item Low SNR (Signal-to-Noise Ratio): The sonar suffers from low SNR mainly due the very-long-range scanning and the presence of speckle noise introduced caused by acoustic wave interferences \cite{abbott1979}.
+    \item Changes in viewpoint: Imaging the same scene from different viewpoints can cause occlusions, shadows movements and significant alterations of observable objects \cite{hurtos2014}. For instance, when an outstanding object is insonified, its shadow is shorter, as the sonar becomes closer;
+    \item Low SNR (Signal-to-Noise Ratio): The sonar suffers from low SNR mainly due the very-long-range scanning, and the presence of speckle noise introduced caused by acoustic wave interferences \cite{abbott1979};
+    \item Reverberation: This phenomena is caused when multiple acoustic waves returning from the same object are detected over the same ping producing duplicated objects.
 \end{enumerate}
 
 % ----------------------------------------------------------------------------------
 
-\subsection{Types of underwater sonar devices}
-\label{sonar:devices}
-
-The most common types of acoustic sonars are mechanical scanning imaging sonar (MSIS) and forward-looking sonar (FLS). In the first one (Fig. \ref{fig:swarths:msis}), with one beam per reading, the sonar image is built for each pulse; these images are usually shown on a display pulse by pulse, and the head position reader is rotated according to motor step angle. After a full $360^{\circ}$ sector reading (or the desired sector defined by left and right limit angles), the accumulated sonar data is overwritten. In contrast, the acquisition of a scan image involves a relatively long time and introduces distortions by vehicle movement. This sonar device is useful for obstacle avoidance \cite{ganesan2015} and navigation \cite{ribas2010} applications.
-
-For the FLS, as seen in Fig. \ref{fig:swarths:fls}, with \textit{n} beams being read simultaneously, the whole forward view is scanned and the current data is overwritten by the next one with a high framerate, similar to a streaming video imagery for real-time applications. This imaging sonar is commonly used for navigation \cite{fallon2013}, mosaicing \cite{hurtos2014}, target tracking \cite{liu2016} and 3D reconstruction \cite{huang2015} approaches.
-
-\begin{figure}[h]
+\begin{figure*}[t]
     \centering
     \subfigure[][]{
-    	\includegraphics[width=0.95\columnwidth]{figs/sonar_swarths_msis}
+    	\includegraphics[width=\columnwidth]{figs/sonar_swarths_msis_2}
         \label{fig:swarths:msis}
     }
     \subfigure[][]{
-    	\includegraphics[width=0.95\columnwidth]{figs/sonar_swarths_fls}
+    	\includegraphics[width=\columnwidth]{figs/sonar_swarths_fls_2}
         \label{fig:swarths:fls}
     }
     \captionsetup{justification=centering}
-    \caption{Different underwater sonar readings: Mechanically Scanning Imaging Sonar \subref{fig:swarths:msis} and Forward-Looking Sonar \subref{fig:swarths:fls}.}
+    \caption{Different underwater sonar readings: Mechanical scanning imaging sonar \subref{fig:swarths:msis} and forward-looking sonar \subref{fig:swarths:fls}.}
     \label{fig:sonar_devices}
-\end{figure}
+\end{figure*}
+
+\subsection{Types of underwater sonar devices}
+\label{sonar:devices}
+
+The most common types of acoustic sonars are mechanical scanning imaging sonars (MSIS) and forward-looking sonars (FLS). In the first (Fig. \ref{fig:swarths:msis}), the sonar image is built for each pulse, with one beam per reading; these images are usually shown on a display pulse by pulse, and the head position reader is rotated according to motor step angle. After a full $360^{\circ}$ sector reading (or the desired sector defined by left and right limit angles), the accumulated sonar data is overwritten. The acquisition of a scanning image involves a relatively long time, introducing distortions caused by the vehicle movements. This sonar device is generally applied in obstacle avoidance \cite{ganesan2015} and navigation \cite{ribas2010} applications.
+
+As illustrated in Fig. \ref{fig:swarths:fls}, the whole forward view of an FLS is scanned and the current data is overwritten by the next one with a high frame rate, with \textit{n} beams being read simultaneously. This is similar to a streaming video imagery for real-time applications. This imaging sonar is commonly used for navigation \cite{fallon2013}, mosaicing \cite{hurtos2014}, target tracking \cite{liu2016} and 3D reconstruction \cite{huang2015}.
 
 % ----------------------------------------------------------------------------------
 
-\begin{figure*}[!h]
+\begin{figure*}[t]
     \includegraphics[width=0.85\paperwidth]{figs/sonar_sim}
     \centering
     \captionsetup{justification=centering}
-    \caption{A graphical overview of the imaging sonar simulation process: (i) a virtual camera, specialized as the sonar device, samples the underwater scene; (ii) three components are calculated by shader rendering on GPU and stored in a matrix: Euclidean distance from camera's center, surface's normal angles, and the angular distortion; (iii) the shader matrix is splitted in beam parts, according the angular distortion values, and the bin's depth and intensity are defined by distance histogram and energy normalization; (iv) the speckle noise is added to final sonar data; (v) the simulated data is presented as Rock's datatype.}
+    \caption{A graphical overview of the imaging sonar simulation process: (i) a virtual camera, specialized as the sonar device, samples the underwater scene; (ii) three components are calculated by shader rendering on GPU and stored in a matrix: Euclidean distance from camera's center, surface's normal angles, and the angular distortion; the shader matrix is splitted in beam parts, according the angular distortion values, and the bin's depth and intensity are defined by distance histogram (iii) and energy normalization (iv) ; (v) the speckle noise is added to final sonar data; (vi) the simulated data is presented as Rock's datatype.}
     \label{fig:sonar_sim}
 \end{figure*}
 
@@ -161,21 +165,21 @@ For the FLS, as seen in Fig. \ref{fig:swarths:fls}, with \textit{n} beams being 
 \section{GPU-based sonar simulation}
 \label{dev}
 
-The goal of this work is to simulate any kind of underwater sonar by vertex and fragment processing, with a low computational cost. The complete pipeline of this implementation, from the virtual scene to the synthetic acoustic image, is seen in Fig. \ref{fig:sonar_sim} and is detailed in the following subsections. The sonar simulation is written in C++ with OpenCV~\footnote{http://opencv.org/} support as Rock packages.
+The goal of this work is to simulate any kind of underwater sonar by vertex and fragment processing, with a low computational cost. The complete pipeline of this implementation, from the virtual scene to the simulated acoustic data, is seen in Fig. \ref{fig:sonar_sim} and is detailed in the following subsections. The sonar simulation is written in C++ with OpenCV \cite{bradski2000} support as Rock packages.
 
 % ----------------------------------------------------------------------------------
 
 \subsection{Rendering underwater scene}
 \label{dev:uwscene}
 
-The Rock-Gazebo integration \cite{watanabe2015} provides the underwater scenario and allows real-time Hardware-in-the-Loop simulations, where Gazebo handles the physical engines and the Rock's visualization tools are responsible by the scene rendering. The graphical data in Rock are based on OpenSceneGraph~\footnote{http://www.openscenegraph.org/} library, an open source C/C++ 3D graphics toolkit built on OpenGL. The osgOcean~\footnote{http://wiki.ros.org/osgOcean} library is used to simulate the ocean's visual effects, and the ocean buoyancy is defined by the Gazebo plugin as described in Watanabe et al \cite{watanabe2015}.
+The Rock-Gazebo integration \cite{watanabe2015} provides the underwater scenario and allows real-time Hardware-in-the-Loop simulations, where Gazebo handles the physical engines and the Rock's visualization tools are responsible by the scene rendering. The graphical data in Rock are based on OpenSceneGraph library, an open source C/C++ 3D graphics toolkit built on OpenGL. The osgOcean library is used to simulate the ocean's visual effects, and the ocean buoyancy is defined by the Gazebo plugin as described in Watanabe \textit{et al} \cite{watanabe2015}.
 
-All scene's aspects, such as world model, robot parts (including sensors and joints) and others objects presented in the environment are defined by SDF files, which uses the SDFormat~\footnote{http://sdformat.org}, a XML format used to describe simulated models and environments for Gazebo. Also, the vehicle and sensor robot description must contain a geometry file. Visual geometries used by the rendering engine are provided in COLLADA format and the collision geometries in STL data.
+All scene's aspects, such as world model, robot parts (including sensors and joints) and others objects presented in the environment are defined by SDF files, which uses the SDFormat \cite{sdformat2017}, a XML format used to describe simulated models and environments for Gazebo. Also, the vehicle and sensor robot description must contain a geometry file. Visual geometries used by the rendering engine are provided in COLLADA format and the collision geometries in STL data.
 
-Each component described in the SDF file becomes a Rock component, which is based on the Orocos RTT (Real Time Toolkit)~\footnote{http://www.orocos.org/rtt} and provides ports, properties and operations as its communication layer. When the models are loaded, Rock-Gazebo creates ports to allow other system components to interact with the simulated models \cite{cerqueira2016}. A resulting scene sample of this integration is seen in Fig. \ref{fig:uwscene}.
+Each component described in the SDF file becomes a Rock component, which is based on the Orocos RTT (Real Time Toolkit) \cite{soetens2005} and provides ports, properties and operations as its communication layer. When the models are loaded, Rock-Gazebo creates ports to allow other system components to interact with the simulated models \cite{cerqueira2016}. A resulting scene sample of this integration is seen in Fig. \ref{fig:uwscene}.
 
-\begin{figure}[!h]
-    \includegraphics[width=\columnwidth]{figs/uwscene2}
+\begin{figure}[t]
+    \includegraphics[width=\columnwidth]{figs/uwscene}
     \centering
     \captionsetup{justification=centering}
     \caption{FlatFish AUV in Rock-Gazebo underwater scene.}
@@ -189,7 +193,7 @@ Each component described in the SDF file becomes a Rock component, which is base
 
 Modern graphics hardware presents programmable tasks embedded in GPU. Based on parallel computing, this approach can speed up 3D graphics processing and reduce the computational effort of Central Processing Unit (CPU).
 
-The rendering pipeline can be customized by defining programs on GPU called shaders. A shader is written in OpenGL Shading Language (GLSL)~\footnote{https://www.opengl.org/documentation/glsl/}, a high-level language with a C-based syntax which enables more direct control of graphics pipeline avoiding the usage of low-level or hardware-specific languages. Shaders can describe the characteristics of either a vertex or a fragment (a single pixel). Vertex shaders are responsible by transform the vertex position into a screen position by the rasterizer, generating texture coordinates for texturing, and lighting the vertex to determine its color. The rasterization results in a set of pixels to be processed by fragment shaders, which manipulate their locations, depth and alpha values and interpolated parameters from the previous stages, such as colors and textures \cite{fernando2003}.
+The rendering pipeline can be customized by defining programs on GPU called shaders. A shader is written in OpenGL Shading Language (GLSL) \cite{rost2009}, a high-level language with a C-based syntax which enables more direct control of graphics pipeline avoiding the usage of low-level or hardware-specific languages. Shaders can describe the characteristics of either a vertex or a fragment (a single pixel). Vertex shaders are responsible by transform the vertex position into a screen position by the rasterizer, generating texture coordinates for texturing, and lighting the vertex to determine its color. The rasterization results in a set of pixels to be processed by fragment shaders, which manipulate their locations, depth and alpha values and interpolated parameters from the previous stages, such as colors and textures \cite{fernando2003}.
 
 In this work, the underwater scene is sampled by a virtual camera, whose optical axis is aligned with the intended viewing direction of the imaging sonar device, as well as the covered range and opening angle. By programming the fragment and vertex shaders, the sonar data is computed as:
 
@@ -201,9 +205,9 @@ In this work, the underwater scene is sampled by a virtual camera, whose optical
 
 These data are normalized in [0,1] interval, where means no energy and maximum echo energy for intensity data respectively. For depth data, the minimum value portrays a close object while the maximum value represents a far one, limited by the sonar maximum range. Angle distortion value is zero in image center column which increases for both borders to present the half value of horizontal field of view.
 
-Most real-world surfaces present irregularities and different reflectances. For more realistic sensing, the normal data can also be defined by bump mapping and material properties. Bump mapping is a perturbation rendering technique to simulate wrinkles on the object's surface by passing textures and modifying the normal directions on shaders. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN (Tangent, Bitangent and Normal) matrix is computed to convert the normal values to world space. The different scenes representation is seen in Fig. \ref{fig:sonar_bump_mapping}.
+In realistic sensing, most real-world surfaces present irregularities and different reflectances. To solve this, the normal data can also be defined by bump mapping and material properties. Bump mapping is a perturbation rendering technique to simulate wrinkles on the object's surface by passing textures and modifying the normal directions on shaders. It is much faster and consumes less resources for the same level of detail compared to displacement mapping, because the geometry remains unchanged. Since bump maps are built in tangent space, interpolating the normal vertex and the texture, a TBN (Tangent, Bitangent and Normal) matrix is computed to convert the normal values to world space. The different scenes representation is seen in Fig. \ref{fig:sonar_bump_mapping}.
 
-\begin{figure*}[!h]
+\begin{figure*}[t]
     \centering
     \subfigure[][]{
         \includegraphics[width=0.27\paperwidth]{figs/bump_0}
@@ -234,7 +238,7 @@ Most real-world surfaces present irregularities and different reflectances. For 
     \label{fig:sonar_bump_mapping}
 \end{figure*}
 
-Moreover, the reflectance allows to describe properly the intensity back from observable objects in shader processing according their material properties (e.g. aluminum has more reflectance than wood and plastic). When an object has its reflectivity defined, the reflectance value $R$ is passed to fragment shader and must be positive. As seen in Fig. \ref{fig:sonar_reflectances}, when the normal values are directly proportional to the reflectance value $R$.
+Moreover, the reflectance allows to describe properly the intensity back from observable objects in shader processing according their material properties. For instance, aluminum has more reflectance than wood and plastic. When an object has its reflectivity defined, the reflectance value $R$ is passed to fragment shader and must be positive. As seen in Fig. \ref{fig:sonar_reflectances}, when the normal values are directly proportional to the reflectance value $R$.
 
 \begin{figure}[h]
     \centering
@@ -278,14 +282,14 @@ Due to acoustic beam spreading and absorption in the water, the final bins have 
 \end{equation}
 where $I_{bin}$ is the intensity in the bin after the energy normalization, $x$ is the pixel in the shader matrix, $N$ is the depth histogram value (number of pixels) of that bin, $S(i_{x})$ is the sigmoid function and $i_{x}$ is the intensity value of the pixel $x$.
 
-Finally, the sonar image resolution needs to be big enough to fill all bins informations. In this case, the number of bins involved is in direct proportion to the sonar image resolution.
+Finally, the sonar image resolution needs to be big enough to fill all bins informations. For that, the number of bins involved is in direct proportion to the sonar image resolution.
 
 % ----------------------------------------------------------------------------------
 
 \subsection{Noise model}
 \label{dev:noise}
 
-Imaging sonar systems are perturbed by a multiplicative noise known as speckle. It is caused by coherent processing of backscattered signals from multiple distributed targets, that degrades image quality and the visual evaluation. Speckle noise results in constructive and destructive interferences which are shown as bright and dark dots in the image. The noisy image has been expressed as \cite{lee1980}:
+Imaging sonar systems are perturbed by a multiplicative noise known as speckle, caused by coherent processing of backscattered signals from multiple distributed targets, that degrades image quality and the visual evaluation. Speckle noise results in constructive and destructive interferences which are shown as bright and dark dots in the image. The noisy image has been expressed as \cite{lee1980}:
 
 \begin{equation}
 \label{eq:2}
@@ -307,19 +311,19 @@ To export and display the sonar image, the simulated data is encapsulated as Roc
 \section{Simulation results and experimental analysis}
 \label{results}
 
-For the evaluation of the proposed simulator, the experiments were conducted by using a 3D model of FlatFish AUV equipped with two MSIS and one FLS sensors on different scenarios. The MSIS sensors are located in AUV's top and back and they are configured as follows: opening angle of $3^{\circ}$ by $35^{\circ}$, 500 bins in the single beam, a full $360^{\circ}$ sector scan reading and a motor step of $1.8^{\circ}$. By other hand, the FLS takes place in AUV's bottom with the following set: field of view of $120^{\circ}$ by $20^{\circ}$, 256 beams simultaneously, 1000 bins per each beam and angle tilt between the sonar and AUV of $20^{\circ}$. While the scene's frames were captured by the sonars, we sequentially present the resulting simulated acoustic images.
+For the evaluation of the proposed simulator, the experiments were conducted by using a 3D model of FlatFish AUV equipped with two MSIS and one FLS sensors on different scenarios. The MSIS sensors are located in AUV's top and back and are configured as follows: opening angle of $3^{\circ}$ by $35^{\circ}$, 500 bins in the single beam, a full $360^{\circ}$ sector scan reading and a motor step of $1.8^{\circ}$. By other hand, the FLS takes place in AUV's bottom with the following set: field of view of $120^{\circ}$ by $20^{\circ}$, 256 beams simultaneously, 1000 bins per each beam and angle tilt between the sonar and AUV of $20^{\circ}$. While the scene's frames were captured by the sonars, we sequentially present the resulting simulated acoustic images.
 
 \subsection{Experimental evaluation}
 
-The virtual FLS from FlatFish AUV was used to insonify scenes in three scenarios. A docking station, in parallel with a pipeline on the seabed, composes the first scenario, as seen in Fig. \ref{fig:fls_scene1}. The target's surface is well-defined in the simulated acoustic frame, as seen in Fig. \ref{fig:fls_sim1}, even as the shadows and speckle noise. Given the docking station is metal-made, the texture and reflectivity were set, resulting in a higher intensity shape in comparison with the other targets.
+The virtual FLS from FlatFish AUV was used to insonify the scenes from three distinct scenarios. A docking station, in parallel with a pipeline on the seabed, composes the first scenario, as seen in Fig. \ref{fig:fls_scene1}. The target's surface is well-defined in the simulated acoustic frame, as seen in Fig. \ref{fig:fls_sim1}, even as the shadows and speckle noise. Given the docking station is metal-made, the texture and reflectivity were set, resulting in a higher intensity shape in comparison with the other targets.
 
 The second scenario presents the vehicle in front of a manifold model on a non-uniform seabed, as seen in Fig. \ref{fig:fls_scene2}. The target model was insonified to generate the sonar frame from the underwater scene. The frontal face of the target, as well the portion of the seabed and the degraded data by noise, are clearly visible in the FLS image. Also, a long acoustic shadow is formed behind the manifold, occluding part of the scene.
 
-The third scenario contains a SSIV (SubSea Isolation Valve) structure connected with a pipeline in the bottom, presented in Fig. \ref{fig:fls_scene3}. The targets' shapes are well-defined, such as their shadows.
+The third scenario contains a SubSea Isolation Valve (SSIV) structure connected with a pipeline in the bottom, presented in Fig. \ref{fig:fls_scene3}. The targets' shapes are well-defined, such as their shadows.
 
 Due the sensor configuration and the robot position, the initial bins usually present a blind region in the three simulated scenes, caused by absence of objects at lower ranges, similar with real images. Also, the brightness of seafloor decreases when it makes farthest from sonar due the normal orientation of surface.
 
-\begin{figure*}[!h]
+\begin{figure*}[!ht]
     \centering
     \subfigure[][]{
         \includegraphics[width=0.425\paperwidth,height=6cm]{figs/fls_scene1}
@@ -354,9 +358,9 @@ The MSIS sensor was also simulated in three different experiments. The FlatFish 
 
 The second experiment involves the vehicle's movement during the data acquisition process. The scene contains a grid around the AUV, as seen in Fig. \ref{fig:msis_scene2}, and the frontal MSIS is used. This trial induces a distortion in the final acoustic frame, because the relative sensor's position with respect to surrounding object changes while the sonar image is being built, as seen in Fig. \ref{fig:msis_sim2}. In this case, the robot rotates $20^{\circ}$ left during the scanning.
 
-The last scenario presents the AUV over oil and gas structures on the sea bottom, as seen in Fig. \ref{fig:msis_scene3}. Using the back MSIS, with a vertical orientation, the scene was scanned in order to produce the acoustic visualization. As seen in Fig. \ref{fig:msis_sim3}, the objects' surfaces present clear definition in the small scanning section of the seafloor.
+The last scenario presents the AUV over oil and gas structures on the sea bottom, as seen in Fig. \ref{fig:msis_scene3}. Using the back MSIS sensor, with a vertical orientation, the scene was scanned in order to produce the acoustic visualization. As seen in Fig. \ref{fig:msis_sim3}, the objects' surfaces present clear definition in the slice scanning of the seafloor.
 
-\begin{figure*}[!h]
+\begin{figure*}[!ht]
     \centering
     \subfigure[][]{
         \includegraphics[width=0.425\paperwidth,height=6cm]{figs/msis_scene1}
@@ -387,13 +391,11 @@ The last scenario presents the AUV over oil and gas structures on the sea bottom
     \label{fig:msis}
 \end{figure*}
 
-% The different scenarios here provided sufficient variability to detect several features found in real sonar images.
-
 \subsection{Computational time}
 
 The performance evaluation for this approach was determined as part of suitable analysis for real-time applications. The experiments were performed on a personal computer with Ubuntu 16.04 64 bits, Intel Core i7 3540M processor running at 3 GHz with 16GB DDR3 RAM memory and NVIDIA NVS 5200M video card.
 
-The elapsed time of each sonar data is stored to compute the mean and standard deviation metrics, after $500$ iterations, as presented in Tables \ref{table:fls} and \ref{table:msis}. After changing the device parameters, such as number of bins, number of beams and field of view, the proposed approach generated the sonar frames with a high frame rate, for both sonar types. Given the Tritech Gemini 720i, a real forward-looking sonar sensor with a field of view of $120^{\circ}$ by $20^{\circ}$ and 256 beams presents a maximum update rate of 15 frames per second, the results grant the usage of the sonar simulator for real-time applications. Also, the MSIS data built by the simulator is able to complete a $360^{\circ}$ scan sufficiently time short in comparison with a real sonar as Tritech Micron DST.
+The elapsed time of each sonar data is stored to compute the average time, standard deviation and frame rate metrics, after $500$ iterations, as presented in Tables \ref{table:fls} and \ref{table:msis}. After changing the device parameters, such as number of bins, number of beams and field of view, the proposed approach generated the sonar frames with a high frame rate, for both sonar types. Given the Tritech Gemini 720i, a real forward-looking sonar sensor with a field of view of $120^{\circ}$ by $20^{\circ}$ and 256 beams presents a maximum update rate of 15 frames per second, the results grant the usage of the sonar simulator for real-time applications. Also, the MSIS data built by the simulator is able to complete a $360^{\circ}$ scan sufficiently time short in comparison with a real sonar as Tritech Micron DST.
 
 Moreover, since the number of bins is directly proportional to sonar image resolution, as explained in Section \ref{dev:sonardata}, this is also correlated with the computation time. When the number of bins increases, the simulator will have a bigger scene frame to compute and generate the sonar data.
 
@@ -459,9 +461,9 @@ Next steps will focus on qualitative and computation-efficiency evaluations with
 %%   \cite[chap. 2]{key} ==>>  [#, chap. 2]
 %%   \citet{key}         ==>>  Author [#]
 
-%\section*{Acknowledgment}
-%
-%The authors would like to thank Shell Brazil and ANP for financing the work and SENAI CIMATEC and DFKI RIC for the great institutional support.
+% \section*{Acknowledgment}
+
+% The authors would like to thank Shell Brazil and ANP for financing the work and SENAI CIMATEC and DFKI RIC for the great institutional support.
 
 %% References with bibTeX database:
 % \newpage
