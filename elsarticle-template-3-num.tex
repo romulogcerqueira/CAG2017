@@ -6,13 +6,11 @@
 \usepackage[nodots]{numcompress}
 \usepackage{lineno}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{caption}
 \usepackage{hyphenat}
 \usepackage{array}
-
-\hyphenation{com-pu-ta-tion-al-time}
-\hyphenation{time-con-sum-ing}
-\hyphenation{promis-es}
+\usepackage{makecell}
 
 %% Avoids linenumbers to collide with text for 5p format:
 \setlength\linenumbersep{3pt}
@@ -75,9 +73,9 @@ By considering sonar benefits and singularities along with the need to evaluate 
 
 %%%LUCIANO 24/03/2017: Não botaria isso nessa versão ainda: In addition to our previous work \cite{cerqueira2016}, the normal data can also be defined by a bump mapping technique and material's reflectivity.
 %%%ROMULO 24/03/2017: Ok. Faz sentido.
-This paper introduces a novel imaging sonar simulator, which can overcome 
-the main limitations of the existing approaches. As opposed to \cite{bell1997,coiras2009,gueriot2010,sac2015,demarco2015,gu2013,kwak2015}, where 
-the presented models simulate a specific sonar type, our model is able to 
+This paper introduces a novel imaging sonar simulator, which can overcome
+the main limitations of the existing approaches. As opposed to \cite{bell1997,coiras2009,gueriot2010,sac2015,demarco2015,gu2013,kwak2015}, where
+the presented models simulate a specific sonar type, our model is able to
 reproduce two kind of sonar devices: mechanical scanning imaging sonar (MSIS) and forward-looking sonar (FLS). Also, the underwater scene is processed during the pipeline rendering on graphics processing unit (GPU), accelerating the simulation process, and guaranteeing  real-time simulation, in contrast to the methods found in \cite{bell1997,coiras2009,sac2015,demarco2015}. The intensity measured back from the insonified objects depends on the accumulated energy based on surface normal directions, instead of statically defined by the user \cite{demarco2015} or binary representation \cite{gu2013, kwak2015}. The speckle noise is modeled as a non-uniform Gaussian distribution and added to final sonar image, performing a more realistic sensing, differently to \cite{gueriot2010,sac2015,gu2013,kwak2015}.
 
 The main goal here is to build quality and low time-consuming acoustic frames, according to underwater sonar image formation and operational modes (see Section \ref{sonar:operation}). The shader matrix with depth and normal buffers, and angular distortion values are extracted from underwater scene, and subsequently fused to generate the simulated sonar data, as described in Section \ref{dev}. The qualitative and time evaluation results for two different sonar devices are presented in Section \ref{results}, and allow for the simulator use in real-time applications.
@@ -307,16 +305,16 @@ The virtual FLS from AUV was used to insonify the scenes from three distinct sce
     \caption{Sonar devices configurations used on experimental evaluation.}
     \label{table:sonar_settings}
     \begin{center}
-        \begin{tabular}{| m{.4in} | m{.35in} | m{.35in} | m{.6in} | m{.3in} | m{.35in} |}
+        \begin{tabular}{| c | c | c | c | c | c |}
             \hline
-            Device & \shortstack{\# of\\ beams} & \shortstack{\# of\\ bins} & \shortstack{Field \\of view} & \shortstack{Down\\tilt} & \shortstack{Motor\\Step}\\
+            \rule{0pt}{15pt}
+            \makecell[c]{Device} & \makecell[c]{\shortstack{\# of\\ beams}} & \makecell[c]{\shortstack{\# of\\ bins}} & \makecell[c]{\shortstack{Field \\of view}} & \makecell[c]{\shortstack{Down\\tilt}} & \makecell{\shortstack{Motor\\Step}}\\
             \hline
             FLS  & 256 & 1000 & $120^{\circ}$ x $20^{\circ}$ & $20^{\circ}$  & - \\ \hline
             MSIS & 1   & 500  & $3^{\circ}$ x $35^{\circ}$	 & $0^{\circ}$  & $1.8^{\circ}$ \\ \hline
         \end{tabular}
     \end{center}
 \end{table}
-
 
 Due to sensor configuration and robot position, the initial bins usually present a blind region in the three simulated scenes, caused by absence of objects at lower ranges, similar to real images. Also, the brightness of sea-floor decreases, when farthest from sonar, because of the normal orientation of the surface.
 
@@ -390,7 +388,7 @@ The experimental scenarios provided enough variability of specific phenomena usu
 
 The performance evaluation of the simulator was determined by considering the suitability to run real-time applications. The experiments were performed on a personal computer with Ubuntu 16.04 64 bits, Intel Core i7 3540M processor running at 3 GHz with 16GB DDR3 RAM memory and NVIDIA NVS 5200M video card.
 
-The elapsed time of each sonar data is stored to compute the average time, standard deviation and frame rate metrics, after $500$ iterations, as summarized in Tables \ref{table:fls} and \ref{table:msis}. After changing the device parameters, such as number of bins, number of beams and field of view, the proposed approach generated the sonar frames with a high frame rate, for both sonar types, in comparison with real devices. Given the Tritech Gemini 720i, a real forward-looking sonar sensor with a field of view of $120^{\circ}$ by $20^{\circ}$ and 256 beams presents a maximum update rate of 15 frames per second, the results grant the usage of the sonar simulator for real-time applications. Also, the MSIS data built by the simulator is able to complete a $360^{\circ}$ scan sufficiently time short in comparison with a real sonar as Tritech Micron DST. Moreover, for the FLS device, these rates are superior to the rates lists by DeMarco \textit{et al} \cite{demarco2015} ($330 ms$) and Saç \textit{et al} \cite{sac2015} ($2.5 min$). For MSIS type, we are not aware of any previous work for comparison.  
+The elapsed time of each sonar data is stored to compute the average time, standard deviation and frame rate metrics, after $500$ iterations, as summarized in Tables \ref{table:fls} and \ref{table:msis}. After changing the device parameters, such as number of bins, number of beams and field of view, the proposed approach generated the sonar frames with a high frame rate, for both sonar types, in comparison with real devices. Given the Tritech Gemini 720i, a real forward-looking sonar sensor with a field of view of $120^{\circ}$ by $20^{\circ}$ and 256 beams presents a maximum update rate of 15 frames per second, the results grant the usage of the sonar simulator for real-time applications. Also, the MSIS data built by the simulator is able to complete a $360^{\circ}$ scan sufficiently time short in comparison with a real sonar as Tritech Micron DST. Moreover, for the FLS device, these rates are superior to the rates lists by DeMarco \textit{et al} \cite{demarco2015} ($330 ms$) and Saç \textit{et al} \cite{sac2015} ($2.5 min$). For MSIS type, we are not aware of any previous work for comparison.
 
 According to previous results, since the number of bins is directly proportional to sonar image resolution, as explained in Sec. \ref{dev:sonardata}, this is also correlated with the computational time. When the number of bins increases, the simulator will have a bigger scene frame to compute, and generate the sonar data.
 
@@ -461,4 +459,3 @@ Next steps will focus on qualitative and computation-efficiency evaluations with
 
 
 \end{document}
-
