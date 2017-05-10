@@ -4,9 +4,12 @@
 Reviewer #1: The proposed work simulates underwater imaging sonar based on
 OpenGL shading language (GLSL) chain, and is able to simulate two main types
 of sonar sensors: mechanical scanning imaging sonars (MSIS) and forward-looking
-sonars (FLS). The paper is well written with just small issues like "there is any
+sonars (FLS).
+
+The paper is well written with just small issues like "there is any
 previous work for comparison", "foward-looking sonars" or "the sonar simulator
 can be by feature" that needs to be easily solved.
+===> ROMULO COMMENTS <===: Done. The text was reviewed and typing errors were fixed.
 
 The contribution of the work is interesting for the community, mainly if
 the simulator will become freely available. It can increase the potential

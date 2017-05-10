@@ -40,14 +40,14 @@
 \begin{abstract}
 
 Sonar simulation requires great computational effort due to the complexity of
-acoustic physics related to the underwater environment. This fact turns the
+acoustic physics mainly when applied in the underwater environment. This fact turns the
 challenge of reproducing sensor data into a non-trivial task. On the other
 hand, simulation of sonar operation data allows to evaluate algorithms and
 control systems without going to the real underwater environment; that reduces
 the costs and risks of in-field experiments. This paper proposes a novel
 real-time underwater imaging sonar simulator, which uses the OpenGL shading
 language (GLSL) chain, and is able to simulate two main types of sonar sensors:
-mechanical scanning imaging sonars (MSIS) and foward-looking sonars (FLS). The
+mechanical scanning imaging sonars (MSIS) and forward-looking sonars (FLS). The
 virtual underwater simulation was conceived based on three frameworks: (i)
 OpenSceneGraph (OSG) reproduces the ocean visual effects, (ii) Gazebo deals
 with physics effects, and (iii) the Robot Construction Kit (Rock) controls the
@@ -334,7 +334,7 @@ in \cite{watanabe2015}.
 
 All scene aspects, such as world model, robot parts (including sensors and
 joints) and other objects presented in the environment are defined by simulation
-description files (SDF), which use the SDFormat \cite{sdformat2017}, an XML
+description files (SDF), which use the SDFormat \cite{sdformat2017}, a XML
 format used to describe simulated models and environments for Gazebo. Visual
 and collision geometries of vehicle and sensor robot are also described in
 specific file formats. Each component described in the SDF file becomes a
@@ -544,7 +544,7 @@ expressed as \cite{lee1980}:
 y(t) = x(t) \times n(t) \, ,
 \end{equation}
 where $t$ is the time instant, $y(t)$ is the noised image, $x(t)$ is the
-free-noise image, $n(t)$ is the speckle noise matrix, and $\times$ defines an
+free-noise image, $n(t)$ is the speckle noise matrix, and $\times$ symbol defines an
 element-wise multiplication.
 
 This type of noise is well-modeled as a Gaussian distribution. The physical
@@ -652,18 +652,18 @@ orientation of the surface.
 The MSIS was also simulated in three different experiments. The robot in a
 big textured tank composes \textbf{the first scene} (see Fig.
 \ref{fig:msis_scene1}). Similar to the first scenario of FLS experiment,
-the reflectivity and texture were set to the target. The rotation of the the
+the reflectivity and texture were set to the target. The rotation of the
 sonar head position, by a complete $360^{\circ}$ scanning, produced the acoustic
 frame of tank walls (see Fig. \ref{fig:msis_sim1}). \textbf{The second scene}
 involves the vehicle's movement during the data acquisition process. The scene
-contains a grid around the AUV (see Fig. \ref{fig:msis_scene2}), an MSIS in
+contains a grid around the AUV (see Fig. \ref{fig:msis_scene2}), a MSIS in
 the front of the AUV is used. This trial induces a distortion in the final
 acoustic frame, because the relative sensor position with respect to the
 surrounding object changes while the sonar image is being built (see
 Fig. \ref{fig:msis_sim2}). In this case, the robot rotates $20^{\circ}$ left
 during the scanning. \textbf{The last scene} presents the AUV over oil
 and gas structures on the sea bottom (see Fig. \ref{fig:msis_scene3}).
-Using an MSIS located in the back of the AUV, with a vertical orientation,
+Using a MSIS located in the back of the AUV, with a vertical orientation,
 the scene was scanned to produce the acoustic visualization. As illustrated
 in Fig. \ref{fig:msis_sim3}, object surfaces present clear definition in
 the slice scanning of the sea-floor.
@@ -738,8 +738,8 @@ complete a $360^{\circ}$ scan sufficiently fast in comparison with a
 real sonar as Tritech Micron DST. Moreover, for the FLS device, these
 rates are superior to the rates lists by DeMarco \textit{et al}
 \cite{demarco2015} ($330 ms$) and Saç \textit{et al} \cite{sac2015}
-($2.5 min$). For MSIS type, to the best of our knowledge, there is any
-previous work for comparison.
+($2.5 min$). For MSIS type, to the best of our knowledge, there is no
+previous work done for comparison.
 
 According to previous results, since the number of bins is directly
 proportional to sonar image resolution, as explained in Section
@@ -795,7 +795,7 @@ sonar image singularities, such as multiplicative noise, surface
 properties and acoustic shadows are addressed and represented in the
 simulated frames. Specially for the shadows, the acoustic representation
 can present information as useful as the insonified object. Considering
-the qualitative results, the sonar simulator can be by feature detection
+the qualitative results, the sonar simulator can be used by feature detection
 algorithms, based on corners, lines and shapes. Also, the computation time
 to build one sonar frame was calculated using different device settings.
 The vertex and fragment processing during the underwater scene rendering
