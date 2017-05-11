@@ -14,6 +14,8 @@ can be by feature" that needs to be easily solved.
 The contribution of the work is interesting for the community, mainly if
 the simulator will become freely available. It can increase the potential
 of the work in terms of impact.
+===> ROMULO COMMENTS <===: I'll check with Jan and Sylvain about the possibility
+of making open source and available.
 
 About the work, Figure 3 is confused and needs to be improved. The authors
 argue that the beam are composed by the intensity, depth and angular
@@ -21,6 +23,7 @@ distortion matrix, however it is not clean in the figure. The names makes
 the things hard, please "uniform the names", like "Beam Angle in Camera"
 = "Angular Distortion"? "Surface Angle to Camera" = "Intensity"? "Distance
 from Camera" = "Depth" ?
+===> ROMULO COMMENTS <===: Jan can do this adjustments easily.
 
 In Fig. 6, it is not clear the effect of the parameter "p". How does the
 normal (blue channel) is adopted in the calculus of the acoustic intensity?
@@ -32,15 +35,25 @@ sonar's frequency and the adopted range. The authors know it, as shown in line
 266, however it could be interesting to define the number of bins in terms of
 these two parameters to make the simulation "more realistic" in terms of
 the real sensor. It could be interesting for the community.
+===> ROMULO COMMENTS <===: Certainly the number of bins depends on adopted range
+and sonar's frequency. While the Tritech Micron DST sonar uses this calculus,
+the Tritech Gemini 720i takes a range compression to limit the number of bins
+between 750 and 1500, independent of covered area. Since we are dealing with
+a simulator, this parameter can be adjusted by the user.
 
 Another interesting thing is related to the noise simulation. It does not appear
 realistic due to the lack of "noise" in the black areas. The application of
 noise in this area can be interesting.
+===> ROMULO COMMENTS <===:
 
 The main limitation of the work is the lacks of reverberation simulation in the
 work. It limits the applicability of the simulation to open waters with a small
 number of objects. Thus, it appears to be the "main future works", however, the
 authors do not mention it.
+===> ROMULO COMMENTS <===: As we mentioned in the lines 422-426, the
+reverberation is a missing part of our simulator and the future inclusion
+of this phenomena must be considered. Maybe we need to emphasize in the last
+conclusion sentence.
 
 It is hard to validate a simulator, however, I believe the works lake in
 terms of comparison with real data at least in terms of SNR or other metrics.
