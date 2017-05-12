@@ -14,8 +14,8 @@ can be by feature" that needs to be easily solved.
 The contribution of the work is interesting for the community, mainly if
 the simulator will become freely available. It can increase the potential
 of the work in terms of impact.
-===> ROMULO COMMENTS <===: I'll check with Jan and Sylvain about the possibility
-of making open source and available.
+===> ROMULO COMMENTS <===: I'll check with Jan and Sylvain about the
+possibility to make it open source and available.
 
 About the work, Figure 3 is confused and needs to be improved. The authors
 argue that the beam are composed by the intensity, depth and angular
@@ -44,7 +44,12 @@ a simulator, this parameter can be adjusted by the user.
 Another interesting thing is related to the noise simulation. It does not appear
 realistic due to the lack of "noise" in the black areas. The application of
 noise in this area can be interesting.
-===> ROMULO COMMENTS <===:
+===> ROMULO COMMENTS <===: This limitation is explained in lines 366-372.
+As we described in Section 3.4, the speckle noise modeled in this paper
+is a multiplicative one, following a non-uniform distribution. Thus the
+resulting sonar data is composed by an element-wise multiplication between
+the raw data and the speckle noise. The insertion of an additive noise is
+already addressed as a future work to solve this missing part.
 
 The main limitation of the work is the lacks of reverberation simulation in the
 work. It limits the applicability of the simulation to open waters with a small
@@ -52,7 +57,7 @@ number of objects. Thus, it appears to be the "main future works", however, the
 authors do not mention it.
 ===> ROMULO COMMENTS <===: As we mentioned in the lines 422-426, the
 reverberation is a missing part of our simulator and the future inclusion
-of this phenomena must be considered. Maybe we need to emphasize in the last
+of this phenomena must be considered. We are emphasizing this in the last
 conclusion sentence.
 
 It is hard to validate a simulator, however, I believe the works lake in
@@ -78,6 +83,9 @@ The Euclidean distance from camera center, the surface normal angles, and the
 angular distortion are recorded as color channels. In this case, there is a
 limitation of 256 values. Does this brings precision problems? Using CUDA or
 OpenCL, couldn't this be addressed in a more elegant way?
+===> ROMULO COMMENTS <===: All data processed during the shader rendering are
+floating-point number recorded as color channels. Then we do not have precision
+problems here.
 
 I would like to see more details on the implementations of the models. I am not
 sure if it is possible to reproduce the solution with the presented text.
@@ -86,6 +94,8 @@ This sentence seems to be from a decade ago paper…: Modern graphics hardware
 presents programmable tasks…
 
 It is unclear to me, but each beam is for a complete column?
+===> ROMULO COMMENTS <===: Each beam is composed by one or more columns,
+according to sonar bearings.
 
 ===============================================================================
 ===============================================================================
