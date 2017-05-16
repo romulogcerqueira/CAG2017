@@ -85,7 +85,7 @@ limitation of 256 values. Does this brings precision problems? Using CUDA or
 OpenCL, couldn't this be addressed in a more elegant way?
 ===> ROMULO COMMENTS <===: All data processed during the shader rendering are
 floating-point number recorded as color channels. Then we do not have precision
-problems here.
+problems here. We use GLSL due the hardware and backward compatibility.
 
 I would like to see more details on the implementations of the models. I am not
 sure if it is possible to reproduce the solution with the presented text.
@@ -131,9 +131,9 @@ tions."
 ---> What is "Rock-Gazebo integration"? The authors explain it later. However,
 the order of the sentences could be switched to make text a bit clearer.
 
-
 The Introduction section contains some text that should be in the
 Related Work Section.
+===> ROMULO COMMENTS <===: XXXXXXXX
 
 
 Technically, bump maps are different from normal maps. Bump maps are defined as
@@ -141,6 +141,8 @@ height maps that describes the bumps on parametric surfaces. Normal maps, on the
 other hand, are textures that contain perturbed normal vectors. There are both
 tangential and object space normal maps. It seems that the proposed technique
 uses normal maps. I suggest a review on that.
+===> ROMULO COMMENTS <===: Our confusion here. The proposed approach uses normal
+maps. It will be corrected in the next version.
 
 
 Some image labels are too small.
@@ -153,14 +155,14 @@ on lines 322, 327, 334, 343, 347-348, 354-355.
 Contributions and limitations
 =============================
 
-
 In the abstract the authors state the importance of simulating sonar sensors
 and then introduce the proposed method. However, nothing is said
 about the difficulties involved in such a simulation and about the general
 limitations of current methods. Along the text, it seems that the use of the GPU
 for sonar sensor simulation is a contribution, but this is not mentioned in the
 abstract.
-
+===> ROMULO COMMENTS <===: We cited GLSL. Is not intrinsic the GPU usage?
+I'm not sure if we should explaing the limitations in the abstract.
 
 In the beginning of Section 1.1 (Contributions) we have:
 
@@ -177,6 +179,7 @@ they could even do it very accurately. Actually, it can be (and probably will
 be) the case that the authors of the existing techniques were not concerned
 about simulating several sonar sensor types. I think that this statements should
 be reviewed and rewritten in order to correctly account for that.
+===> ROMULO COMMENTS <===: XXXXXXXXX
 
 ---> The authors claim that the proposed technique overcomes the "main
 limitations" of existing techniques. However, the proposed method itself

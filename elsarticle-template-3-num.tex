@@ -51,10 +51,10 @@ mechanical scanning imaging sonars (MSIS) and forward-looking sonars (FLS). The
 virtual underwater simulation was conceived based on three frameworks: (i)
 OpenSceneGraph (OSG) reproduces the ocean visual effects, (ii) Gazebo deals
 with physics effects, and (iii) the Robot Construction Kit (Rock) controls the
-sonar in underwater environments. The proposed sonar simulation returns a
-matrix comprised of the echo intensity, the distance to the target object and
-the angle distortion, being all calculated over object shapes and material
-properties in the 3D rendered scene. Sonar-intrinsic speckle noise and object
+sonar in underwater environments. The proposed sonar simulation exploits the
+rasterization pipeline in order to build a matrix comprised of echo intensity,
+distance and angular distortion, being all calculated over object shapes in
+the 3D rendered scene. Sonar-intrinsic speckle noise and object
 material properties are also considered as part of the sonar image. Our
 evaluation demonstrated that the proposed method is able to operate with high
 frame rate, as well as realistic sonar image quality in different virtual
@@ -396,54 +396,54 @@ of horizontal field of view.
 
 In realistic sensing, real-world surfaces usually present irregularities
 and different reflectance values. To render that in a virtual scene, the
-intensity values can also be defined by a bump mapping and material
-property information. Bump mapping is a perturbation rendering technique
-to simulate wrinkles on the object surface by passing textures and modifying
+intensity values can also be defined by a normal maps and material
+property information. Normal mapping is a perturbation rendering technique
+to simulate wrinkles and dents on the object surface by passing RGB textures and modifying
 the normal directions on shaders. This approach consumes less computational
 resources for the same level of detail, compared to the displacement mapping
-technique, because the geometry remains unchanged. Since bump maps are
+technique, because the geometry remains unchanged. Since normal maps are
 built in tangent space, interpolating the normal vertex and the texture,
 a tangent, bitangent and normal (TBN) matrices are computed to convert the
-normal values into the world space. Representation of bump mapping process
-in our approach is seen in Fig. \ref{fig:sonar_bump_mapping}.
+normal values into the world space. Representation of normal mapping process
+in our approach is seen in Fig. \ref{fig:sonar_normal_mapping}.
 
 \begin{figure*}[t]
     \centering
     \subfigure[][]{
-        \includegraphics[width=0.25\paperwidth]{figs/bump_0}
-        \label{fig:bump_0}
+        \includegraphics[width=0.25\paperwidth]{figs/normal_map_0}
+        \label{fig:normal_0}
     }
     \subfigure[][]{
-        \includegraphics[width=0.25\paperwidth]{figs/bump_1}
-        \label{fig:bump_1}
+        \includegraphics[width=0.25\paperwidth]{figs/normal_map_1}
+        \label{fig:normal_1}
     }
     \subfigure[][]{
-        \includegraphics[width=0.25\paperwidth]{figs/bump_2}
-        \label{fig:bump_2}
+        \includegraphics[width=0.25\paperwidth]{figs/normal_map_2}
+        \label{fig:normal_2}
     }
     \subfigure[][]{
-        \includegraphics[width=0.25\paperwidth]{figs/bump_3}
-        \label{fig:bump_3}
+        \includegraphics[width=0.25\paperwidth]{figs/normal_map_3}
+        \label{fig:normal_3}
     }
     \subfigure[][]{
-        \includegraphics[width=0.25\paperwidth]{figs/bump_4}
-        \label{fig:bump_4}
+        \includegraphics[width=0.25\paperwidth]{figs/normal_map_4}
+        \label{fig:normal_4}
     }
     \subfigure[][]{
-        \includegraphics[width=0.25\paperwidth]{figs/bump_5}
-        \label{fig:bump_5}
+        \includegraphics[width=0.25\paperwidth]{figs/normal_map_5}
+        \label{fig:normal_5}
     }
     \captionsetup{justification=centering}
-    \caption{Example of shader rendering with bump mapping processing:
-    A sphere without texture \subref{fig:bump_0} and with texture
-    \subref{fig:bump_3}; their respective shader image representation
-    in \subref{fig:bump_1} and \subref{fig:bump_4}, where blue is the
+    \caption{Example of shader rendering with normal mapping processing:
+    A sphere without texture \subref{fig:normal_0} and with texture
+    \subref{fig:normal_3}; their respective shader image representation
+    in \subref{fig:normal_1} and \subref{fig:normal_4}, where blue is the
     normal channel and green is the depth one; and the final acoustic
-    image in \subref{fig:bump_2} and \subref{fig:bump_5}. By using
-    bump mapping technique, the textures changes the normal directions,
+    image in \subref{fig:normal_2} and \subref{fig:normal_5}. By using
+    normal mapping technique, the textures changes the normal directions,
     and the sonar image details the appearance of object surface, like
     in real-world sensing.}
-    \label{fig:sonar_bump_mapping}
+    \label{fig:sonar_normal_mapping}
 \end{figure*}
 
 The reflectance allows to properly describe the intensity received back
