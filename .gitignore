@@ -2,4 +2,8 @@
 *.blg
 *.log
 *.gz
-.latexcfg
+*.latexcfg
+*.bcf
+*-blx.bib
+*.xml
+*.fdb_latexmk
