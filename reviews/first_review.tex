@@ -1,0 +1,401 @@
+\documentclass{article}
+\usepackage{a4wide}
+\usepackage{todonotes}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\title{Response to the Reviewer's Comments}
+\begin{document}
+
+\maketitle
+
+We thank the reviewers for their insightful and useful feedback. We have
+revised our paper in light of this feedback, and feel it has benefited
+greatly from addressing the concerns raised by the reviewers. Please find
+below our replies and comments about each of the issues raised, and how
+we modified the paper to address them.
+
+\begin{verbatim}
+>> REVIEWER #1 <<
+
+> The proposed work simulates underwater imaging sonar based on OpenGL shading
+> language (GLSL) chain, and is able to simulate two main types of sonar sensors:
+> mechanical scanning imaging sonars (MSIS) and forward-looking sonars (FLS).
+>
+> The paper is well written with just small issues like "there is any previous
+> work for comparison", "foward-looking sonars" or "the sonar simulator can be
+> by feature" that needs to be easily solved.
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> The contribution of the work is interesting for the community, mainly if the
+> simulator will become freely available. It can increase the potential of the
+> work in terms of impact.
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+> About the work, Figure 3 is confused and needs to be improved. The authors
+> argue that the beam are composed by the intensity, depth and angular
+> distortion matrix, however it is not clean in the figure. The names makes
+> the things hard, please "uniform the names", like "Beam Angle in Camera"
+> = "Angular Distortion"? "Surface Angle to Camera" = "Intensity"? "Distance
+> from Camera" = "Depth" ?
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+> In Fig. 6, it is not clear the effect of the parameter "p". How does the
+> normal (blue channel) is adopted in the calculus of the acoustic intensity?
+> It is more readable to show the final simulation instead of the normal
+> image vs. depth image (green channel), as in Fig. 5.
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> About the simulation resolution, the number of bins are dependent of the
+> sonar's frequency and the adopted range. The authors know it, as shown in line
+> 266, however it could be interesting to define the number of bins in terms of
+> these two parameters to make the simulation "more realistic" in terms of
+> the real sensor. It could be interesting for the community.
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+> Another interesting thing is related to the noise simulation. It does not appear
+> realistic due to the lack of "noise" in the black areas. The application of
+> noise in this area can be interesting.
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> The main limitation of the work is the lacks of reverberation simulation in the
+> work. It limits the applicability of the simulation to open waters with a small
+> number of objects. Thus, it appears to be the "main future works", however, the
+> authors do not mention it.
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> It is hard to validate a simulator, however, I believe the works lake in
+> terms of comparison with real data at least in terms of SNR or other metrics.
+> It could be interesting to simulate a "real scenario" and compare the results
+> obtained by the simulator.
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+>> REVIEWER #2 <<
+
+> The paper proposes a complete simulation suite for real-time underwater
+> imaging sonar simulator. It seems to be a very broad proposal, that includes
+> many aspects of the simulation itself, going through the rendering to the
+> physical simulation itself. Acording to the authors, one main difference of
+> their work in relation to others is that they solve both mechanical scanning
+> imaging sonar (MSIS) and forward-looking sonar (FLS) models.
+>
+> The results are promising and interesting. However, I am afraid that the
+> contribution is tangent to Computer & Graphics, even with a visualization
+> aspect being solved.
+\end{verbatim}
+
+\todo[inline, color=blue!40]{Undefined responsible answer}
+
+\begin{verbatim}
+> The Euclidean distance from camera center, the surface normal angles, and the
+> angular distortion are recorded as color channels. In this case, there is a
+> limitation of 256 values. Does this brings precision problems? Using CUDA or
+> OpenCL, couldn't this be addressed in a more elegant way?
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> I would like to see more details on the implementations of the models. I am not
+> sure if it is possible to reproduce the solution with the presented text.
+\end{verbatim}
+
+\todo[inline, color=blue!40]{Undefined responsible's answer}
+
+\begin{verbatim}
+> This sentence seems to be from a decade ago paper…: Modern graphics hardware
+> presents programmable tasks…
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> It is unclear to me, but each beam is for a complete column?
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+>> REVIEWER #3 <<
+
+> The present work proposes a method for the simulation of sonar sensors.
+> Differently from previous methods, the proposed technique takes advantage
+> of the GPU to achieve realtime performance and is able to reproduce the
+> operation of FLS and MSIS sonars sensors.
+>
+> Text
+> ====
+>
+> The text contains some confusing passages that demand review. For instance:
+>
+> --- lines 78-82
+> "The intensity measured back from the in-
+> sonified objects depends on the accumulated energy based on
+> surface normal directions, producing more realistic simulated
+> scenes, instead of statically defined by the user, as in [5], or in
+> a binary representation as found in [6, 7]."
+>
+> ---> "accumulated energy" refers to what exactly? Energy accumulated where?
+> ---> "instead of statically defined by the user" What does it mean?
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> --- lines 172-174
+> "The Rock-Gazebo integration [17] provides the underwa-
+> ter scenario, and allows real-time hardware-in-the-loop simula-
+> tions."
+
+> ---> What is "Rock-Gazebo integration"? The authors explain it later. However,
+> the order of the sentences could be switched to make text a bit clearer.
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+> The Introduction section contains some text that should be in the Related
+> Work Section.
+\end{verbatim}
+
+\todo[inline, color=yellow!40]{Luciano's answer}
+
+\begin{verbatim}
+> Technically, bump maps are different from normal maps. Bump maps are defined as
+> height maps that describes the bumps on parametric surfaces. Normal maps, on the
+> other hand, are textures that contain perturbed normal vectors. There are both
+> tangential and object space normal maps. It seems that the proposed technique
+> uses normal maps. I suggest a review on that.
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> Some image labels are too small.
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> No need to put "the {first|second|third|last} {scenario|scene}" in bold on
+> lines 322, 327, 334, 343, 347-348, 354-355.
+\end{verbatim}
+
+\todo[inline, color=yellow!40]{Luciano's answer}
+
+\begin{verbatim}
+> Contributions and limitations
+> =============================
+>
+> In the abstract the authors state the importance of simulating sonar sensors
+> and then introduce the proposed method. However, nothing is said
+> about the difficulties involved in such a simulation and about the general
+> limitations of current methods. Along the text, it seems that the use of the GPU
+> for sonar sensor simulation is a contribution, but this is not mentioned in the
+> abstract.
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> --- lines 69-73
+> "This paper introduces a novel imaging sonar simulator, that
+> can overcome the main limitations of the existing approaches.
+> As opposed to [1, 2, 3, 4, 5, 6, 7], where the proposed models
+> simulate a specific sonar type, our model is able to reproduce
+> two kind of sonar devices (...)"
+>
+> ---> These sentences may lead the reader to wrongly interpret the existing
+> techniques, that simulate only one type of sensor, as being limited although
+> they could even do it very accurately. Actually, it can be (and probably will
+> be) the case that the authors of the existing techniques were not concerned
+> about simulating several sonar sensor types. I think that this statements should
+> be reviewed and rewritten in order to correctly account for that.
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+> ---> The authors claim that the proposed technique overcomes the "main
+> limitations" of existing techniques. However, the proposed method itself
+> introduces limitations that were not present in some of the existing techniques
+> (for instance, the proposed method does not handle reverberation, an important
+> phenomenon in the context of sonar sensor simulation). Thus, I think that the
+> discourse about contributions versus limitations should be reviewed in order
+> to be fair.
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+> The method
+> ==========
+>
+> The explanation about sonar sensors, and how they work, seems to be Ok. However,
+> I've missed a formalization of the problem being simulated. Without it, it
+> becomes difficult to understand how good the proposed simulation method is
+> (which were the simplifying assumptions adopted?). Also, the description of
+> the method implementation is quite confusing. I think that a grad student
+> could not implement it without too much guessing.
+\end{verbatim}
+
+\todo[inline, color=blue!40]{Undefined responsible's answer}
+
+\begin{verbatim}
+> --- lines 74-78
+> "Also, the underwater scene is processed during the pipeline rendering on
+> graphics processing unit (GPU), accelerating the simulation process,
+> guaranteeing real-time simulation, in contrast to the methods found in
+> [1, 2, 4, 5]."
+>
+> ---> It is not clear why the GPU/rasterization were chosen and how the GPU
+> helps in overcoming eventual problems/limitations of the existing techniques.
+> Why GPU-based realtime ray tracing was not chosen, for instance?
+\end{verbatim}
+
+\todo[inline, color=blue!40]{Undefined responsible's answer}
+
+\begin{verbatim}
+> The method takes advantage of the rasterization pipeline in order to build
+> the distance, normal and angle maps. This is not stated anywhere, but that
+> rendering method is similar to the "deferred shading" (which solves the
+> visibility from the camera viewpoint at the same time that stores several
+> properties of the rasterized fragments into an auxiliar buffer). This would
+> be one advantage related to the use of GPU in this context.
+\end{verbatim}
+
+\todo[inline, color=blue!40]{Undefined responsible's answer}
+
+\begin{verbatim}
+> From Section 2 (lines 104-107) it seems that bins are samples placed along the
+> beam. However, I could not spot how these samples are obtained from the
+> description in Section 3.3. Actually the text explains it, but I've found it too
+> confusing. In the beginning I had the impression that the distance, angle and
+> normal maps were 2D. Later on, I started thinking that they should be 3D
+> (what does "3D shader matrix" mean in line 257?). However, if they are really
+> 3D maps, when is each slice of this 3D map (matrix) obtained? I've got really
+> confused at this point.
+\end{verbatim}
+
+\todo[inline, color=blue!40]{Undefined responsible's answer}
+
+\begin{verbatim}
+> I've found the noise model too arbitrary. How good is this approximation?
+\end{verbatim}
+
+\todo[inline, color=blue!40]{Undefined responsible's answer}
+
+\begin{verbatim}
+> Results
+> =======
+>
+> --- lines 86-88
+> "The main goal here is to build quality and low time-con-
+> suming acoustic frames, according to underwater sonar image
+> formation and operation modes (see Section 2)."
+>
+> ---> The Results Section does not compare the obtained results with data
+> obtained with real sensors (validation). The proposed method is not even
+> compared to existing techniques (except for speed in some cases). Thus, despite
+> the fact that the proposed method can very efficiently simulate two distinct
+> types of sonar sensors, it is not possible to assert how good the results are
+> (quality).
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+> --- lines 370-373
+> "In real sonar images, the noise also granulates the shadows and blind regions.
+> The sonar simulator can be improved by inserting an additive noise to our
+> model."
+>
+> ---> This seems to be a feature that could be easily included. Why it was not
+> added to the system?
+
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+> Here I make an observation regarding the proposed technique. As was
+> mentioned in the paper, several existing techniques make use of the ray tracing
+> in order to simulate sonar sensors because reflection is extremely
+> important in the context of sound propagation simulation and it
+> can be easily simulated with ray tracing. Thus, how do the authors
+> plan to efficiently expand their rasterization-based system in order to handle
+> reflections? Wouldn't it be easier and more efficient with GPU-accelerated ray
+> tracing?
+\end{verbatim}
+
+\todo[inline, color=green!40]{Jan's answer}
+
+\begin{verbatim}
+> --- lines 373-375
+> "This lacking part can be addressed by implementation of a multi-path propaga-
+> tion model."
+>
+> ---> What does it mean "multi-path"? References?
+\end{verbatim}
+
+\todo[inline, color=red!40]{Rômulo's answer}
+
+\begin{verbatim}
+> Decision
+> ========
+>
+> The proposed work is very interesting but seems to be just in early stages
+> of development. Some decisions were not very well justified (why GPUs? why
+> rasterization?). Some explanations are confusing (the simulation of the sonars).
+> Certainly, with some additional work on these points, the paper will be ready for
+> submissions. However, in the current state, and from what was already discussed,
+> I've decided for its rejection.
+\end{verbatim}
+
+\todo[inline, color=blue!40]{Undefined responsible's answer}
+
+\begin{verbatim}
+>> REVIEWER #4 <<
+
+> The submitted manuscript proposes a sonar simulator for real-time
+> applications. Several physical aspects are considered in a computational high
+> performance implementation. The final product is impressive.
+>
+> With respect to the document, it is very well-written and organized, theoretically
+> well supported, the presentation is clear and the experiments are sufficient
+> to prove the system effectiveness. Everything is well justified and I do not
+> have any comment or question about the work. Congratulations.
+>
+> Under these conditions, I believe the paper is ready to be published.
+\end{verbatim}
+
+\todo[inline, color=blue!40]{Undefined responsible's answer}
+
+\end{document}
+
+\grid
+\grid

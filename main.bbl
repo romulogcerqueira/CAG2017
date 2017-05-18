@@ -1,0 +1,186 @@
+\begin{thebibliography}{21}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\eprint}[1]{\href{http://arxiv.org/abs/#1}{\path{#1}}}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\BIBand}{and}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\undefined \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Bell(1997)}]{bell1997}
+\bibinfo{author}{Bell\xfnm[ J.M.]}.
+\newblock \bibinfo{title}{Application of optical ray tracing techniques to the
+  simulation of sonar images}.
+\newblock \bibinfo{journal}{Optical Engineering}
+  \bibinfo{year}{1997};\bibinfo{volume}{36}(\bibinfo{number}{6}):\bibinfo{pages}{1806--1813}.
+%Type = Incollection
+\bibitem[{Coiras and Groen(2009)}]{coiras2009}
+\bibinfo{author}{Coiras\xfnm[ E.]}, \bibinfo{author}{Groen\xfnm[ J.]}.
+\newblock \bibinfo{title}{Simulation and 3d reconstruction of side-looking
+  sonar images}.
+\newblock In: \bibinfo{editor}{Silva\xfnm[ S.]}, editor.
+  \bibinfo{booktitle}{Advances in Sonar Technology};
+  chap.~\bibinfo{chapter}{1}. \bibinfo{publisher}{InTech};
+  \bibinfo{year}{2009}, p. \bibinfo{pages}{1--15}.
+%Type = Inproceedings
+\bibitem[{Guériot and Sintes(2010)}]{gueriot2010}
+\bibinfo{author}{Guériot\xfnm[ D.]}, \bibinfo{author}{Sintes\xfnm[ C.]}.
+\newblock \bibinfo{title}{Forward looking sonar data simulation through tube
+  tracing}.
+\newblock In: \bibinfo{booktitle}{MTS/IEEE OCEANS Conference}.
+  \bibinfo{year}{2010}, p. \bibinfo{pages}{1--6}.
+%Type = Article
+\bibitem[{Sa{\c c} et~al.(2015)Sa{\c c}, Lebleb{\.i}c{\.i}o{\u g}lu and
+  Bozda{\u g}i~Akar}]{sac2015}
+\bibinfo{author}{Sa{\c c}\xfnm[ H.]}, \bibinfo{author}{Lebleb{\.i}c{\.i}o{\u
+  g}lu\xfnm[ K.]}, \bibinfo{author}{Bozda{\u g}i~Akar\xfnm[ G.]}.
+\newblock \bibinfo{title}{2d high-frequency forward-looking sonar simulator
+  based on continuous surfaces approach}.
+\newblock \bibinfo{journal}{Turkish Journal of Electrical Engineering and
+  Computer Sciences}
+  \bibinfo{year}{2015};\bibinfo{volume}{23}(\bibinfo{number}{1}):\bibinfo{pages}{2289--2303}.
+%Type = Inproceedings
+\bibitem[{DeMarco et~al.(2015)DeMarco, West and Howard}]{demarco2015}
+\bibinfo{author}{DeMarco\xfnm[ K.]}, \bibinfo{author}{West\xfnm[ M.]},
+  \bibinfo{author}{Howard\xfnm[ A.]}.
+\newblock \bibinfo{title}{A computationally-efficient 2d imaging sonar model
+  for underwater robotics simulations in {Gazebo}}.
+\newblock In: \bibinfo{booktitle}{MTS/IEEE OCEANS Conference}.
+  \bibinfo{year}{2015}, p. \bibinfo{pages}{1--8}.
+%Type = Inproceedings
+\bibitem[{Gu et~al.(2013)Gu, Joe and Yu}]{gu2013}
+\bibinfo{author}{Gu\xfnm[ J.]}, \bibinfo{author}{Joe\xfnm[ H.]},
+  \bibinfo{author}{Yu\xfnm[ S.C.]}.
+\newblock \bibinfo{title}{Development of image sonar simulator for underwater
+  object recognition}.
+\newblock In: \bibinfo{booktitle}{MTS/IEEE OCEANS Conference}.
+  \bibinfo{year}{2013}, p. \bibinfo{pages}{1--6}.
+%Type = Inproceedings
+\bibitem[{Kwak et~al.(2015)Kwak, Ji, Yamashita and Asama}]{kwak2015}
+\bibinfo{author}{Kwak\xfnm[ S.]}, \bibinfo{author}{Ji\xfnm[ Y.]},
+  \bibinfo{author}{Yamashita\xfnm[ A.]}, \bibinfo{author}{Asama\xfnm[ H.]}.
+\newblock \bibinfo{title}{Development of acoustic camera-imaging simulator
+  based on novel model}.
+\newblock In: \bibinfo{booktitle}{IEEE International Conference on Environment
+  and Electrical Engineering (EEEIC)}. \bibinfo{year}{2015}, p.
+  \bibinfo{pages}{1719--1724}.
+%Type = Inproceedings
+\bibitem[{Quigley et~al.(2009)Quigley, Conley, Gerkey, Faust, Foote, Leibs
+  et~al.}]{quigley2009}
+\bibinfo{author}{Quigley\xfnm[ M.]}, \bibinfo{author}{Conley\xfnm[ K.]},
+  \bibinfo{author}{Gerkey\xfnm[ B.P.]}, \bibinfo{author}{Faust\xfnm[ J.]},
+  \bibinfo{author}{Foote\xfnm[ T.]}, \bibinfo{author}{Leibs\xfnm[ J.]}, et~al.
+\newblock \bibinfo{title}{{ROS}: an open-source robot operating system}.
+\newblock In: \bibinfo{booktitle}{Workshop on Open Source Software, held at
+  IEEE International Conference on Robotics and Automation (ICRA)}.
+  \bibinfo{year}{2009}, p. \bibinfo{pages}{1--6}.
+%Type = Phdthesis
+\bibitem[{Hurtós(2014)}]{hurtos2014}
+\bibinfo{author}{Hurtós\xfnm[ N.]}.
+\newblock \bibinfo{title}{Forwad-looking sonar mosaicing for underwater
+  environments}.
+\newblock Ph.D. thesis; Universitat de Girona; \bibinfo{year}{2014}.
+%Type = Article
+\bibitem[{Abbot and Thurstone(1979)}]{abbott1979}
+\bibinfo{author}{Abbot\xfnm[ J.]}, \bibinfo{author}{Thurstone\xfnm[ F.]}.
+\newblock \bibinfo{title}{Acoustic speckle: theory and experimental analysis}.
+\newblock \bibinfo{journal}{Ultrasonic Imaging}
+  \bibinfo{year}{1979};\bibinfo{volume}{1}(\bibinfo{number}{4}):\bibinfo{pages}{303--324}.
+%Type = Article
+\bibitem[{Ganesan et~al.(2015)Ganesan, Chitre and Brekke}]{ganesan2015}
+\bibinfo{author}{Ganesan\xfnm[ V.]}, \bibinfo{author}{Chitre\xfnm[ M.]},
+  \bibinfo{author}{Brekke\xfnm[ E.]}.
+\newblock \bibinfo{title}{Robust underwater obstacle detection and collision
+  avoidance}.
+\newblock \bibinfo{journal}{Autonomous Robots}
+  \bibinfo{year}{2015};\bibinfo{volume}{40}(\bibinfo{number}{7}):\bibinfo{pages}{1--21}.
+%Type = Book
+\bibitem[{Ribas et~al.(2010)Ribas, Ridao and Neira}]{ribas2010}
+\bibinfo{author}{Ribas\xfnm[ D.]}, \bibinfo{author}{Ridao\xfnm[ P.]},
+  \bibinfo{author}{Neira\xfnm[ J.]}.
+\newblock \bibinfo{title}{Underwater {SLAM} for structured environments using
+  an imaging sonar}.
+\newblock \bibinfo{publisher}{Springer-Verlag Berlin Heidelberg};
+  \bibinfo{year}{2010}.
+%Type = Article
+\bibitem[{Fallon et~al.(2013)Fallon, Folkesson, McClelland and
+  Leonard}]{fallon2013}
+\bibinfo{author}{Fallon\xfnm[ M.F.]}, \bibinfo{author}{Folkesson\xfnm[ J.]},
+  \bibinfo{author}{McClelland\xfnm[ H.]}, \bibinfo{author}{Leonard\xfnm[
+  J.J.]}.
+\newblock \bibinfo{title}{Relocating underwater features autonomously using
+  sonar-based {SLAM}}.
+\newblock \bibinfo{journal}{Journal of Ocean Engineering}
+  \bibinfo{year}{2013};\bibinfo{volume}{38}(\bibinfo{number}{3}):\bibinfo{pages}{500--513}.
+%Type = Inproceedings
+\bibitem[{Liu et~al.(2016)Liu, Xu and Bian}]{liu2016}
+\bibinfo{author}{Liu\xfnm[ L.]}, \bibinfo{author}{Xu\xfnm[ W.]},
+  \bibinfo{author}{Bian\xfnm[ H.]}.
+\newblock \bibinfo{title}{A {LBF}-associated contour tracking method for
+  underwater targets tracking}.
+\newblock In: \bibinfo{booktitle}{MTS/IEEE OCEANS Conference}.
+  \bibinfo{year}{2016}, p. \bibinfo{pages}{1--5}.
+%Type = Inproceedings
+\bibitem[{Huang and Kaess(2015)}]{huang2015}
+\bibinfo{author}{Huang\xfnm[ T.A.]}, \bibinfo{author}{Kaess\xfnm[ M.]}.
+\newblock \bibinfo{title}{Towards acoustic structure from motion for imaging
+  sonar}.
+\newblock In: \bibinfo{booktitle}{IEEE/RSJ International Conference on
+  Intelligent Robots and Systems (IROS)}. \bibinfo{year}{2015}, p.
+  \bibinfo{pages}{758--765}.
+%Type = Article
+\bibitem[{Bradski(2000)}]{bradski2000}
+\bibinfo{author}{Bradski\xfnm[ G.]}.
+\newblock \bibinfo{title}{The opencv library}.
+\newblock \bibinfo{journal}{Doctor Dobbs Journal}
+  \bibinfo{year}{2000};\bibinfo{volume}{25}(\bibinfo{number}{11}):\bibinfo{pages}{120--126}.
+%Type = Inproceedings
+\bibitem[{Watanabe et~al.(2015)Watanabe, Neves, Cerqueira, Trocoli, Reis,
+  Joyeux et~al.}]{watanabe2015}
+\bibinfo{author}{Watanabe\xfnm[ T.]}, \bibinfo{author}{Neves\xfnm[ G.]},
+  \bibinfo{author}{Cerqueira\xfnm[ R.]}, \bibinfo{author}{Trocoli\xfnm[ T.]},
+  \bibinfo{author}{Reis\xfnm[ M.]}, \bibinfo{author}{Joyeux\xfnm[ S.]}, et~al.
+\newblock \bibinfo{title}{The {Rock-Gazebo} integration and a real-time {AUV}
+  simulation}.
+\newblock In: \bibinfo{booktitle}{IEEE Latin American Robotics Symposium
+  (LARS)}. \bibinfo{year}{2015}, p. \bibinfo{pages}{132--138}.
+%Type = Misc
+\bibitem[{sdf(2017)}]{sdformat2017}
+\bibinfo{title}{{SDF}}.
+\newblock \bibinfo{howpublished}{\url{http://sdformat.org/}};
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{note}{Accessed: 2017-04-23}.
+%Type = Inproceedings
+\bibitem[{Soetens and Bruyninckx(2005)}]{soetens2005}
+\bibinfo{author}{Soetens\xfnm[ P.]}, \bibinfo{author}{Bruyninckx\xfnm[ H.]}.
+\newblock \bibinfo{title}{Realtime hybrid task-based control for robots and
+  machine tools}.
+\newblock In: \bibinfo{booktitle}{IEEE International Conference on Robotics and
+  Automation (ICRA)}. \bibinfo{year}{2005}, p. \bibinfo{pages}{260--265}.
+%Type = Book
+\bibitem[{Rost et~al.(2009)Rost, Licea-Kane, Ginsburg, Kessenich, Lichtenbelt,
+  Malan et~al.}]{rost2009}
+\bibinfo{author}{Rost\xfnm[ R.J.]}, \bibinfo{author}{Licea-Kane\xfnm[ B.]},
+  \bibinfo{author}{Ginsburg\xfnm[ D.]}, \bibinfo{author}{Kessenich\xfnm[
+  J.M.]}, \bibinfo{author}{Lichtenbelt\xfnm[ B.]}, \bibinfo{author}{Malan\xfnm[
+  H.]}, et~al.
+\newblock \bibinfo{title}{OpenGL shading language}.
+\newblock \bibinfo{edition}{3rd} ed.; \bibinfo{publisher}{Addison-Wesley
+  Professional}; \bibinfo{year}{2009}.
+%Type = Article
+\bibitem[{Lee(1980)}]{lee1980}
+\bibinfo{author}{Lee\xfnm[ J.]}.
+\newblock \bibinfo{title}{Digital image enhancement and noise filtering by use
+  of local statistics}.
+\newblock \bibinfo{journal}{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}
+  \bibinfo{year}{1980};\bibinfo{volume}{2}(\bibinfo{number}{2}):\bibinfo{pages}{165--168}.
+
+\end{thebibliography}
