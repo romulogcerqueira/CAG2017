@@ -240,7 +240,7 @@ present more difficult data interpretation due to:
     \item \textbf{Low signal-to-noise ratio (SNR)}: The sonar suffers from low
     SNR mainly due the very-long-range scanning, and the presence of speckle
     noise introduced caused by acoustic wave interferences \cite{abbott1979};
-    \item \textbf{Reverberation}: This phenomena is caused when multiple acoustic
+    \item \textbf{Reverberation}: This phenomenon is caused when multiple acoustic
     waves returning from the same object are detected over the same ping,
     producing duplicated objects.
 \end{enumerate}
@@ -356,9 +356,8 @@ in Fig. \ref{fig:uwscene}.
 \subsection{Shader rendering}
 \label{dev:shader}
 
-Modern graphics hardware presents programmable tasks embedded in GPU. Based
-on parallel computing, that approach can speed up 3D graphics processing,
-reducing the computational effort of the central processing unit (CPU). The
+GPUs are parallel numeric computing chips specialized to speed up 2D and 3D graphics
+processing, reducing the computational effort of the central processing unit (CPU). The
 rendering pipeline can be customized by defining programs on GPU called
 shaders. A shader is written in OpenGL Shading Language (GLSL) \cite{rost2009},
 a high-level language with a C-based syntax which enables more direct control
@@ -803,7 +802,7 @@ devices. These results allowed the use of this imaging sonar simulator
 by real-time applications, such as obstacle detection and avoidance, and
 object tracking. Finally, the reverberation effect is still missing on
 our simulator to perform a more realistic sensing. The future inclusion
-of this phenomena will probably change the reflected intensity model
+of this phenomenon will probably change the reflected intensity model
 and the computation time must be considered again. Next steps will
 focus on expand the underwater acoustic characteristics, such as additive
 noise and reverberation, and qualitative and computation\hyp{}efficiency

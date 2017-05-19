@@ -27,7 +27,9 @@ we modified the paper to address them.
 > by feature" that needs to be easily solved.
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{Thank you for catching these issues. We corrected the existing typing
+errors in the revised version.}
 
 \begin{verbatim}
 > The contribution of the work is interesting for the community, mainly if the
@@ -47,6 +49,7 @@ we modified the paper to address them.
 \end{verbatim}
 
 \todo[inline, color=green!40]{Jan's answer}
+% \textbf{We redrew Fig. 3 XXXX}
 
 \begin{verbatim}
 > In Fig. 6, it is not clear the effect of the parameter "p". How does the
@@ -73,7 +76,13 @@ we modified the paper to address them.
 > noise in this area can be interesting.
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{This limitation is explained in lines 366--372. As we described in
+Section 3.4, the speckle noise modeled in this paper is a multiplicative one,
+following a non-uniform distribution. The resulting sonar data is composed by
+an element-wise multiplication between the raw data and the speckle noise. The
+insertion of additive noise is already addressed as future work to solve this
+missing part.}
 
 \begin{verbatim}
 > The main limitation of the work is the lacks of reverberation simulation in the
@@ -82,7 +91,12 @@ we modified the paper to address them.
 > authors do not mention it.
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{We have chosen to extend the underwater acoustic phenomena in the
+simulator obeying its usage by real-time applications. As we described in
+the lines 422--426, the reverberation is a lacking part of our solution and
+its addition must considerer the computation time again. Thus, we emphasize
+the reverberation as future work in the lines 426--429.}
 
 \begin{verbatim}
 > It is hard to validate a simulator, however, I believe the works lake in
@@ -117,7 +131,20 @@ we modified the paper to address them.
 > OpenCL, couldn't this be addressed in a more elegant way?
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{Good points. At the beginning of development, we only had precision
+limitation problems with the depth information. Since the shader returns data
+in 8-bit color space, if the number of bins is higher than 256, the depth
+histogram will contain some blank spaces that will be reflected in the final
+sonar image as "black holes". To avoid this precision limitation, we store the
+depth information using the native GLSL depth buffer, which has 32-bit
+floating-point values.}
+
+\textbf{Indeed, CUDA and OpenCL are both good alternatives ways to implement
+the proposed approach. However, we have chosen to use GLSL for three main reasons:
+1) native from OpenGL, avoiding to install additional packages;
+2) hardware and backward compatibility;
+3) usage of precomputed geometric informations during the rasterization process.}
 
 \begin{verbatim}
 > I would like to see more details on the implementations of the models. I am not
@@ -131,13 +158,16 @@ we modified the paper to address them.
 > presents programmable tasks…
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{Thank you. This sentence has been rewritten in our revised manuscript.}
 
 \begin{verbatim}
 > It is unclear to me, but each beam is for a complete column?
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{Each beam is composed by one or more columns,
+according to sonar bearings.}
 
 \begin{verbatim}
 >> REVIEWER #3 <<
@@ -192,7 +222,9 @@ we modified the paper to address them.
 > uses normal maps. I suggest a review on that.
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{Our confusion here. The proposed approach uses normal
+maps. It will be corrected in the next version.}
 
 \begin{verbatim}
 > Some image labels are too small.
