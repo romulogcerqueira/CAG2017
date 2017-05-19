@@ -134,7 +134,7 @@ the reverberation as future work in the lines 426--429.}
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{Good points. At the beginning of development, we only had precision
 limitation problems with the depth information. Since the shader returns data
-in 8-bit color space, if the number of bins is higher than 256, the depth
+in 8-bit color space, if the number of bins is higher than 256, the distance
 histogram will contain some blank spaces that will be reflected in the final
 sonar image as "black holes". To avoid this precision limitation, we store the
 depth information using the native GLSL depth buffer, which has 32-bit
@@ -166,8 +166,9 @@ the proposed approach. However, we have chosen to use GLSL for three main reason
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Each beam is composed by one or more columns,
-according to sonar bearings.}
+\textbf{Each beam is composed by one or more columns, according to sonar
+bearings. We take this point and revised the text to make it clearer by
+adding this information in the lines 263--264.}
 
 \begin{verbatim}
 >> REVIEWER #3 <<
@@ -223,14 +224,18 @@ according to sonar bearings.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Our confusion here. The proposed approach uses normal
-maps. It will be corrected in the next version.}
+\textbf{Thank you for catching this issue. In fact, the proposed approach uses
+normal maps to simulate geometric surface irregularities by passing RGB textures
+and modifying the normal vectors. We revised the manuscript to avoid this
+mistake.}
 
 \begin{verbatim}
 > Some image labels are too small.
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{This paper followed the journal's LaTeX template. Unfortunately, we do not
+think we can change this.}
 
 \begin{verbatim}
 > No need to put "the {first|second|third|last} {scenario|scene}" in bold on

@@ -494,7 +494,8 @@ acoustic representation. Since the angular distortion is radially spaced
 over the horizontal field-of-view, where all pixels in the same column
 have the same angle value, the first step is to split the image in a
 number of beam parts. Each column is correlated with its respective beam,
-according to sonar bearings, as seen in Fig. \ref{fig:sonar_sim}. Each
+according to sonar bearings, as seen in Fig. \ref{fig:sonar_sim}. In this
+case, one beam represents one or more columns. Each
 beamed sub-image is converted into bin intensities using the depth and
 intensity data. In a real imaging sonar, the echo measured back is sampled
 over time and the bin number is proportional to the sensor range. In other
@@ -516,7 +517,7 @@ the accumulated intensity in each bin is normalized as
     I_{bin} = \sum\limits_{x=1}^N \frac{1}{N} \times S(i_{x}) \, ,
 \end{equation}
 where $I_{bin}$ is the intensity in the bin after energy normalization,
-$x$ is the pixel location in the shader matrix, $N$ is the depth histogram
+$x$ is the pixel location in the shader matrix, $N$ is the distance histogram
 value (number of pixels) of that bin, $S(i_{x})$ is a sigmoid function,
 and $i_{x}$ is the intensity value of the pixel $x$.
 
