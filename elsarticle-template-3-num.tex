@@ -10,6 +10,7 @@
 \usepackage{hyphenat}
 \usepackage{array}
 \usepackage{makecell}
+\usepackage{todonotes}
 
 \include{myhyph}
 
@@ -40,25 +41,25 @@
 \begin{abstract}
 
 Sonar simulation requires great computational effort due to the complexity of
-acoustic physics mainly when applied in the underwater environment. This fact turns the
-challenge of reproducing sensor data into a non-trivial task. On the other
+acoustic physics mainly when applied in the underwater environment. This fact
+turns the reproduction of sensor data into a non-trivial task. On the other
 hand, simulation of sonar operation data allows to evaluate algorithms and
 control systems without going to the real underwater environment; that reduces
 the costs and risks of in-field experiments. This paper proposes a novel
 real-time underwater imaging sonar simulator, which uses the OpenGL shading
-language (GLSL) chain, and is able to simulate two main types of sonar sensors:
-mechanical scanning imaging sonars (MSIS) and forward-looking sonars (FLS). The
-virtual underwater simulation was conceived based on three frameworks: (i)
-OpenSceneGraph (OSG) reproduces the ocean visual effects, (ii) Gazebo deals
-with physics effects, and (iii) the Robot Construction Kit (Rock) controls the
-sonar in underwater environments. The proposed sonar simulation exploits the
-rasterization pipeline in order to build a matrix comprised of echo intensity,
-distance and angular distortion, being all calculated over object shapes in
-the 3D rendered scene. Sonar-intrinsic speckle noise and object
-material properties are also considered as part of the sonar image. Our
-evaluation demonstrated that the proposed method is able to operate with high
-frame rate, as well as realistic sonar image quality in different virtual
-underwater scenarios.
+language (GLSL) chain on graphics processing unit (GPU), and is able to
+simulate two main types of sonar sensors: mechanical scanning imaging sonars
+(MSIS) and forward-looking sonars (FLS). The virtual underwater simulation was
+conceived based on three frameworks: (i) OpenSceneGraph (OSG) reproduces the
+ocean visual effects, (ii) Gazebo deals with physics effects, and (iii) the
+Robot Construction Kit (Rock) controls the sonar in underwater environments.
+The proposed sonar simulation exploits the rasterization pipeline in order
+to build a matrix comprised of echo intensity, distance and angular distortion,
+being all calculated over objects shapes in the 3D rendered scene.
+Sonar-intrinsic speckle noise and surface reflectance property are also
+considered as part of the acoustic image. Our evaluation demonstrated that the
+proposed method is able to operate with high frame rate, as well as realistic
+sonar image quality in different virtual underwater scenarios.
 
 \end{abstract}
 
@@ -127,7 +128,7 @@ simulations, Guériot and Sintes \cite{gueriot2010} introduce a volume-based
 approach of energy interacting with the scene, and collected by the receiving
 sonar; the sound propagation is defined by series of acoustic tubes, being
 always orthogonal to the current sonar view, where the reverberation and
-objects' surface irregularities are also addressed. Saç \textit{et al.}
+objects surface irregularities are also addressed. Saç \textit{et al.}
 \cite{sac2015} described a sonar model by computing the ray tracing in
 frequency domain; when a ray hits an object in 3D space, three parameters
 are calculated to process the acoustic data: the Euclidean distance from
@@ -136,44 +137,59 @@ model and the surface normal; the reverberation and shadow phenomena are
 also considered in the scene rendering. DeMarco \textit{et al.}
 \cite{demarco2015} used Gazebo and Robot Operating System (ROS)
 \cite{quigley2009} integration to simulate the acoustic sound pulses by a
-ray tracing technique, and to produce a 3D point cloud of the covered area;
-since the material reflectivity was statically defined, the final sonar
-image presented the same intensity values for all points on a single object.
-Gu \textit{et al} \cite{gu2013} modeled a forward-looking device where the
-ultrasound beams were formed by a set of rays; the acoustic image is
-significantly limited by its representation using only two colors: white,
-when the ray strikes an object, and black for shadow areas. Kwak
-\textit{et al.} \cite{kwak2015} evolved the previous approach by adding a
-sound pressure attenuation to produce the gray-scale sonar frame, while
-the other physical characteristics related to sound transmission are disregarded.
+ray tracing technique, and to produce a 3D point cloud of the coverage area;
+the reflected intensity has taken account of object reflectivity and the
+sonar image is corrupted by adding Gaussian noise, salt-and-pepper noise
+and median blur empirically defined. Gu \textit{et al} \cite{gu2013} modeled
+a forward-looking device where the ultrasound beams were formed by a set of
+rays; the acoustic image is significantly limited by its representation
+using only two colors: white, when the ray strikes an object, and black for
+shadow areas. Kwak \textit{et al.} \cite{kwak2015} evolved the previous
+approach by adding a sound pressure attenuation to produce the gray-scale
+sonar frame, while the other physical characteristics related to sound
+transmission are disregarded.
 
 \subsection{Contributions}
 
-This paper introduces a novel imaging sonar simulator, that can overcome
-the main limitations of the existing approaches. As opposed to
+This paper introduces a novel imaging sonar simulator that presents some
+contributions in relation to the existing approaches. Instead of simulating
+the sound pulse paths and the effects of their encounters with the virtual
+objects, as presented by the ray tracing and tube tracing-based methods
+\cite{bell1997,coiras2009,gueriot2010,sac2015,demarco2015,gu2013,kwak2015},
+we take advantage of precomputed geometric data during the rasterization
+pipeline to compute the acoustic frame. In addition, these informations are
+handled on GPU, accelerating the simulation process and guaranteeing the
+usage by real-time applications, in contrast to the methods found in
+\cite{bell1997,coiras2009,sac2015,demarco2015}. As opposed to
 \cite{bell1997,coiras2009,gueriot2010,sac2015,demarco2015,gu2013,kwak2015}, where
 the proposed models simulate a specific sonar type, our model is able to
 reproduce two kind of sonar devices: mechanical scanning imaging sonar (MSIS)
-and forward-looking sonar (FLS). Also, the underwater scene is processed during
-the pipeline rendering on graphics processing unit (GPU), accelerating the
-simulation process, guaranteeing real-time simulation, in contrast to the
-methods found in \cite{bell1997,coiras2009,sac2015,demarco2015}. The
-intensity measured back from the insonified objects depends on the accumulated
-energy based on surface normal directions, producing more realistic simulated
-scenes, instead of statically defined by the user, as in \cite{demarco2015},
-or in a binary representation as found in \cite{gu2013, kwak2015}. The speckle
-noise is modeled as a non-uniform Gaussian distribution and added to the final
-sonar image, performing a more realistic sensing, differently to
-\cite{gueriot2010,sac2015,gu2013,kwak2015}.
+and forward-looking sonar (FLS). The intensity measured back from the
+insonified objects depends on surface normal directions and reflectivity,
+producing more realistic simulated frames than binary representation as
+found in \cite{gu2013,kwak2015}. The speckle noise is modeled as a non-uniform
+Gaussian distribution and applied to the final sonar image, performing a more
+realistic sensing, differently to
+\cite{gueriot2010,sac2015,demarco2015,gu2013,kwak2015}. On the other hand,
+our proposed approach introduces limitations not present in some of existing
+techniques, such as reverberation phenomenon \cite{sac2015} and additive
+noise model \cite{sac2015,demarco2015}.
+% Rewrite this sentence, according the reviewers' comments:
+% As opposed to
+% \cite{bell1997,coiras2009,gueriot2010,sac2015,demarco2015,gu2013,kwak2015}, where
+% the proposed models simulate a specific sonar type, our model is able to
+% reproduce two kind of sonar devices: mechanical scanning imaging sonar (MSIS)
+% and forward-looking sonar (FLS).
 
 The main goal here is to build quality and low time\hyp{}consuming acoustic
 frames, according to underwater sonar image formation and operation modes
 (see Section \ref{sonar:operation}). The shader matrix with depth and normal
-buffers, and angular distortion values are extracted from underwater scene,
-and subsequently fused to generate the simulated sonar data, as described in
-Section \ref{dev}. Qualitative and time evaluation results for two different
-sonar devices are presented in Section \ref{results}, and allow for the use
-of the proposed simulator in real-time applications.
+buffers, and angular distortion values are extracted from underwater scene
+during the rasterization pipeline, and subsequently fused to generate the
+simulated sonar data, as described in Section \ref{dev}. Qualitative and
+time evaluation results for two different sonar devices are presented in
+Section \ref{results}, and allow for the use of the proposed simulator in
+real-time applications.
 
 % ----------------------------------------------------------------------------------
 
@@ -189,7 +205,7 @@ back versus time of acoustic signal. The transducer reading in a given direction
 forms a \textit{beam}. A single beam transmitted from a sonar is illustrated in
 Fig. \ref{fig:sonar_geometry}. The horizontal and vertical beamwidths are
 represented by the azimuth $\psi$ and elevation $\theta$ angles, respectively,
-where each sampling along the beam is named as \textit{bin}. The sonar covered
+where each sampling along the beam is named as \textit{bin}. The sonar coverage
 area is defined by $R_{min}$ and $R_{max}$. Since the speed of sound underwater
 is known, or can be measured, the time delay between the emitted pulses and
 their echoes reveal how far the objects are (distance $r$), as well as how fast
@@ -208,10 +224,10 @@ into a 2D image.
     \centering
     \captionsetup{justification=centering}
     \caption{Imaging sonar geometry. By the projection process, all 3D points
-    belonging to the same elevation arc (represented as dashed red line) will
-    be represented to the same image point in the 2D plane. This way,
+    belonging to the same elevation arc (represented as dashed orange line) will
+    be represented to the same image point in the 2D plane. In this way,
     range $r$ and azimuth angle $\psi$ are measured, and elevation
-    angle $\theta$ is lost. The sonar covered area is defined by $R_{min}$
+    angle $\theta$ is lost. The sonar coverage area is defined by $R_{min}$
     and $R_{max}$.}
     \label{fig:sonar_geometry}
 \end{figure}
@@ -226,7 +242,7 @@ present more difficult data interpretation due to:
 
 \begin{enumerate}[(a)]
     \item \textbf{Shadowing}: This effect is caused by objects blocking the
-    sound waves transmission and causing regions behind, without acoustic
+    sound waves transmission and causing regions behind them, without acoustic
     feedback. These regions are defined by a black spot in the image
     occluding part of the scene;
     \item \textbf{Non-uniform resolution}: The amount of pixels used to
@@ -277,7 +293,7 @@ involves a relatively long time, introducing distortions caused by the
 vehicle movements. This sonar device is generally applied in obstacle
 avoidance \cite{ganesan2015} and navigation \cite{ribas2010} applications.
 
-As illustrated in Fig. \ref{fig:swarths:fls}, the whole forward view of an
+As illustrated in Fig. \ref{fig:swarths:fls}, the whole forward view of a
 FLS is scanned and the current data is overwritten by the next one in a high
 frame rate, with \textit{n} beams being read simultaneously. This is similar
 to a streaming video imagery for real-time applications. This imaging sonar
@@ -294,12 +310,12 @@ and 3D reconstruction \cite{huang2015}.
     \caption{A graphical overview of the imaging sonar simulation process:
     (i) a virtual camera, specialized as the sonar device, samples the
     underwater scene; (ii) three components are calculated by shader
-    rendering on GPU: The Euclidean distance from camera center, the surface
+    rendering on GPU: the Euclidean distance from camera center, the surface
     normal angles, and the angular distortion; the shader information is
     splitted in beam parts, according the angular distortion values, and
     bin depth and intensity are defined by distance histogram (iii) and energy
-    normalization (iv); (v) the speckle noise is added to the final sonar data;
-    (vi) the simulated data is presented as Rock's data type.}
+    normalization (iv); (v) the speckle noise is applied to the final sonar data;
+    (vi) and the simulated acoustic data is presented as Rock's data type.}
     \label{fig:sonar_sim}
 \end{figure*}
 
@@ -568,7 +584,7 @@ component.
 
 To evaluate our simulator, experiments were conducted by using a 3D model
 of an AUV equipped with one MSIS and one FLS, studied in different scenarios.
-The following devices configuration are summarized in
+The following device configurations are summarized in
 Table \ref{table:sonar_settings}. As the scene frames are being captured by
 the sonars, resulting simulated acoustic images are sequentially presented,
 on-the-fly.
@@ -592,7 +608,7 @@ third scenario} contains a sub-sea isolation valve (SSIV) structure, connected
 to a pipeline in the bottom (see Fig. \ref{fig:fls_scene3}).
 
 \begin{table}[t]
-    \caption{Sonar devices configurations used on experimental evaluation.}
+    \caption{Sonar device configurations used on experimental evaluation.}
     \label{table:sonar_settings}
     \begin{center}
         \begin{tabular}{| c | c | c | c | c | c |}
@@ -807,7 +823,7 @@ of this phenomenon will probably change the reflected intensity model
 and the computation time must be considered again. Next steps will
 focus on expand the underwater acoustic characteristics, such as additive
 noise and reverberation, and qualitative and computation\hyp{}efficiency
-evaluations with other imaging sonar simulators.
+evaluations with other imaging sonar simulators and real images.
 
 % \nocite{*}
 \bibliographystyle{model3-num-names}
