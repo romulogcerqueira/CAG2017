@@ -194,7 +194,9 @@ adding this information in the lines 263--264.}
 > ---> "instead of statically defined by the user" What does it mean?
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{Thank you for catching this point. We have rewritten the subsection
+1.1 to avoid such confusion.}
 
 \begin{verbatim}
 > --- lines 172-174
@@ -338,7 +340,7 @@ think we can change this.}
 > confused at this point.
 \end{verbatim}
 
-\todo[inline, color=blue!40]{Undefined responsible's answer}
+\todo[inline, color=green!40]{Jan's answer}
 
 \begin{verbatim}
 > I've found the noise model too arbitrary. How good is this approximation?
@@ -389,7 +391,14 @@ think we can change this.}
 > tracing?
 \end{verbatim}
 
-\todo[inline, color=green!40]{Jan's answer}
+% \todo[inline, color=green!40]{Jan's answer}
+\textbf{Good point. We have decided to extend the physical phenomena in the
+simulator obeying its usage in real-time conditions. Knowing that, our approach
+is optimized by taking precomputed geometric data during the rasterization
+pipeline on GPU to compute the acoustic frame instead of simulating ray paths and
+the effect of theirs encounters with the virtual objects. Computing the multipath
+reflection in sonar simulation is computationally costly, thus we need to consider
+the computation time again by modeling and including phenomena such as reverberation.}
 
 \begin{verbatim}
 > --- lines 373-375
@@ -399,7 +408,10 @@ think we can change this.}
 > ---> What does it mean "multi-path"? References?
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{Multipath means that a signal propagates between transmitter and receiver along
+several different paths, resulting in fading and reverberation effects. We included
+the reference [22] in the paper.}
 
 \begin{verbatim}
 > Decision
@@ -415,7 +427,7 @@ think we can change this.}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
 \textbf{We thank for your feedback. We have addressed your comments and the other
-reviewers' ones in the revised version and we hope your expectations are
+reviewers' ones in the revised manuscript and we hope your expectations are
 satisfied this time.}
 
 \begin{verbatim}
