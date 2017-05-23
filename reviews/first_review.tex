@@ -3,6 +3,7 @@
 \usepackage{todonotes}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{amsmath}
 
 \title{Response to the Reviewer's Comments}
 \begin{document}
@@ -142,8 +143,8 @@ lines 422-426.}
 \textbf{Good points. At the beginning of development, we only had precision
 limitation problems with the depth information. Since the shader returns data
 in 8-bit color space, if the number of bins is higher than 256, the distance
-histogram will contain some blank spaces that will be reflected in the final
-sonar image as "black holes". To avoid this precision limitation, we store the
+histogram will contain some blank spaces that will result in "black holes" in
+the final sonar image. To avoid this precision limitation, we store the
 depth information using the native GLSL depth buffer, which has 32-bit
 floating-point values.}
 
@@ -168,7 +169,7 @@ Github. We added a reference in the outlook section.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Thank you. This sentence has been rewritten in our revised manuscript.}
+\textbf{This sentence has been rewritten in our revised manuscript.}
 
 \begin{verbatim}
 > It is unclear to me, but each beam is for a complete column?
@@ -245,8 +246,7 @@ mistake.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{This paper followed the journal's LaTeX template. Unfortunately, we do not
-think we can change this.}
+\textbf{This paper have followed the journal's LaTeX template.}
 
 \begin{verbatim}
 > No need to put "the {first|second|third|last} {scenario|scene}" in bold on
@@ -302,7 +302,7 @@ and the subsection 1.1 to avoid such confusion and make them clearer.}
 \end{verbatim}
 
 % \todo[inline, color=green!40]{Jan's answer}
-\textbf{Thank you. We addressed your consideration in the text and rewrite the
+\textbf{We addressed your consideration in the text and rewrite the
 subsection 1.1 to avoid such confusion in the revised paper.}
 
 \begin{verbatim}
@@ -317,7 +317,7 @@ subsection 1.1 to avoid such confusion in the revised paper.}
 > could not implement it without too much guessing.
 \end{verbatim}
 
-\todo[inline, color=blue!40]{Undefined responsible's answer}
+\todo[inline, color=yellow!40]{Jan's answer}
 
 \begin{verbatim}
 > --- lines 74-78
@@ -347,7 +347,9 @@ to include these informations.}
 > be one advantage related to the use of GPU in this context.
 \end{verbatim}
 
-\todo[inline, color=blue!40]{Undefined responsible's answer}
+% \todo[inline, color=blue!40]{Undefined responsible's answer}
+\textbf{We addressed your consideration in the text and rewrite the
+subsection 1.1 to avoid such confusion in the revised paper.}
 
 \begin{verbatim}
 > From Section 2 (lines 104-107) it seems that bins are samples placed along the
@@ -369,7 +371,16 @@ term on paper to make it clear.}
 > I've found the noise model too arbitrary. How good is this approximation?
 \end{verbatim}
 
-\todo[inline, color=blue!40]{Undefined responsible's answer}
+% \todo[inline, color=blue!40]{Undefined responsible's answer}
+\textbf{The speckle noise $n$ is a bell curve, following a Gaussian non-uniform
+distribution:}
+
+\begin{equation*}
+n(x;\mu,\sigma) = \frac{1}{{\sigma \sqrt {2\pi } }}e^{{{ - \left( {x - \mu } \right)^2 } \mathord{\left/ {\vphantom {{ - \left( {x - \mu } \right)^2 } {2\sigma ^2 }}} \right. \kern-\nulldelimiterspace} {2\sigma ^2 }}},
+\end{equation*}
+
+\textbf{given mean $\mu$ and standard deviation $\sigma$. In the proposed approach,
+we defined $\mu = 0.4$ and $\sigma = 0.15$, and the modeled curve is presented in Fig. 3.}
 
 \begin{verbatim}
 > Results
@@ -420,7 +431,7 @@ simulator obeying its usage in real-time conditions. Knowing that, our approach
 is optimized by taking precomputed geometric data during the rasterization
 pipeline on GPU to compute the acoustic frame instead of simulating sound pulse propagation
 with ray-tracing approach. Computing the multipath reflection in sonar simulation
-is computationally costly, thus we need to consider the computation time again by modeling
+is computationally costly, thus we need to consider the time consuming again by modeling
 and including phenomena such as reverberation.}
 
 \begin{verbatim}
