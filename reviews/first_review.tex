@@ -38,8 +38,10 @@ errors in the revised version.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{The simulator is available under an open source license and can be downloaded from 
-github. We added a reference in the outlook section.}
+\textbf{The simulator is available under an open source license and can be downloaded from
+Github. We added a reference in the outlook section.}
+% RÔMULO COMMENT: In this revised paper, we must check if the inclusion of our
+% github URL keeps the blind-review process.
 
 \begin{verbatim}
 > About the work, Figure 3 is confused and needs to be improved. The authors
@@ -51,7 +53,7 @@ github. We added a reference in the outlook section.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{We redrew Fig. 3 to make clarify this}
+\textbf{We redrew Fig. 3 to make clarify this.}
 
 \begin{verbatim}
 > In Fig. 6, it is not clear the effect of the parameter "p". How does the
@@ -60,7 +62,10 @@ github. We added a reference in the outlook section.}
 > image vs. depth image (green channel), as in Fig. 5.
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
+% \todo[inline, color=red!40]{Rômulo's answer}
+\textbf{To find the pixel intensity, we multiply its normal angle value by the
+material reflectance $\rho$. This operation takes place in fragment shader.
+We rewrite the lines 258--264 to make it clearer.}
 
 \begin{verbatim}
 > About the simulation resolution, the number of bins are dependent of the
@@ -79,7 +84,7 @@ github. We added a reference in the outlook section.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{This limitation is explained in lines 366--372. As we described in
+\textbf{This limitation is explained in lines 376--382. As we described in
 Section 3.4, the speckle noise modeled in this paper is a multiplicative one,
 following a non-uniform distribution. The resulting sonar data is composed by
 an element-wise multiplication between the raw data and the speckle noise. The
@@ -95,10 +100,10 @@ missing part.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{We have chosen to extend the underwater acoustic phenomena in the
-simulator obeying its usage by real-time applications. As we described in
-the lines 422--426, the reverberation is a lacking part of our solution and
-its addition must considerer the computation time again. Thus, we emphasize
-the reverberation as future work in the lines 426--429.}
+simulator obeying its usage by real-time applications. Processing the
+reverberation in a sonar simulator is computationally costly, then its
+addition must consider the time consuming again, as we described in the
+lines 422-426.}
 
 \begin{verbatim}
 > It is hard to validate a simulator, however, I believe the works lake in
@@ -124,7 +129,7 @@ the reverberation as future work in the lines 426--429.}
 > aspect being solved.
 \end{verbatim}
 
-\todo[inline, color=blue!40]{Undefined responsible answer}
+\todo[inline, color=yellow!40]{Luciano's answer}
 
 \begin{verbatim}
 > The Euclidean distance from camera center, the surface normal angles, and the
@@ -153,7 +158,9 @@ the proposed approach. However, we have chosen to use GLSL for three main reason
 > sure if it is possible to reproduce the solution with the presented text.
 \end{verbatim}
 
-\todo[inline, color=blue!40]{Undefined responsible's answer}
+% \todo[inline, color=blue!40]{Undefined responsible's answer}
+\textbf{The simulator is available under an open source license and can be downloaded from
+Github. We added a reference in the outlook section.}
 
 \begin{verbatim}
 > This sentence seems to be from a decade ago paper…: Modern graphics hardware
@@ -246,8 +253,7 @@ think we can change this.}
 > lines 322, 327, 334, 343, 347-348, 354-355.
 \end{verbatim}
 
-% \todo[inline, color=yellow!40]{Luciano's answer}
-Corrected.
+\todo[inline, color=yellow!40]{Luciano's answer}
 
 \begin{verbatim}
 > Contributions and limitations
@@ -262,6 +268,8 @@ Corrected.
 \end{verbatim}
 
 \todo[inline, color=red!40]{Rômulo's answer}
+% RÔMULO COMMENT: I added the use of GPU in the abstract, but I'm not sure if we need
+% to include limitations and difficulties here.
 
 \begin{verbatim}
 > --- lines 69-73
@@ -280,7 +288,7 @@ Corrected.
 \end{verbatim}
 
 % \todo[inline, color=green!40]{Jan's answer}
-\textbf{Thank you for catching this points. We have rewritten the sentences
+\textbf{Thank you for catching this point. We have rewritten the sentences
 and the subsection 1.1 to avoid such confusion and make them clearer.}
 
 \begin{verbatim}
@@ -323,7 +331,8 @@ subsection 1.1 to avoid such confusion in the revised paper.}
 > Why GPU-based realtime ray tracing was not chosen, for instance?
 \end{verbatim}
 
-\todo[inline, color=blue!40]{Undefined responsible's answer}
+% \todo[inline, color=blue!40]{Undefined responsible's answer}
+\textbf{The subsection 1.1 was rewritten in the revised manuscript.XXXXXXXX}
 
 \begin{verbatim}
 > The method takes advantage of the rasterization pipeline in order to build
@@ -402,10 +411,10 @@ subsection 1.1 to avoid such confusion in the revised paper.}
 \textbf{Good point. We have decided to extend the physical phenomena in the
 simulator obeying its usage in real-time conditions. Knowing that, our approach
 is optimized by taking precomputed geometric data during the rasterization
-pipeline on GPU to compute the acoustic frame instead of simulating ray paths and
-the effect of theirs encounters with the virtual objects. Computing the multipath
-reflection in sonar simulation is computationally costly, thus we need to consider
-the computation time again by modeling and including phenomena such as reverberation.}
+pipeline on GPU to compute the acoustic frame instead of simulating ray propagation and
+interation with the virtual objects. Computing the multipath reflection in sonar simulation
+is computationally costly, thus we need to consider the computation time again by modeling
+and including phenomena such as reverberation.}
 
 \begin{verbatim}
 > --- lines 373-375

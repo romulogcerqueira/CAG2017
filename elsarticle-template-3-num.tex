@@ -463,13 +463,12 @@ in our approach is seen in Fig. \ref{fig:sonar_normal_mapping}.
 
 The reflectance allows to properly describe the intensity received back
 from observable objects in shader processing, according their material
-properties. For instance, aluminum has more reflectance than wood and
-plastic. When an object has its reflectivity defined, the reflectance
-value $\rho$ is passed to fragment shader and must be positive. As seen
-in Fig. \ref{fig:sonar_reflectances}, normal values are directly
-proportional to the reflectance value $\rho$. At the end, the shader process
-provides a matrix with three main data: Intensity, depth and
-angular distortion.
+properties. For instance, aluminum has more reflectivity than wood and plastic.
+When an object has its reflectivity property defined, the reflectance value
+$\rho$ is passed to the fragment shader and processed on GPU. So the final
+pixel intensity represents the product of its normal value by the reflectance
+value $\rho$. At the end, the shader process provides a matrix with three main
+data: intensity, depth and angular distortion.
 
 \begin{figure}[h]
     \centering
@@ -593,18 +592,18 @@ on-the-fly.
 
 The virtual FLS from AUV was used to insonify the scenes from three distinct
 scenarios. A docking station, in parallel with a pipeline on the seabed,
-composes the first scenario (see Fig. \ref{fig:fls_scene1}). The
+composes \textbf{the first scenario} (see Fig. \ref{fig:fls_scene1}). The
 target surface is well-defined in the simulated acoustic frame (see
 Fig. \ref{fig:fls_sim1}), even as the shadows and speckle noise. Given the
 docking station is metal-made, the texture and reflectivity were set, such
 as a higher intensity shape was resulted in comparison with the other targets.
-The second scenario presents the vehicle in front of a manifold model
+\textbf{The second scenario} presents the vehicle in front of a manifold model
 in a non-uniform seabed (see Fig. \ref{fig:fls_scene2}). The target model was
 insonified to generate the sonar frame from the underwater scene. The frontal
 face of the target, as well the portion of the seabed and the degraded data
 by noise, are clearly visible in the FLS image. Also, a long acoustic shadow
-is formed behind the manifold, occluding part of the scene. The
-third scenario contains a sub-sea isolation valve (SSIV) structure, connected
+is formed behind the manifold, occluding part of the scene. \textbf{The
+third scenario} contains a sub-sea isolation valve (SSIV) structure, connected
 to a pipeline in the bottom (see Fig. \ref{fig:fls_scene3}).
 
 \begin{table}[t]
@@ -664,18 +663,18 @@ orientation of the surface.
 \end{figure*}
 
 The MSIS was also simulated in three different experiments. The robot in a
-big textured tank composes the first scene (see Fig.
+big textured tank composes \textbf{the first scene} (see Fig.
 \ref{fig:msis_scene1}). Similar to the first scenario of FLS experiment,
 the reflectivity and texture were set to the target. The rotation of the
 sonar head position, by a complete $360^{\circ}$ scanning, produced the acoustic
-frame of tank walls (see Fig. \ref{fig:msis_sim1}). The second scene
+frame of tank walls (see Fig. \ref{fig:msis_sim1}). \textbf{The second scene}
 involves the vehicle's movement during the data acquisition process. The scene
 contains a grid around the AUV (see Fig. \ref{fig:msis_scene2}), a MSIS in
 the front of the AUV is used. This trial induces a distortion in the final
 acoustic frame, because the relative sensor position with respect to the
 surrounding object changes while the sonar image is being built (see
 Fig. \ref{fig:msis_sim2}). In this case, the robot rotates $20^{\circ}$ left
-during the scanning. The last scene presents the AUV over oil
+during the scanning. \textbf{The last scene} presents the AUV over oil
 and gas structures on the sea bottom (see Fig. \ref{fig:msis_scene3}).
 Using a MSIS located in the back of the AUV, with a vertical orientation,
 the scene was scanned to produce the acoustic visualization. As illustrated
@@ -826,7 +825,7 @@ noise and reverberation, and qualitative and computation\hyp{}efficiency
 evaluations with other imaging sonar simulators and real images.
 
 The simulator is available as open source on github under the \emph{Brazilian
-Institut of Robotics} organisation: 
+Institut of Robotics} organisation:
 https://github.com/Brazilian-Institute-of-Robotics/simulation-gpu_sonar_simulation
 
 % \nocite{*}
