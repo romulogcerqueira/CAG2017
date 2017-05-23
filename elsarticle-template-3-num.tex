@@ -401,7 +401,7 @@ computed as:
     center column up to the camera boundary column, for both directions.
 \end{itemize}
 
-All those three informations are normalized into the interval [0,1],
+All those three informations are 2D and normalized into the interval [0,1],
 where zero means no energy and one means maximum echo energy for
 intensity data, respectively. For depth data, the minimum value portrays
 a close object while the maximum value represents a far one, limited by
@@ -504,7 +504,7 @@ data: intensity, depth and angular distortion.
 \subsection{Simulating sonar device}
 \label{dev:sonardata}
 
-The 3D shader matrix is processed in order to build the corresponding
+The 3-channel shader matrix is processed in order to build the corresponding
 acoustic representation. Since the angular distortion is radially spaced
 over the horizontal field-of-view, where all pixels in the same column
 have the same angle value, the first step is to split the image in a

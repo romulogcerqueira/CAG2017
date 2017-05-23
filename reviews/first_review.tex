@@ -176,7 +176,7 @@ Github. We added a reference in the outlook section.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{Each beam is composed by one or more columns, according to sonar
-bearings. We take this point and revised the text to make it clearer by
+bearings. We took this point and revised the text to make it clearer by
 adding this information in the lines 263--264.}
 
 \begin{verbatim}
@@ -332,7 +332,11 @@ subsection 1.1 to avoid such confusion in the revised paper.}
 \end{verbatim}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
-\textbf{The subsection 1.1 was rewritten in the revised manuscript.XXXXXXXX}
+\textbf{The rasterization was chosen because the geometric data from virtual
+scene are computed on optimized pipeline GPU embedded. With this, we handled
+these precomputed data to get the depth, intensity and angle properties needed
+to build the acoustic frame. In addition, we have rewritten the subsection 1.1
+to include these informations.}
 
 \begin{verbatim}
 > The method takes advantage of the rasterization pipeline in order to build
@@ -356,7 +360,10 @@ subsection 1.1 to avoid such confusion in the revised paper.}
 > confused at this point.
 \end{verbatim}
 
-\todo[inline, color=green!40]{Jan's answer}
+% \todo[inline, color=green!40]{Jan's answer}
+\textbf{The "3D shader matrix" is a 3-channel matrix which stores the 2D information
+about depth, intensity and angle from the captured OSG scene. We have rewritten this
+term on paper to make it clear.}
 
 \begin{verbatim}
 > I've found the noise model too arbitrary. How good is this approximation?
@@ -411,8 +418,8 @@ subsection 1.1 to avoid such confusion in the revised paper.}
 \textbf{Good point. We have decided to extend the physical phenomena in the
 simulator obeying its usage in real-time conditions. Knowing that, our approach
 is optimized by taking precomputed geometric data during the rasterization
-pipeline on GPU to compute the acoustic frame instead of simulating ray propagation and
-interation with the virtual objects. Computing the multipath reflection in sonar simulation
+pipeline on GPU to compute the acoustic frame instead of simulating sound pulse propagation
+with ray-tracing approach. Computing the multipath reflection in sonar simulation
 is computationally costly, thus we need to consider the computation time again by modeling
 and including phenomena such as reverberation.}
 
