@@ -11,10 +11,10 @@
 \maketitle
 
 We thank the reviewers for their insightful and useful feedback. We have
-revised our paper in light of this feedback, and feel it has benefited
-greatly from addressing the concerns raised by the reviewers. Please find
+revised our paper in light of their comments. Please, find 
 below our replies and comments about each of the issues raised, and how
-we modified the paper to address them.
+we modified the paper to address them. All changes in the text is in blue
+in this revised version.
 
 \begin{verbatim}
 >> REVIEWER #1 <<
@@ -29,8 +29,8 @@ we modified the paper to address them.
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Thank you for catching these issues. We corrected the existing typing
-errors in the revised version.}
+\textbf{Done. We corrected the referred typos and other
+errors of the same kind in the revised version.}
 
 \begin{verbatim}
 > The contribution of the work is interesting for the community, mainly if the
@@ -39,10 +39,8 @@ errors in the revised version.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{The simulator is available under an open source license and can be downloaded from
-Github. We added a reference in the outlook section.}
-% RÔMULO COMMENT: In this revised paper, we must check if the inclusion of our
-% github URL keeps the blind-review process.
+\textbf{Certainly, after the acceptance of the paper, we will add the url to 
+download the simulator in the paper, making it public available.}
 
 \begin{verbatim}
 > About the work, Figure 3 is confused and needs to be improved. The authors
@@ -54,7 +52,7 @@ Github. We added a reference in the outlook section.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{We redrew Fig. 3 to make clarify this.}
+\textbf{Done. We corrected the names in Fig. 3 to fit to the text.}
 
 \begin{verbatim}
 > In Fig. 6, it is not clear the effect of the parameter "p". How does the
@@ -66,7 +64,8 @@ Github. We added a reference in the outlook section.}
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{To find the pixel intensity, we multiply its normal angle value by the
 material reflectance $\rho$. This operation takes place in fragment shader.
-We rewrite the lines 258--264 to make it clearer.}
+We rewrote lines 258--264 to make the idea clearer. }
+%%With respect to the issue of the final simulation instead of image vs depth image in Fig. 6 (as in Fig. 5), we believe that it would cause redundancy rather than improve the explanation, since
 
 \begin{verbatim}
 > About the simulation resolution, the number of bins are dependent of the
@@ -85,7 +84,7 @@ We rewrite the lines 258--264 to make it clearer.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{This limitation is explained in lines 376--382. As we described in
+\textbf{This issue is explained in lines 376--382. As we described in
 Section 3.4, the speckle noise modeled in this paper is a multiplicative one,
 following a non-uniform distribution. The resulting sonar data is composed by
 an element-wise multiplication between the raw data and the speckle noise. The
@@ -104,7 +103,8 @@ missing part.}
 simulator obeying its usage by real-time applications. Processing the
 reverberation in a sonar simulator is computationally costly, then its
 addition must consider the time consuming again, as we described in the
-lines 422-426.}
+lines 422-426. However, we included to tackle this problem in order to be 
+addressed in a future work.}
 
 \begin{verbatim}
 > It is hard to validate a simulator, however, I believe the works lake in
@@ -118,21 +118,6 @@ lines 422-426.}
 \begin{verbatim}
 >> REVIEWER #2 <<
 
-> The paper proposes a complete simulation suite for real-time underwater
-> imaging sonar simulator. It seems to be a very broad proposal, that includes
-> many aspects of the simulation itself, going through the rendering to the
-> physical simulation itself. Acording to the authors, one main difference of
-> their work in relation to others is that they solve both mechanical scanning
-> imaging sonar (MSIS) and forward-looking sonar (FLS) models.
->
-> The results are promising and interesting. However, I am afraid that the
-> contribution is tangent to Computer & Graphics, even with a visualization
-> aspect being solved.
-\end{verbatim}
-
-\todo[inline, color=yellow!40]{Luciano's answer}
-
-\begin{verbatim}
 > The Euclidean distance from camera center, the surface normal angles, and the
 > angular distortion are recorded as color channels. In this case, there is a
 > limitation of 256 values. Does this brings precision problems? Using CUDA or
@@ -140,19 +125,19 @@ lines 422-426.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Good points. At the beginning of development, we only had precision
-limitation problems with the depth information. Since the shader returns data
-in 8-bit color space, if the number of bins is higher than 256, the distance
-histogram will contain some blank spaces that will result in "black holes" in
-the final sonar image. To avoid this precision limitation, we store the
-depth information using the native GLSL depth buffer, which has 32-bit
-floating-point values.}
+
+\textbf{Good points. The only problem caused by the limitation of the 8-bit channel 
+representation is in the Euclidean distance from camera center information (let us call 
+this information as depth). In this case, we replace the original depth information by
+the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this 
+information was not addressed in the first version of the paper. We clarified this issue
+in the revised version. }
 
 \textbf{Indeed, CUDA and OpenCL are both good alternatives ways to implement
 the proposed approach. However, we have chosen to use GLSL for three main reasons:
 1) native from OpenGL, avoiding to install additional packages;
 2) hardware and backward compatibility;
-3) usage of precomputed geometric informations during the rasterization process.}
+3) use of precomputed geometric information during the rasterization process.}
 
 \begin{verbatim}
 > I would like to see more details on the implementations of the models. I am not
@@ -160,8 +145,8 @@ the proposed approach. However, we have chosen to use GLSL for three main reason
 \end{verbatim}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
-\textbf{The simulator is available under an open source license and can be downloaded from
-Github. We added a reference in the outlook section.}
+\textbf{Conditioned to the acceptance of the paper, the simulator will be available 
+under an open source license and may be downloaded from Github.}
 
 \begin{verbatim}
 > This sentence seems to be from a decade ago paper…: Modern graphics hardware
@@ -169,7 +154,7 @@ Github. We added a reference in the outlook section.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{This sentence has been rewritten in our revised manuscript.}
+\textbf{This sentence was rewritten in our revised manuscript.}
 
 \begin{verbatim}
 > It is unclear to me, but each beam is for a complete column?
@@ -177,8 +162,8 @@ Github. We added a reference in the outlook section.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{Each beam is composed by one or more columns, according to sonar
-bearings. We took this point and revised the text to make it clearer by
-adding this information in the lines 263--264.}
+bearings. We took this point into consideration, rewriting the text to make 
+it clearer.}
 
 \begin{verbatim}
 >> REVIEWER #3 <<
@@ -205,8 +190,7 @@ adding this information in the lines 263--264.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Thank you for catching this point. We have rewritten the subsection
-1.1 to avoid such confusion.}
+\textbf{We rewrote all subsection 1.1 to clarify these issues.}
 
 \begin{verbatim}
 > --- lines 172-174
@@ -225,7 +209,10 @@ adding this information in the lines 263--264.}
 > Work Section.
 \end{verbatim}
 
-\todo[inline, color=yellow!40]{Luciano's answer}
+%\todo[inline, color=yellow!40]{Luciano's answer}
+\textbf{We decided to include the related work continuously inside the introduction
+without a dedicated subsection. We think that it makes the text more uniform and fluid
+in the introduction.}
 
 \begin{verbatim}
 > Technically, bump maps are different from normal maps. Bump maps are defined as
@@ -236,24 +223,26 @@ adding this information in the lines 263--264.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Thank you for catching this issue. In fact, the proposed approach uses
-normal maps to simulate geometric surface irregularities by passing RGB textures
-and modifying the normal vectors. We revised the manuscript to avoid this
-mistake.}
+\textbf{In fact, the proposed approach uses normal maps to simulate geometric surface 
+irregularities by passing RGB textures and modifying the normal vectors. We revised the 
+manuscript to avoid this mistake.}
 
 \begin{verbatim}
 > Some image labels are too small.
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{This paper have followed the journal's LaTeX template.}
+\textbf{The paper have followed the journal's LaTeX template. It is not possible to modify
+this point.}
 
 \begin{verbatim}
 > No need to put "the {first|second|third|last} {scenario|scene}" in bold on
 > lines 322, 327, 334, 343, 347-348, 354-355.
 \end{verbatim}
 
-\todo[inline, color=yellow!40]{Luciano's answer}
+\textbf{The rationale in putting the sentences in bold was to highlight the beginning
+of the explanations about each scene/scenario. This helps the reader to follow our 
+description.}
 
 \begin{verbatim}
 > Contributions and limitations
@@ -267,9 +256,8 @@ mistake.}
 > abstract.
 \end{verbatim}
 
-\todo[inline, color=red!40]{Rômulo's answer}
-% RÔMULO COMMENT: I added the use of GPU in the abstract, but I'm not sure if we need
-% to include limitations and difficulties here.
+\textbf{We added the use of GPU in the abstract.}
+
 
 \begin{verbatim}
 > --- lines 69-73
@@ -481,7 +469,7 @@ satisfied this time.}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
 \textbf{We thank for your feedback. We have addressed the other reviewers' comments in the revised
-version and we hope your expectations continue to be satisfied.}
+version,and we hope your expectations continue to be satisfied.}
 
 \end{document}
 
