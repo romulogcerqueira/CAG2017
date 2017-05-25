@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2017-05-22 16:32:01 +0000</string>
+	<string>2017-05-25 18:55:28 +0000</string>
 	<key>Modifier</key>
 	<string>Jan Christian Albiez</string>
 	<key>NotesVisible</key>
@@ -5381,10 +5381,10 @@ value}</string>
 					<key>OrthogonalBarPoint</key>
 					<string>{0, 0}</string>
 					<key>OrthogonalBarPosition</key>
-					<real>4.1052496592203411</real>
+					<real>4.105249659220334</real>
 					<key>Points</key>
 					<array>
-						<string>{498.89765167236328, 83.70603911081956}</string>
+						<string>{498.89765167236328, 83.706039110819574}</string>
 						<string>{629.29135608673096, 107.71653842926025}</string>
 					</array>
 					<key>Style</key>
@@ -5433,10 +5433,10 @@ value}</string>
 					<key>OrthogonalBarPoint</key>
 					<string>{0, 0}</string>
 					<key>OrthogonalBarPosition</key>
-					<real>-1</real>
+					<real>4.105249659220334</real>
 					<key>Points</key>
 					<array>
-						<string>{498.89765167236328, 83.70603911081956}</string>
+						<string>{498.89765167236328, 83.706039110819574}</string>
 						<string>{498.89765167236328, 107.21653842926025}</string>
 					</array>
 					<key>Style</key>
@@ -5487,10 +5487,10 @@ value}</string>
 					<key>OrthogonalBarPoint</key>
 					<string>{0, 0}</string>
 					<key>OrthogonalBarPosition</key>
-					<real>4.1052496592203411</real>
+					<real>4.105249659220334</real>
 					<key>Points</key>
 					<array>
-						<string>{498.89765167236328, 83.70603911081956}</string>
+						<string>{498.89765167236328, 83.706039110819574}</string>
 						<string>{368.50394725799561, 107.71653842926025}</string>
 					</array>
 					<key>Style</key>
@@ -5543,7 +5543,7 @@ value}</string>
 					<key>Points</key>
 					<array>
 						<string>{285.83591394789141, 70.932178297315389}</string>
-						<string>{447.87402820587158, 70.95013324419665}</string>
+						<string>{430.86615371704102, 70.95013324419665}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -28721,7 +28721,7 @@ value}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{447.87402820587158, 58.194227377573725}, {102.0472469329834, 25.51181173324585}}</string>
+					<string>{{430.86615371704102, 58.194227377573725}, {136.06299591064453, 25.51181173324585}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -28743,7 +28743,7 @@ value}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\f0\fs20 \cf0 3D Shader}</string>
+\f0\fs20 \cf0 3-Channel Shader Matrix }</string>
 					</dict>
 				</dict>
 				<dict>
@@ -35065,7 +35065,7 @@ value}</string>
 			<string>Main</string>
 		</array>
 		<key>Frame</key>
-		<string>{{0, 4}, {1920, 1020}}</string>
+		<string>{{0, 4}, {1680, 1020}}</string>
 		<key>ShowInfo</key>
 		<true/>
 		<key>ShowRuler</key>
@@ -35077,15 +35077,15 @@ value}</string>
 		<key>TopSlabHeight</key>
 		<real>325</real>
 		<key>VisibleRegion</key>
-		<string>{{0, 0}, {760.10927179215798, 462.84151920054467}}</string>
+		<string>{{-245, -190.99999999999997}, {1274.3169100066948, 942.07648063959743}}</string>
 		<key>Zoom</key>
-		<real>1.8300000429153442</real>
+		<real>0.91500002145767212</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
 				<string>Main</string>
+				<real>0.91500002145767212</real>
 				<real>1.8300000429153442</real>
-				<real>1.8300000000000001</real>
 			</array>
 			<array>
 				<string>zeug</string>
