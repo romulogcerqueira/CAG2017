@@ -382,13 +382,15 @@ interpolated parameters from the previous stages, such as colors and textures.
 
 In our work, the underwater scene is sampled by a virtual camera, whose
 optical axis is aligned with the intended viewing direction of the
-imaging sonar device, as well as the covered range and opening angle.
+imaging sonar device, as well as the coverage range and opening angle.
 By programming the fragment and vertex shaders, the sonar data is
 computed as:
 
 \begin{itemize}[(a)]
     \item \textbf{Depth} is the camera focal length, calculated by the
-    Euclidean distance to the object surface point;
+    Euclidean distance to the object surface point. \textcolor{blue}{To
+    avoid precision limitation, we use the native GLSL depth buffer,
+    which has 32-bit floating-point values};
     \item \textbf{Intensity} presents the echo reflection energy based
     on object surface normal angle up to the camera;
     \item \textbf{Angular distortion} is the angle formed from the camera
@@ -802,7 +804,7 @@ sonar image singularities, such as multiplicative noise, surface
 properties and acoustic shadows are addressed and represented in the
 simulated frames. Specially for the shadows, the acoustic representation
 can present information as useful as the insonified object. Considering
-the qualitative results, \textcolor{blue}{the sonar simulator can be used} by feature detection
+the qualitative results, \textcolor{blue}{the sonar simulator can be used by feature} detection
 algorithms, based on corners, lines and shapes. Also, the computation time
 to build one sonar frame was calculated using different device settings.
 The vertex and fragment processing during the underwater scene rendering

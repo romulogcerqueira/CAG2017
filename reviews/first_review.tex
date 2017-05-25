@@ -11,9 +11,9 @@
 \maketitle
 
 We thank the reviewers for their insightful and useful feedback. We have
-revised our paper in light of their comments. Please, find 
+revised our paper in light of their comments. Please, find
 below our replies and comments about each of the issues raised, and how
-we modified the paper to address them. All changes in the text is in blue
+we modified the paper to address them. All changes in the text are in blue
 in this revised version.
 
 \begin{verbatim}
@@ -39,7 +39,7 @@ errors of the same kind in the revised version.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Certainly, after the acceptance of the paper, we will add the url to 
+\textbf{Certainly, after the acceptance of the paper, we will add the url to
 download the simulator in the paper, making it public available.}
 
 \begin{verbatim}
@@ -64,8 +64,8 @@ download the simulator in the paper, making it public available.}
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{To find the pixel intensity, we multiply its normal angle value by the
 material reflectance $\rho$. This operation takes place in fragment shader.
-We rewrote lines 258--264 to make the idea clearer. }
-%%With respect to the issue of the final simulation instead of image vs depth image in Fig. 6 (as in Fig. 5), we believe that it would cause redundancy rather than improve the explanation, since
+We rewrote lines 260--262 to make the idea clearer. Also, the Fig. 6 was
+improved to take your consideration.}
 
 \begin{verbatim}
 > About the simulation resolution, the number of bins are dependent of the
@@ -102,9 +102,8 @@ missing part.}
 \textbf{We have chosen to extend the underwater acoustic phenomena in the
 simulator obeying its usage by real-time applications. Processing the
 reverberation in a sonar simulator is computationally costly, then its
-addition must consider the time consuming again, as we described in the
-lines 422-426. However, we included to tackle this problem in order to be 
-addressed in a future work.}
+addition must consider the time consuming again. However, we took this problem
+into account and addressed it as future work in the outlook section.}
 
 \begin{verbatim}
 > It is hard to validate a simulator, however, I believe the works lake in
@@ -126,10 +125,10 @@ addressed in a future work.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 
-\textbf{Good points. The only problem caused by the limitation of the 8-bit channel 
-representation is in the Euclidean distance from camera center information (let us call 
+\textbf{Good points. The only problem caused by the limitation of the 8-bit channel
+representation is in the Euclidean distance from camera center information (let us call
 this information as depth). In this case, we replace the original depth information by
-the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this 
+the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this
 information was not addressed in the first version of the paper. We clarified this issue
 in the revised version. }
 
@@ -145,7 +144,7 @@ the proposed approach. However, we have chosen to use GLSL for three main reason
 \end{verbatim}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
-\textbf{Conditioned to the acceptance of the paper, the simulator will be available 
+\textbf{Conditioned to the acceptance of the paper, the simulator will be available
 under an open source license and may be downloaded from Github.}
 
 \begin{verbatim}
@@ -162,7 +161,7 @@ under an open source license and may be downloaded from Github.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{Each beam is composed by one or more columns, according to sonar
-bearings. We took this point into consideration, rewriting the text to make 
+bearings. We took this point into consideration, rewriting the text to make
 it clearer.}
 
 \begin{verbatim}
@@ -223,8 +222,8 @@ in the introduction.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{In fact, the proposed approach uses normal maps to simulate geometric surface 
-irregularities by passing RGB textures and modifying the normal vectors. We revised the 
+\textbf{In fact, the proposed approach uses normal maps to simulate geometric surface
+irregularities by passing RGB textures and modifying the normal vectors. We revised the
 manuscript to avoid this mistake.}
 
 \begin{verbatim}
@@ -241,7 +240,7 @@ this point.}
 \end{verbatim}
 
 \textbf{The rationale in putting the sentences in bold was to highlight the beginning
-of the explanations about each scene/scenario. This helps the reader to follow our 
+of the explanations about each scene/scenario. This helps the reader to follow our
 description.}
 
 \begin{verbatim}
@@ -333,13 +332,7 @@ to include these informations.}
 > visibility from the camera viewpoint at the same time that stores several
 > properties of the rasterized fragments into an auxiliar buffer). This would
 > be one advantage related to the use of GPU in this context.
-\end{verbatim}
-
-% \todo[inline, color=blue!40]{Undefined responsible's answer}
-\textbf{We addressed your consideration in the text and rewrite the
-subsection 1.1 to avoid such confusion in the revised paper.}
-
-\begin{verbatim}
+>
 > From Section 2 (lines 104-107) it seems that bins are samples placed along the
 > beam. However, I could not spot how these samples are obtained from the
 > description in Section 3.3. Actually the text explains it, but I've found it too
