@@ -717,13 +717,19 @@ the slice scanning of the sea-floor.
 The experimental scenarios provided enough variability of specific phenomena
 usually found in real sonar images, such as acoustic shadows, noise
 interference, surface irregularities and properties, distortion during
-the acquisition process and gradient of acoustic intensities. However, our
+the acquisition process and gradient of acoustic intensities. 
+
+However, our
 sonar model also presented some limitations. For instance, the speckle noise
 application is restricted to regions with acoustic intensity, as shown in
 Figs. \ref{fig:fls_sim3} and \ref{fig:msis_sim1}. This fact is due to our
 sonar model, defined in Eq. \ref{eq:2}, be multiplicative. In real sonar
 images, the noise also granulates the shadows and blind regions. The sonar
 simulator can be improved by inserting an additive noise to our model.
+\textcolor{blue}{The impact of added noise on the image is more severe
+than that of multiplicative. We therefore want to collect more data on how to do 
+it so that we still stay close enough ot the real sonar.}
+
 A second feature missing in simulated acoustic images are the ghost effects
 caused by reverberation. This lacking part can be addressed by implementation
 of a multi-path propagation model \textcolor{blue}{\cite{huang2015b}}.
@@ -805,19 +811,25 @@ types of sonar devices (FLS and MSIS) over different scenarios. The real
 sonar image singularities, such as multiplicative noise, surface
 properties and acoustic shadows are addressed and represented in the
 simulated frames. Specially for the shadows, the acoustic representation
-can present information as useful as the insonified object. Considering
-the qualitative results, \textcolor{blue}{the sonar simulator can be used by feature} detection
+can present information as useful as the insonified object. 
+
+Considering
+the qualitative results, \textcolor{blue}{the sonar simulator can be used} by feature detection
 algorithms, based on corners, lines and shapes. Also, the computation time
 to build one sonar frame was calculated using different device settings.
 The vertex and fragment processing during the underwater scene rendering
 accelerates the sonar image building, and the metrics, such as the average
 time, demonstrated that the performance is much close to real imaging
-devices. These results allowed the use of this imaging sonar simulator
+devices. 
+
+These results allowed the use of this imaging sonar simulator
 by real-time applications, such as obstacle detection and avoidance, and
 object tracking. Finally, the reverberation effect is still missing on
 our simulator to perform a more realistic sensing. The future inclusion
 of this phenomenon will probably change the reflected intensity model
-and the computation time must be considered again. Next steps will
+and the computation time must be considered again. 
+
+Next steps will
 focus on \textcolor{blue}{to expand the underwater acoustic characteristics, such as additive
 noise and reverberation, and} qualitative and computation\hyp{}efficiency
 evaluations with other imaging sonar simulators and real images.
