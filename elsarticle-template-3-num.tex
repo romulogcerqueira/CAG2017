@@ -259,11 +259,11 @@ present more difficult data interpretation due to:
 \begin{figure*}[t]
     \centering
     \subfigure[][]{
-    	\includegraphics[width=\columnwidth]{figs/sonar_swarths_msis_2}
+    	\includegraphics[width=\columnwidth]{figs/sonar_swarths_msis}
         \label{fig:swarths:msis}
     }
     \subfigure[][]{
-    	\includegraphics[width=\columnwidth]{figs/sonar_swarths_fls_2}
+    	\includegraphics[width=\columnwidth]{figs/sonar_swarths_fls}
         \label{fig:swarths:fls}
     }
     \captionsetup{justification=centering}
@@ -468,31 +468,50 @@ pixel intensity represents the product of its normal value by the reflectance
 value $\rho$.} At the end, the shader process provides a matrix with three main
 data: intensity, depth and angular distortion.
 
-\begin{figure}[h]
+\begin{figure}[!ht]
     \centering
     \subfigure[][]{
-    	\includegraphics[width=0.45\columnwidth]{figs/reflectance_0}
-        \label{fig:reflectance:0}
+    	\includegraphics[width=0.45\columnwidth]{figs/reflectance_shader_1}
+        \label{fig:reflectance:1}
     }
     \subfigure[][]{
-    	\includegraphics[width=0.45\columnwidth]{figs/reflectance_0_35}
-        \label{fig:reflectance:0.35}
+        \includegraphics[width=0.45\columnwidth]{figs/reflectance_view_1}
+        \label{fig:reflectance:view:1}
     }
     \subfigure[][]{
-    	\includegraphics[width=0.45\columnwidth]{figs/reflectance_1_40}
-        \label{fig:reflectance:1.40}
+    	\includegraphics[width=0.45\columnwidth]{figs/reflectance_shader_0_35}
+        \label{fig:reflectance:0_35}
     }
     \subfigure[][]{
-    	\includegraphics[width=0.45\columnwidth]{figs/reflectance_2_12}
-        \label{fig:reflectance:2.12}
+        \includegraphics[width=0.45\columnwidth]{figs/reflectance_view_0_35}
+        \label{fig:reflectance:view:0_35}
+    }
+    \subfigure[][]{
+    	\includegraphics[width=0.45\columnwidth]{figs/reflectance_shader_1_40}
+        \label{fig:reflectance:1_40}
+    }
+    \subfigure[][]{
+        \includegraphics[width=0.45\columnwidth]{figs/reflectance_view_1_40}
+        \label{fig:reflectance:view:1_40}
+    }
+    \subfigure[][]{
+    	\includegraphics[width=0.45\columnwidth]{figs/reflectance_shader_2_12}
+        \label{fig:reflectance:2_12}
+    }
+    \subfigure[][]{
+        \includegraphics[width=0.45\columnwidth]{figs/reflectance_view_2_12}
+        \label{fig:reflectance:view:2_12}
     }
     \captionsetup{justification=centering}
     \caption{Examples of different reflectance values, $\rho$, applied in
     shader image representation, where blue is the normal channel and
-    green is the depth channel: \subref{fig:reflectance:0} raw image;
-    \subref{fig:reflectance:0.35} $\rho = 0.35$;
-    \subref{fig:reflectance:1.40} $\rho = 1.40$; and
-    \subref{fig:reflectance:2.12} $\rho = 2.12$.}
+    green is the depth channel: \subref{fig:reflectance:1} raw image;
+    \subref{fig:reflectance:0_35} $\rho = 0.35$;
+    \subref{fig:reflectance:1_40} $\rho = 1.40$; and
+    \subref{fig:reflectance:2_12} $\rho = 2.12$.\textcolor{blue}{The following
+    acoustic images are presented in \subref{fig:reflectance:view:1},
+    \subref{fig:reflectance:view:0_35}, \subref{fig:reflectance:view:1_40}
+    and \subref{fig:reflectance:view:2_12}.}}
     \label{fig:sonar_reflectances}
 \end{figure}
 
@@ -717,7 +736,43 @@ the slice scanning of the sea-floor.
 The experimental scenarios provided enough variability of specific phenomena
 usually found in real sonar images, such as acoustic shadows, noise
 interference, surface irregularities and properties, distortion during
-the acquisition process and gradient of acoustic intensities. 
+the acquisition process and gradient of acoustic intensities.
+
+\begin{table*}[t]
+    \caption{Processing time to generate forward-looking sonar frames with different parameters.}
+    \label{table:fls}
+    \begin{center}
+        \begin{tabular}{| c | c | c | c | c | c | c |}
+            \hline
+            \# of samples & \# of beams & \# of bins & Field of view & Average time ($ms$) & Std dev ($ms$) & Frame rate ($fps$) \\
+            \hline
+            500     & 128     & 500       & $120^{\circ}$ x $20^{\circ}$        & 54.7    & 3.7   & 18.3 \\ \hline
+            500     & 128     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 72.3	& 8.9   & 13.8 \\ \hline
+            500     & 256     & 500       & $120^{\circ}$ x $20^{\circ}$        & 198.7	& 17.1  & 5.0  \\ \hline
+            500     & 256     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 218.2	& 11.9  & 4.6  \\ \hline
+            500     & 128     & 500       & $90^{\circ}$ x $15^{\circ}$         & 77.4	& 11.8  & 12.9 \\ \hline
+            500     & 128     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 94.6	& 10.2  & 10.6 \\ \hline
+            500     & 256     & 500       & $90^{\circ}$ x $15^{\circ}$         & 260.8	& 18.5  & 3.8  \\ \hline
+            500     & 256     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 268.7	& 16.7  & 3.7  \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table*}
+
+\begin{table*}
+    \caption{Processing time to generate mechanical scanning imaging sonar samples with different parameters.}
+    \label{table:msis}
+    \begin{center}
+        \begin{tabular}{| c | c | c | c | c | c |}
+            \hline
+            \# of samples & \# of bins & Field of view & Average time ($ms$) & Std dev ($ms$) & Frame rate ($fps$) \\
+            \hline
+            500     & 500       & $3^{\circ}$ x $35^{\circ}$        & 8.8	    & 0.7  & 113.4 \\ \hline
+            500     & 1000      & $3^{\circ}$ x $35^{\circ}$        & 34.5	& 1.6  & 29.0  \\ \hline
+            500     & 500       & $2^{\circ}$ x $20^{\circ}$        & 10.3	& 0.6  & 96.7  \\ \hline
+            500     & 1000      & $2^{\circ}$ x $20^{\circ}$        & 41.7	& 3.7  & 24.0  \\ \hline
+        \end{tabular}
+    \end{center}
+\end{table*}
 
 However, our
 sonar model also presented some limitations. For instance, the speckle noise
@@ -727,7 +782,7 @@ sonar model, defined in Eq. \ref{eq:2}, be multiplicative. In real sonar
 images, the noise also granulates the shadows and blind regions. The sonar
 simulator can be improved by inserting an additive noise to our model.
 \textcolor{blue}{The impact of added noise on the image is more severe
-than that of multiplicative. We therefore want to collect more data on how to do 
+than that of multiplicative. We therefore want to collect more data on how to do
 it so that we still stay close enough ot the real sonar.}
 
 A second feature missing in simulated acoustic images are the ghost effects
@@ -764,41 +819,41 @@ proportional to sonar image resolution, as explained in Section
 When the number of bins increases, the simulator will have a bigger scene
 frame to compute, and generate the sonar data.
 
-\begin{table*}[!h]
-    \caption{Processing time to generate forward-looking sonar frames with different parameters.}
-    \label{table:fls}
-    \begin{center}
-        \begin{tabular}{| c | c | c | c | c | c | c |}
-            \hline
-            \# of samples & \# of beams & \# of bins & Field of view & Average time ($ms$) & Std dev ($ms$) & Frame rate ($fps$) \\
-            \hline
-            500     & 128     & 500       & $120^{\circ}$ x $20^{\circ}$        & 54.7    & 3.7   & 18.3 \\ \hline
-            500     & 128     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 72.3	& 8.9   & 13.8 \\ \hline
-            500     & 256     & 500       & $120^{\circ}$ x $20^{\circ}$        & 198.7	& 17.1  & 5.0  \\ \hline
-            500     & 256     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 218.2	& 11.9  & 4.6  \\ \hline
-            500     & 128     & 500       & $90^{\circ}$ x $15^{\circ}$         & 77.4	& 11.8  & 12.9 \\ \hline
-            500     & 128     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 94.6	& 10.2  & 10.6 \\ \hline
-            500     & 256     & 500       & $90^{\circ}$ x $15^{\circ}$         & 260.8	& 18.5  & 3.8  \\ \hline
-            500     & 256     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 268.7	& 16.7  & 3.7  \\ \hline
-        \end{tabular}
-    \end{center}
-\end{table*}
-
-\begin{table*}
-    \caption{Processing time to generate mechanical scanning imaging sonar samples with different parameters.}
-    \label{table:msis}
-    \begin{center}
-        \begin{tabular}{| c | c | c | c | c | c |}
-            \hline
-            \# of samples & \# of bins & Field of view & Average time ($ms$) & Std dev ($ms$) & Frame rate ($fps$) \\
-            \hline
-            500     & 500       & $3^{\circ}$ x $35^{\circ}$        & 8.8	    & 0.7  & 113.4 \\ \hline
-            500     & 1000      & $3^{\circ}$ x $35^{\circ}$        & 34.5	& 1.6  & 29.0  \\ \hline
-            500     & 500       & $2^{\circ}$ x $20^{\circ}$        & 10.3	& 0.6  & 96.7  \\ \hline
-            500     & 1000      & $2^{\circ}$ x $20^{\circ}$        & 41.7	& 3.7  & 24.0  \\ \hline
-        \end{tabular}
-    \end{center}
-\end{table*}
+% \begin{table*}[t]
+%     \caption{Processing time to generate forward-looking sonar frames with different parameters.}
+%     \label{table:fls}
+%     \begin{center}
+%         \begin{tabular}{| c | c | c | c | c | c | c |}
+%             \hline
+%             \# of samples & \# of beams & \# of bins & Field of view & Average time ($ms$) & Std dev ($ms$) & Frame rate ($fps$) \\
+%             \hline
+%             500     & 128     & 500       & $120^{\circ}$ x $20^{\circ}$        & 54.7    & 3.7   & 18.3 \\ \hline
+%             500     & 128     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 72.3	& 8.9   & 13.8 \\ \hline
+%             500     & 256     & 500       & $120^{\circ}$ x $20^{\circ}$        & 198.7	& 17.1  & 5.0  \\ \hline
+%             500     & 256     & 1000      & $120^{\circ}$ x $20^{\circ}$        & 218.2	& 11.9  & 4.6  \\ \hline
+%             500     & 128     & 500       & $90^{\circ}$ x $15^{\circ}$         & 77.4	& 11.8  & 12.9 \\ \hline
+%             500     & 128     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 94.6	& 10.2  & 10.6 \\ \hline
+%             500     & 256     & 500       & $90^{\circ}$ x $15^{\circ}$         & 260.8	& 18.5  & 3.8  \\ \hline
+%             500     & 256     & 1000      & $90^{\circ}$ x $15^{\circ}$         & 268.7	& 16.7  & 3.7  \\ \hline
+%         \end{tabular}
+%     \end{center}
+% \end{table*}
+%
+% \begin{table*}
+%     \caption{Processing time to generate mechanical scanning imaging sonar samples with different parameters.}
+%     \label{table:msis}
+%     \begin{center}
+%         \begin{tabular}{| c | c | c | c | c | c |}
+%             \hline
+%             \# of samples & \# of bins & Field of view & Average time ($ms$) & Std dev ($ms$) & Frame rate ($fps$) \\
+%             \hline
+%             500     & 500       & $3^{\circ}$ x $35^{\circ}$        & 8.8	    & 0.7  & 113.4 \\ \hline
+%             500     & 1000      & $3^{\circ}$ x $35^{\circ}$        & 34.5	& 1.6  & 29.0  \\ \hline
+%             500     & 500       & $2^{\circ}$ x $20^{\circ}$        & 10.3	& 0.6  & 96.7  \\ \hline
+%             500     & 1000      & $2^{\circ}$ x $20^{\circ}$        & 41.7	& 3.7  & 24.0  \\ \hline
+%         \end{tabular}
+%     \end{center}
+% \end{table*}
 
 % ----------------------------------------------------------------------------------
 
@@ -811,7 +866,7 @@ types of sonar devices (FLS and MSIS) over different scenarios. The real
 sonar image singularities, such as multiplicative noise, surface
 properties and acoustic shadows are addressed and represented in the
 simulated frames. Specially for the shadows, the acoustic representation
-can present information as useful as the insonified object. 
+can present information as useful as the insonified object.
 
 Considering
 the qualitative results, \textcolor{blue}{the sonar simulator can be used} by feature detection
@@ -820,14 +875,14 @@ to build one sonar frame was calculated using different device settings.
 The vertex and fragment processing during the underwater scene rendering
 accelerates the sonar image building, and the metrics, such as the average
 time, demonstrated that the performance is much close to real imaging
-devices. 
+devices.
 
 These results allowed the use of this imaging sonar simulator
 by real-time applications, such as obstacle detection and avoidance, and
 object tracking. Finally, the reverberation effect is still missing on
 our simulator to perform a more realistic sensing. The future inclusion
 of this phenomenon will probably change the reflected intensity model
-and the computation time must be considered again. 
+and the computation time must be considered again.
 
 Next steps will
 focus on \textcolor{blue}{to expand the underwater acoustic characteristics, such as additive
