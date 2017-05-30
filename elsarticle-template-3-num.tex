@@ -120,7 +120,7 @@ ray tracing technique, also producing a 3D point cloud of the \textcolor{blue}{c
 
 This paper introduces a novel imaging sonar simulator \textcolor{blue}{that presents some contributions when compared to the existing approaches. Instead of simulating the sound pulse paths and the effects of their hits with the virtual objects, as presented by ray tracing and tube tracing-based methods \cite{bell1997,coiras2009,gueriot2010,sac2015,demarco2015,gu2013,kwak2015},
 we take advantage of precomputed geometric data during the rasterization
-pipeline to compute the acoustic frame. In addition, all raster data are handled on GPU, accelerating then the simulation process with guarantee of 
+pipeline to compute the acoustic frame. In addition, all raster data are handled on GPU, accelerating then the simulation process with guarantee of
 real-time response, in contrast to the methods found in
 \cite{bell1997,coiras2009,sac2015,demarco2015}. Although the models found in \cite{bell1997,coiras2009,gueriot2010,sac2015,demarco2015,gu2013,kwak2015}, which address simulation of specific sonar device, our model is able to reproduce two kind of sonar devices: mechanical scanning imaging sonar (MSIS)
 and forward-looking sonar (FLS).} The intensity measured back from the
@@ -151,7 +151,7 @@ into a 2D image.
 %%%Luciano 27/05/2017: As legendas são justificadas e não centralizadas. Isso foi do template ou vc que modificou? Mudei ai, mas não nas outras imagens. Se foi vc que mudou, por favor, conserte a legenda nas outras figuras.
 \begin{figure}[t]
     \includegraphics[width=\columnwidth]{figs/sonar_geometry_2}
-    %\captionsetup{justification=centering}
+    \captionsetup{justification=justified}
     \caption{Imaging sonar geometry. By a projection process, all 3D points  belonging to the same elevation arc (represented as dashd orange line) will be represented to the same image point in the 2D plane. Range $r$ and azimuth angle $\psi$ are measured, and elevation angle $\theta$ is lost. Sonar coverage area is defined by $R_{min}$ and $R_{max}$.}
     \label{fig:sonar_geometry}
 \end{figure}
@@ -185,10 +185,10 @@ sound waves transmission and causing regions behind them, without acoustic feedb
     	\includegraphics[width=\columnwidth]{figs/sonar_swarths_fls}
         \label{fig:swarths:fls}
     }
-    \captionsetup{justification=centering}
     \caption{Different underwater sonar readings: \subref{fig:swarths:msis}
     From a mechanical scanning imaging sonar and \subref{fig:swarths:fls}
     from a forward-looking sonar.}
+    \captionsetup{justification=justified}
     \label{fig:sonar_devices}
 \end{figure*}
 
@@ -204,7 +204,7 @@ reading (see Fig. \ref{fig:swarths:msis}); the resulting sonar images in MSIS ar
 \begin{figure*}[t]
     \includegraphics[width=0.85\paperwidth]{figs/sonar_sim}
     \centering
-    \captionsetup{justification=centering}
+    \captionsetup{justification=justified}
     \caption{A graphical overview of the imaging sonar simulation process:    (i) a virtual camera, specialized as the sonar device, samples the underwater scene; (ii) three components are calculated by shader rendering on GPU: the Euclidean distance from camera center, the surface normal angles, and the angular distortion; the shader information is split into beam parts, according to the angular distortion values, and the bin depth and the intensity are defined by: distance histogram (iii) and energy normalization (iv), respectively; (v) the speckle noise is applied to the final sonar data; (vi) and the simulated acoustic data is presented as Rock's data type.}
     \label{fig:sonar_sim}
 \end{figure*}
@@ -232,7 +232,7 @@ joints) and other objects presented in the environment are defined by simulation
 \begin{figure}[t]
     \includegraphics[width=\columnwidth]{figs/uwscene}
     \centering
-    \captionsetup{justification=centering}
+    \captionsetup{justification=justified}
     \caption{The AUV in Rock-Gazebo underwater scene.}
     \label{fig:uwscene}
 \end{figure}
@@ -243,7 +243,7 @@ joints) and other objects presented in the environment are defined by simulation
 \label{dev:shader}
 
 %%%Luciano 28/05/2017: Não vejo sentido desta frase tão básica no artigo. tiraria.
-%\textcolor{blue}{GPUs are parallel numeric computing chips specialized to speed up 2D and 3D graphics processing, reducing the computational effort of the central processing unit (CPU).} 
+%\textcolor{blue}{GPUs are parallel numeric computing chips specialized to speed up 2D and 3D graphics processing, reducing the computational effort of the central processing unit (CPU).}
 %%%Luciano 28/05/2017: esse parágrafo abaixo não está em azul mas parece que foi acrescido. Tem informações didáticas sobre shaders, vertexs, etc. Alguém pediu isso? É novo? Não vejo sentido em explicar isso para um público que é de CG...
 The rendering pipeline can be customized by defining programs on GPU called
 shaders. A shader is written in OpenGL Shading Language (GLSL) \cite{rost2009}, a high-level language with a C-based syntax which enables more direct control of graphics pipeline, which avoids the use of low-level or hardware-specific languages. Shaders can describe the characteristics of either a vertex or a fragment (a single pixel). Vertex shaders are responsible by transforming the vertex position into a screen position by the rasterizer, generating texture coordinates for texturing, and lighting the vertex to determine each color. The rasterization results in a set of pixels to be processed by fragment shaders, which manipulate their locations, depth and alpha values, and interpolated parameters from the previous stages, such as colors and textures.
@@ -304,7 +304,7 @@ technique, because the geometry remains unchanged. Since \textcolor{blue}{normal
         \includegraphics[width=0.25\paperwidth]{figs/normal_map_5}
         \label{fig:normal_5}
     }
-    \captionsetup{justification=centering}
+    \captionsetup{justification=justified}
     \caption{Example of shader rendering with \textcolor{blue}{normal mapping} processing:
     A sphere without texture \subref{fig:normal_0} and with texture
     \subref{fig:normal_3}; their respective shader image representation
@@ -360,7 +360,7 @@ data: intensity, depth and angular distortion.
         \includegraphics[width=0.45\columnwidth]{figs/reflectance_view_2_12}
         \label{fig:reflectance:view:2_12}
     }
-    \captionsetup{justification=centering}
+    \captionsetup{justification=justified}
     \caption{Examples of different reflectance values, $\rho$, applied in
     shader image representation, where blue is the normal channel and
     green is the depth channel: \subref{fig:reflectance:1} raw image;
@@ -482,6 +482,7 @@ third scenario} contains a sub-sea isolation valve (SSIV) structure, connected
 to a pipeline in the bottom (see Fig. \ref{fig:fls_scene3}).
 
 \begin{table}[t]
+    \captionsetup{justification=justified}
     \caption{Sonar device configurations used on experimental evaluation.}
     \label{table:sonar_settings}
     \begin{center}
@@ -528,7 +529,7 @@ orientation of the surface.
         \includegraphics[width=0.4\paperwidth,height=6cm]{figs/fls_sim3}
         \label{fig:fls_sim3}
     }
-    \captionsetup{justification=centering}
+    \captionsetup{justification=justified}
     \caption{Forward-looking sonar simulation experiments:
     \subref{fig:fls_scene1}, \subref{fig:fls_scene2} and \subref{fig:fls_scene3}
     present the virtual underwater trials, while \subref{fig:fls_sim1},
@@ -582,7 +583,7 @@ the slice scanning of the sea-floor.
         \includegraphics[width=0.4\paperwidth,height=6cm]{figs/msis_sim3}
         \label{fig:msis_sim3}
     }
-    \captionsetup{justification=centering}
+    \captionsetup{justification=justified}
     \caption{Experiments using mechanical scanning imaging sonar in three
     different scenarios \subref{fig:msis_scene1}, \subref{fig:msis_scene2}
     and \subref{fig:msis_scene3}, and the respective processed simulated
@@ -598,6 +599,7 @@ the acquisition process and gradient of acoustic intensities.
 
 \begin{table*}[t]
     \caption{Processing time to generate forward-looking sonar frames with different parameters.}
+    \captionsetup{justification=justified}
     \label{table:fls}
     \begin{center}
         \begin{tabular}{| c | c | c | c | c | c | c |}
@@ -618,6 +620,7 @@ the acquisition process and gradient of acoustic intensities.
 
 \begin{table*}
     \caption{Processing time to generate mechanical scanning imaging sonar samples with different parameters.}
+    \captionsetup{justification=justified}
     \label{table:msis}
     \begin{center}
         \begin{tabular}{| c | c | c | c | c | c |}
@@ -747,9 +750,9 @@ focus on \textcolor{blue}{to expand the underwater acoustic characteristics, suc
 noise and reverberation, and} qualitative and computation\hyp{}efficiency
 evaluations with other imaging sonar simulators and real images.
 
-\textcolor{blue}{Recently we had the oportunity to record a lot of imaging sonar data during tests. The 
-target strucutres we were operating on, have been made by us ourselves and we have detailed models in 
-simulation (see figure \ref{fig:real_sonar} and figure \ref{fig:fls_sim3}). We therefore plan to use this data 
+\textcolor{blue}{Recently we had the oportunity to record a lot of imaging sonar data during tests. The
+target strucutres we were operating on, have been made by us ourselves and we have detailed models in
+simulation (see figure \ref{fig:real_sonar} and figure \ref{fig:fls_sim3}). We therefore plan to use this data
 in the  next months to analyse the quality of the simulation.}
 
 \begin{figure}[t]
