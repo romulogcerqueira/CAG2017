@@ -430,6 +430,7 @@ to behave as a Gaussian random variable \textcolor{blue}{\cite{papoulis2002}}. A
 \subsection{Integrating sonar device with Rock}
 \label{dev:rock}
 
+%%%Luciano: Explicar melhor o parágrafo abaixo, integrando com o que foi dito antes
 \textcolor{blue}{After the imaging sonar simulation process, from the virtual underwater scene to the acoustic representation, the resulting sonar data is encapsulated as Rock's sonar data type and provided as I/O port of a Rock's component, allowing the interaction with other simulated models and applications.}
 
 % ----------------------------------------------------------------------------------
@@ -438,10 +439,9 @@ to behave as a Gaussian random variable \textcolor{blue}{\cite{papoulis2002}}. A
 \label{results}
 
 To evaluate our simulator, experiments were conducted by using a 3D model
-of an AUV equipped with an MSIS and an FLS, studied in different scenarios.
-The sonar device configurations are summarized in
+of an AUV equipped with an MSIS and an FLS. Different scenarios were casted and studied. The sonar device configurations used were summarized in
 Table \ref{table:sonar_settings}. In the experimental analysis, as the scene frames are being captured by
-the sonars, resulting simulated acoustic images are sequentially presented,
+the sonars, the resulting acoustic images are sequentially presented,
 on-the-fly \textcolor{blue}{(see Figs. \ref{fig:fls} and \ref{fig:msis})}.
 
 \subsection{Experimental evaluation}
@@ -450,8 +450,7 @@ The virtual FLS from AUV was used to insonify the scenes from three distinct
 scenarios. A docking station, in parallel with a pipeline on the seabed,
 composes \textbf{the first scenario} (see Fig. \ref{fig:fls_scene1}); the
 target surface is well-defined in the simulated acoustic frame (see
-Fig. \ref{fig:fls_sim1}), even as the shadows and speckle noise; given that the
-docking station is metal-made, the texture and reflectivity were set, such
+Fig. \ref{fig:fls_sim1}), even as the shadows and speckle noise; given that the docking station is metal-made, the texture and reflectivity were set, such
 that a higher intensity shape was resulted in comparison with the other targets.
 \textbf{The second scenario} presents the vehicle in front of a manifold model
 in a non-uniform seabed (see Fig. \ref{fig:fls_scene2}); the target model was
@@ -465,7 +464,7 @@ acoustic image, depicted in Fig. \ref{fig:fls_sim3}, also present shadows,
 material properties and speckle noise effects. Due to sensor configuration and
 robot position, the initial bins usually present a blind region in the three
 simulated scenes, caused by absence of objects at lower ranges, similar to real
-sonar images. Also, the brightness of sea-floor decreases, as the sea-floor is
+sonar images. It is noteworthy that the brightness of sea-floor decreases as the sea-floor is
 farther from sonar, because of the normal orientation of the surface.
 
 \begin{table}[t]
@@ -521,25 +520,6 @@ farther from sonar, because of the normal orientation of the surface.
     \label{fig:fls}
 \end{figure*}
 
-The MSIS was also simulated in three different experiments. The robot in a
-big textured tank composes \textbf{the first scene} (see Fig.
-\ref{fig:msis_scene1}); similar to the first scenario of FLS experiment,
-the reflectivity and texture were set to the target; the rotation of the
-sonar head position, by a complete $360^{\circ}$ scanning, produced the acoustic
-frame of tank walls (see Fig. \ref{fig:msis_sim1}). \textbf{The second scene}
-involves the vehicle's movement during the data acquisition process; the scene
-contains a grid around the AUV (see Fig. \ref{fig:msis_scene2}), captured by an MSIS in
-the front of the AUV; this trial induces a distortion in the final
-acoustic frame, because the relative sensor position with respect to the
-surrounding object changes, as the sonar image is being built (see
-Fig. \ref{fig:msis_sim2}); in this case, the robot rotates $20^{\circ}$ left
-during the scanning. \textbf{The last scene} presents the AUV over oil
-and gas structures on the sea bottom (see Fig. \ref{fig:msis_scene3});
-using an MSIS located in the back of the AUV, with a vertical orientation,
-the scene was scanned to produce the acoustic visualization; as illustrated
-in Fig. \ref{fig:msis_sim3}, object surfaces present clear definition in
-the slice scanning of the sea-floor.
-
 \begin{figure*}[!ht]
     \centering
     \subfigure[][]{
@@ -574,20 +554,6 @@ the slice scanning of the sea-floor.
     \subref{fig:msis_sim2}, and vertical axis in \subref{fig:msis_sim3}.}
     \label{fig:msis}
 \end{figure*}
-
-All the experimental scenarios provided enough variability of specific phenomena
-usually found in real sonar images, such as acoustic shadows, noise
-interference, surface irregularities and properties, distortion during
-the acquisition process and gradient of acoustic intensities. However, the speckle noise
-application is restricted to regions with acoustic intensity, as shown in
-Figs. \ref{fig:fls_sim3} and \ref{fig:msis_sim1}. This fact is due to our
-sonar model be multiplicative (defined in Eq. \ref{eq:2}). In real sonar
-images, the noise also granulates the shadows and blind regions. The sonar
-simulator can be improved by inserting an additive noise to our model.
-\textcolor{blue}{The impact of additive noise on the image is more severe
-than that of multiplicative, and we decided to collect more data before include this type of noise in our simulator.} A second feature missing in simulated acoustic images are the ghost effects
-caused by reverberation. This lacking part can be addressed by implementation
-of a multi-path propagation model as found in \textcolor{blue}{\cite{huang2015b}.}
 
 \begin{table*}[t]
     \caption{Processing time to generate forward-looking sonar frames with different parameters.}
@@ -627,37 +593,49 @@ of a multi-path propagation model as found in \textcolor{blue}{\cite{huang2015b}
     \end{center}
 \end{table*}
 
+%%Luciano: Essa frase: "using an MSIS located in the back of the AUV with a vertical orientation, the scene was scanned to produce the acoustic visualization" - parece óbvia demais. Qual o sentido dela no final deste parágrafo?
+The MSIS was also simulated in three different experiments. The robot in a
+big textured tank composes \textbf{the first scene} (see Fig.
+\ref{fig:msis_scene1}); similar to the first scenario of FLS experiment,
+the reflectivity and texture were set to the target; the rotation of the
+sonar head position, by a complete $360^{\circ}$ scanning, produced the acoustic
+frame of tank walls (see Fig. \ref{fig:msis_sim1}). \textbf{The second scene}
+involves the vehicle's movement during the data acquisition process; the scene
+contains a grid around the AUV (see Fig. \ref{fig:msis_scene2}), captured by an MSIS in
+the front of the AUV; this trial induces a distortion in the final
+acoustic frame, because the relative sensor position with respect to the
+surrounding object changes, as the sonar image is being built (see
+Fig. \ref{fig:msis_sim2}); in this case, the robot rotates $20^{\circ}$ left
+during the scanning. \textbf{The last scene} presents the AUV over oil
+and gas structures on the sea bottom (see Fig. \ref{fig:msis_scene3});
+using an MSIS located in the back of the AUV with a vertical orientation, the scene was scanned to produce the acoustic visualization; as illustrated in Fig. \ref{fig:msis_sim3}, object surfaces present clear definition in the slice scanning of the sea-floor.
+
+%%%Luciano: Isso está correto? "gradient of acoustic intensities". O que quer dizer com isso?
+All the experimental scenarios provided enough variability of specific phenomena usually found in real sonar images, such as acoustic shadows, noise interference, surface irregularities and properties, distortion during the acquisition process and gradient of acoustic intensities. However, the speckle noise application is restricted to regions with acoustic intensity, as shown in Figs. \ref{fig:fls_sim3} and \ref{fig:msis_sim1}. This fact is due to our sonar model be multiplicative (defined in Eq. \ref{eq:2}). In real sonar images, the noise also granulates the shadows and blind regions. The sonar simulator can be improved by inserting an additive noise to our model.
+\textcolor{blue}{The impact of additive noise on the image is more severe than that of multiplicative, and we decided to collect more data before including a specific additive noise in our simulator, at this moment.} A second feature missing in our simulated acoustic images are the ghost effects caused by reverberation. This lacking part can be addressed by implementation of a multi-path propagation model as found in \textcolor{blue}{\cite{huang2015b}. } %%%Justificar o porquê não colocou o fenômenos da reverberação. Como está, fica muito solto. Tem que ter um motivo forte dentro dos objetivos do projeto.
+
 
 \subsection{Computational time}
 
-Performance evaluation of the simulator was determined by considering the
-suitability to run real-time applications. The experiments were performed
-on a laptop with Ubuntu 16.04 64 bits, Intel Core i7 3540M processor
-running at 3 GHz with 16GB DDR3 RAM memory and NVIDIA NVS 5200M video card.
-
-The elapsed time of each sonar data is stored to compute the average time,
-standard deviation and frame rate metrics, after $500$ iterations, as
-summarized in Tables \ref{table:fls} and \ref{table:msis}. After changing
-the device parameters, such as number of bins, number of beams and field
+Performance evaluation of the simulator was assessed by considering the suitability to run real-time applications. The experiments were performed on a laptop with Ubuntu 16.04 64 bits, Intel Core i7 3540M processor running at 3 GHz with 16GB DDR3 RAM memory and NVIDIA NVS 5200M video card. The elapsed time of each sonar data is stored to compute the average time, standard deviation and frame rate metrics, after $500$ iterations. The results found is summarized in Tables \ref{table:fls} and \ref{table:msis}. After changing the device parameters, such as number of bins, number of beams and field
 of view, the proposed approach generated the sonar frames with a high
-frame rate, for both sonar types. Given the Tritech Gemini 720i, a real
-forward-looking sonar sensor, with a field of view of $120^{\circ}$ by
-$20^{\circ}$ and 256 beams, presents a maximum update rate of 15 frames
-per second, the results allow the use of the sonar simulator for real-time
-applications. Also, the MSIS data built by the simulator is able to
-complete a $360^{\circ}$ scan sufficiently fast in comparison with a
-real sonar as Tritech Micron DST. Moreover, for the FLS device, these
-rates are superior to the rates lists by DeMarco \textit{et al}
-\cite{demarco2015} ($330 ms$) and Saç \textit{et al} \cite{sac2015}
-($2.5 min$). For MSIS type, to the best of our knowledge, \textcolor{blue}{there is no
-previous work for comparison.}
+frame rate, for both sonar types, considering a real-world sonar. Given the Tritech Gemini 720i, a real forward-looking sonar sensor, with a field of view of $120^{\circ}$ by $20^{\circ}$ and 256 beams, presents a maximum update rate of 15 frames per second, the results allow the use of the sonar simulator for real-time applications. Also, the MSIS data used in the simulator is able to complete a $360^{\circ}$ scan sufficiently fast in comparison with a
+real sonar as Tritech Micron DST. %%%%Colocar também aqui a taxa de scan do Tritech Micron DST
 
-%%%reescrever
+For the FLS device, these rates are superior to the rates lists by DeMarco \textit{et al} \cite{demarco2015} ($330 ms$) and Saç \textit{et al} \cite{sac2015} ($2.5 min$). \textcolor{blue}{For MSIS type, to the best of our knowledge, there is no previous work for comparison.}
+
+%%%reescrever e colocar no local correto dentro das análises. Isso deve ficar em algum lugar lá em cima quando apresenta os resultados da tabela.
 According to previous results, since the number of bins is directly
 proportional to sonar image resolution, as explained in Section
-\ref{dev:sonardata}, this is also correlated with the computational time.
-When the number of bins increases, the simulator will have a bigger scene
-frame to compute, and generate the sonar data.
+\ref{dev:sonardata}, this is also correlated with the computational time. When the number of bins increases, the simulator will have a bigger scene frame to compute, and generate the sonar data.
+
+\begin{figure}[t]
+    \includegraphics[width=\columnwidth]{figs/real_ssiv_03}
+    \centering
+    \captionsetup{justification=centering}
+    \caption{Image of a Tritech Gemini 720i Imaging Sonar of a mock-up of a sub-sea structure.}
+    \label{fig:real_sonar}
+\end{figure}
 
 % \begin{table*}[t]
 %     \caption{Processing time to generate forward-looking sonar frames with different parameters.}
@@ -697,45 +675,15 @@ frame to compute, and generate the sonar data.
 
 % ----------------------------------------------------------------------------------
 
-%%%Falta corrigir
 \section{Conclusion and future work}
 \label{conclusion}
 
-A GPU-based approach for imaging sonar simulation is presented here.
-The same model was able to reproduce the operation mode of two different
-types of sonar devices (FLS and MSIS) over different scenarios. The real
-sonar image singularities, such as multiplicative noise, surface
-properties and acoustic shadows are addressed and represented in the
-simulated frames. Specially for the shadows, the acoustic representation
-can present information as useful as the insonified object. Considering
-the qualitative results, \textcolor{blue}{the sonar simulator can be used} by feature detection
-algorithms, based on corners, lines and shapes. Also, the computation time
-to build one sonar frame was calculated using different device settings.
-The vertex and fragment processing during the underwater scene rendering
-accelerates the sonar image building, and the metrics, such as the average
-time, demonstrated that the performance is much close to real imaging
-devices. These results allowed the use of this imaging sonar simulator
-by real-time applications, such as obstacle detection and avoidance, and
-object tracking. Finally, the reverberation effect is still missing on
-our simulator to perform a more realistic sensing. The future inclusion
-of this phenomenon will probably change the reflected intensity model
-and the computation time must be considered again. Next steps will
-focus on \textcolor{blue}{to expand the underwater acoustic characteristics, such as additive
-noise and reverberation, and} qualitative and computation\hyp{}efficiency
-evaluations with other imaging sonar simulators and real images.
+\textcolor{blue}{A GPU-based simulator for imaging sonar simulation is presented here. The system is able to reproduce the operation mode of two different types of sonar devices (FLS and MSIS) in real-time. The real sonar image singularities, such as multiplicative noise, surface properties and acoustic shadows are addressed and represented in the simulated frames. Specially for the shadows, the acoustic representation can present information as useful as the insonified object. Considering the qualitative results, \textcolor{blue}{the sonar simulator can be used} by feature detection algorithms, based on corners, lines and shapes. Also, the computation time to build one sonar frame was calculated using different device settings. The vertex and fragment processing during the underwater scene rendering accelerates the sonar image building, providing an average time close or better than real imaging devices. These results allowed the use of this imaging sonar simulator by real-time applications, such as obstacle detection and avoidance, and object tracking. We are analyzing now a way to add the reverberation effect to perform a more realistic sensing, as well as, without significantly effect the computational time must. We are working now on how to include an additive noise in the simulation of the acoustic images.}
 
-\textcolor{blue}{Recently we had the opportunity to record a lot of imaging sonar data during tests. The
-target structures we were operating on, have been made by us ourselves and we have detailed models in
-simulation (see Figs. \ref{fig:fls_sim3} and \ref{fig:real_sonar}). We therefore plan to use this data
-in the  next months to analyse the quality of the simulation.}
+%%%Não faz muito sentido. Acho melhor tirar.
+%\textcolor{blue}{Recently we had the opportunity to record a lot of imaging sonar data during tests. The target structures we were operating on, have been made by us ourselves and we have detailed models in simulation (see Figs. \ref{fig:fls_sim3} and \ref{fig:real_sonar}). We therefore plan to use this data in the  next months to analyse the quality of the simulation.}
 
-\begin{figure}[t]
-    \includegraphics[width=\columnwidth]{figs/real_ssiv_03}
-    \centering
-    \captionsetup{justification=centering}
-    \caption{Image of a Tritech Gemini 720i Imaging Sonar of a mock-up of a sub-sea structure.}
-    \label{fig:real_sonar}
-\end{figure}
+
 
 
 
