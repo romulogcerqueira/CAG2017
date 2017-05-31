@@ -129,8 +129,8 @@ real-time response, in contrast to the methods found in
 and forward-looking sonar (FLS).} The intensity measured back from the
 insonified objects depends on surface normal directions and reflectivity,
 producing more realistic simulated frames than binary representation as
-found in \cite{gu2013,kwak2015}. The speckle noise is modeled as a non-uniform Gaussian distribution and applied to the final sonar image, next to real sonar operation, differently to \cite{gueriot2010,sac2015,demarco2015,gu2013,kwak2015}. \textcolor{blue}{Finally, we have decided to extend the physical phenomena in the simulator, obeying
-the usage in real-time experiments (e.g. decision-making algorithms and control system tuning). Knowing this real-time constraint, the high computational cost phenomena such as reverberation is not considered at this point, differently of \cite{sac2015}.}
+found in \cite{gu2013,kwak2015}. The speckle noise is modeled as a non-uniform Gaussian distribution and applied to the final sonar image, next to real sonar operation, differently to \cite{sac2015,demarco2015,gu2013,kwak2015,gueriot2010}. \textcolor{blue}{On the other hand, the additive noise is considered by the authors in \cite{sac2015,demarco2015}. Finally, we have decided to extend the physical phenomena in the simulator, obeying
+the usage in real-time experiments (e.g. decision-making algorithms and control system tuning). Knowing this real-time constraint, the high computational cost phenomena such as reverberation is not included at this point, differently of \cite{sac2015}.}
 
 The main goal here is to build quality and low time\hyp{}consuming acoustic frames, according to underwater sonar image formation and operation modes (see Section \ref{sonar:operation}). \textcolor{blue}{The shader matrix with depth, intensity and angular distortion parameters are extracted from underwater scene during the rasterization pipeline,} and subsequently fused to generate the simulated sonar data, as described in Section \ref{dev}. Qualitative and time evaluation results for two different sonar devices are presented in Section \ref{results}, \textcolor{blue}{allowing the use of the} proposed simulator by real-time applications.
 
@@ -215,7 +215,7 @@ reading (see Fig. \ref{fig:swarths:msis}); the resulting sonar images in MSIS ar
     \includegraphics[width=0.85\paperwidth]{figs/sonar_sim}
     \centering
     \captionsetup{justification=justified}
-    \caption{A graphical overview of the imaging sonar simulation process: (i) a virtual camera, specialized as the sonar device, samples the underwater scene; (ii) three components are calculated by shader rendering on GPU: the Euclidean distance from camera center, the surface normal angles, and the angular distortion; the shader information is split into beam parts, according to the angular distortion values, and the bin depth and the intensity are defined by: distance histogram (iii) and energy normalization (iv), respectively; (v) the speckle noise is applied to the final sonar data; (vi) and the simulated acoustic data is presented as Rock's data type.}
+    \caption{A graphical overview of the imaging sonar simulation process: (i) a virtual camera, specialized as the sonar device, samples the underwater scene; (ii) three parameters are calculated by shader rendering on GPU: \textcolor{blue}{angular distortion, intensity and depth}; the shader information is split into beam parts, according to the angular distortion values, and the bin depth and the intensity are defined by: distance histogram (iii) and energy normalization (iv), respectively; (v) the speckle noise is applied to the final sonar data; (vi) and the simulated acoustic data is presented as Rock's data type.}
     \label{fig:sonar_sim}
 \end{figure*}
 
@@ -244,7 +244,7 @@ joints) and other objects presented in the environment are defined by simulation
 The rendering pipeline can be customized by defining GPU shaders. A shader is written in OpenGL Shading Language (GLSL) \cite{rost2009}, a high-level language with a C-based syntax which enables more direct control of graphics pipeline, which avoids the use of low-level or hardware-specific languages. Shaders can describe the characteristics of either a vertex or a fragment (a single pixel). Vertex shaders are responsible by transforming the vertex position into a screen position by the rasterizer, generating texture coordinates for texturing, and lighting the vertex to determine each color. The rasterization results in a set of pixels to be processed by fragment shaders, which manipulate their locations, depth and alpha values, and interpolated parameters from the previous stages, such as colors and textures.
 
 \textcolor{blue}{In our work, the underwater scenes are sampled by a virtual camera (frame-by-frame), whose
-optical axis is aligned with the intended viewing \textbf{direction}, the coverage \textbf{range} and the \textbf{opening angle} of the simulated sonar device (see Fig. \ref{fig:sonar_sim}). To simulate the sonar imaging by using virtual camera frames, three parameters are computed in fragment and vertex shaders, during the rendering pipeline. This way, we are able to use the precomputed geometric information during the rasterization process on GPU. The three parameters to simulate the sonar using a virtual camera are:}
+optical axis is aligned with the intended viewing \textbf{direction}, the coverage \textbf{range} and the \textbf{opening angle} of the simulated sonar device (see Fig. \ref{fig:sonar_sim}(i)). To simulate the sonar imaging by using virtual camera frames, three parameters are computed in fragment and vertex shaders, during the rendering pipeline. This way, we are able to use the precomputed geometric information during the image rasterization process on GPU. The three parameters to simulate the sonar using a virtual camera are, as illustrated in Fig. \ref{fig:sonar_sim}(ii):}
 
 \begin{itemize}[]
     \item \textbf{Distance / Depth} is the camera focal length, calculated by the
@@ -260,9 +260,8 @@ optical axis is aligned with the intended viewing \textbf{direction}, the covera
 
 \textcolor{blue}{All the three parameters in the shader matrix are normalized into the interval [0,1]. For the intensity parameter, zero means no energy and one means maximum echo energy; for depth, the minimum value denotes a close object, while the maximum value represents a far one, limited by the sonar maximum range; angle distortion is zero in image center column, and increases for both borders to present the half value of horizontal field of view.}
 
-%%%Acrescentar as subfiguras a, b, c, ..., durante o texto abaixo, na explicação e também a Fig. 6 e suas subfiguras
 In real world sensing, surfaces usually present irregularities
-and different reflectance values. To render irregularities in a virtual scene (see Fig. , the
+and different reflectance values. To render irregularities in a virtual scene (see Fig. \ref{fig:sonar_normal_mapping}), the
 intensity values can also be defined by \textcolor{blue}{normal maps} and material property information. \textcolor{blue}{Normal mapping} is a perturbation rendering technique to simulate wrinkles and dents on the object surface by passing \textcolor{blue}{textures}, modifying
 the normal directions on shaders. This approach consumes less computational
 resources for the same level of detail, compared with the displacement mapping
@@ -273,8 +272,8 @@ properties. For instance, aluminum has more reflectivity than wood and plastic.
 When an object has its reflectivity property defined, the reflectance value
 $\rho$ is passed to the fragment shader and processed \textcolor{blue}{on GPU. So the final
 pixel intensity represents the product of its normal value by the reflectance
-value $\rho$.} At the end, the shader process provides a matrix with three main
-data: intensity, depth and angular distortion.
+value $\rho$ (see Fig. \ref{fig:sonar_reflectances}). At the end of sonar rendering step, the shader provides a 3-channel matrix composed by intensity, depth and angular
+distortion parameters.}
 
 \begin{figure*}[t]
     \centering
@@ -315,8 +314,6 @@ data: intensity, depth and angular distortion.
     \label{fig:sonar_normal_mapping}
 \end{figure*}
 
-
-
 \begin{figure}[!ht]
     \centering
     \subfigure[][]{
@@ -353,11 +350,11 @@ data: intensity, depth and angular distortion.
     }
     \captionsetup{justification=justified}
     \caption{Examples of different reflectance values, $\rho$, applied in
-    shader image representation, where blue is the normal channel and
+    shader image representation of the same target, where blue is the normal channel and
     green is the depth channel: \subref{fig:reflectance:1} raw image;
     \subref{fig:reflectance:0_35} $\rho = 0.35$;
     \subref{fig:reflectance:1_40} $\rho = 1.40$; and
-    \subref{fig:reflectance:2_12} $\rho = 2.12$.\textcolor{blue}{The following
+    \subref{fig:reflectance:2_12} $\rho = 2.12$. \textcolor{blue}{The following
     acoustic images are presented in \subref{fig:reflectance:view:1},
     \subref{fig:reflectance:view:0_35}, \subref{fig:reflectance:view:1_40}
     and \subref{fig:reflectance:view:2_12}.}}
@@ -384,7 +381,7 @@ over time and the bin number is proportional to the sensor range. In other
 words, the initial bins represent the closest distances, while the latest
 bins are the farthest ones. Therefore a distance histogram (see Fig. \ref{fig:sonar_sim}(iii)) is computed and evaluated in order to
 group the sub-image pixels with the respective bins, according to the
-depth \textcolor{blue}{shader matrix parameters}. The distance histogram is used to calculate the accumulated intensity of each bin.
+depth \textcolor{blue}{shader matrix parameter}. The distance histogram is used to calculate the accumulated intensity of each bin.
 
 Due to the acoustic beam spreading and absorption in the water, the final
 bins have less echo strength than the first ones, because the energy is
@@ -413,7 +410,7 @@ proportional to the sonar image size.}
 
 Imaging sonar systems are disturbed by a multiplicative noise known as speckle,
 which is caused by coherent processing of backscattered signals from multiple
-distributed targets. \textcolor{blue}{This interference degrades} image quality and visual
+distributed targets. \textcolor{blue}{This effect degrades} image quality and visual
 evaluation. Speckle noise results in constructive and destructive interferences,
 which are shown as bright and dark dots in the image. The noisy image has been
 expressed as \cite{lee1980}:
@@ -433,10 +430,7 @@ to behave as a Gaussian random variable \textcolor{blue}{\cite{papoulis2002}}. A
 \subsection{Integrating sonar device with Rock}
 \label{dev:rock}
 
-%%%Completar para ligar com o que foi dito antes
-To export and display the sonar image, the simulated data is encapsulated
-as Rock's sonar data type, and provided as an output I/O port of a Rock's
-component.
+\textcolor{blue}{After the imaging sonar simulation process, from the virtual underwater scene to the acoustic representation, the resulting sonar data is encapsulated as Rock's sonar data type and provided as I/O port of a Rock's component, allowing the interaction with other simulated models and applications.}
 
 % ----------------------------------------------------------------------------------
 
@@ -448,7 +442,7 @@ of an AUV equipped with an MSIS and an FLS, studied in different scenarios.
 The sonar device configurations are summarized in
 Table \ref{table:sonar_settings}. In the experimental analysis, as the scene frames are being captured by
 the sonars, resulting simulated acoustic images are sequentially presented,
-on-the-fly \textcolor{blue}{(see Figs. \ref{fig:fls} and \ref{fig:msis} for some examples of scenes used)}.
+on-the-fly \textcolor{blue}{(see Figs. \ref{fig:fls} and \ref{fig:msis})}.
 
 \subsection{Experimental evaluation}
 
@@ -461,12 +455,18 @@ docking station is metal-made, the texture and reflectivity were set, such
 that a higher intensity shape was resulted in comparison with the other targets.
 \textbf{The second scenario} presents the vehicle in front of a manifold model
 in a non-uniform seabed (see Fig. \ref{fig:fls_scene2}); the target model was
-insonified to generate the sonar frame from the underwater scene; the frontal
+insonified to generate the sonar frame from the underwater scene (see Fig. \ref{fig:fls_sim2}); the frontal
 face of the target, as well the portion of the seabed and the degraded data
 by noise, are clearly visible in the FLS image; also, a long acoustic shadow
 is formed behind the manifold, occluding part of the scene. \textbf{The
 third scenario} contains a sub-sea isolation valve (SSIV) structure, connected
-to a pipeline in the bottom (see Fig. \ref{fig:fls_scene3}).
+to a pipeline in the bottom (see Fig. \ref{fig:fls_scene3}); the simulated
+acoustic image, depicted in Fig. \ref{fig:fls_sim3}, also present shadows,
+material properties and speckle noise effects. Due to sensor configuration and
+robot position, the initial bins usually present a blind region in the three
+simulated scenes, caused by absence of objects at lower ranges, similar to real
+sonar images. Also, the brightness of sea-floor decreases, as the sea-floor is
+farther from sonar, because of the normal orientation of the surface.
 
 \begin{table}[t]
     \captionsetup{justification=justified}
@@ -484,11 +484,7 @@ to a pipeline in the bottom (see Fig. \ref{fig:fls_scene3}).
     \end{center}
 \end{table}
 
-Due to sensor configuration and robot position, the initial bins usually
-present a blind region in the three simulated scenes, caused by absence
-of objects at lower ranges, similar to real sonar images. Also, the brightness
-of sea-floor decreases, as the sea-floor is farther from sonar, because of the normal
-orientation of the surface.
+
 
 \begin{figure*}[!ht]
     \centering
@@ -632,9 +628,6 @@ of a multi-path propagation model as found in \textcolor{blue}{\cite{huang2015b}
 \end{table*}
 
 
-
-.
-
 \subsection{Computational time}
 
 Performance evaluation of the simulator was determined by considering the
@@ -714,32 +707,26 @@ types of sonar devices (FLS and MSIS) over different scenarios. The real
 sonar image singularities, such as multiplicative noise, surface
 properties and acoustic shadows are addressed and represented in the
 simulated frames. Specially for the shadows, the acoustic representation
-can present information as useful as the insonified object.
-
-Considering
+can present information as useful as the insonified object. Considering
 the qualitative results, \textcolor{blue}{the sonar simulator can be used} by feature detection
 algorithms, based on corners, lines and shapes. Also, the computation time
 to build one sonar frame was calculated using different device settings.
 The vertex and fragment processing during the underwater scene rendering
 accelerates the sonar image building, and the metrics, such as the average
 time, demonstrated that the performance is much close to real imaging
-devices.
-
-These results allowed the use of this imaging sonar simulator
+devices. These results allowed the use of this imaging sonar simulator
 by real-time applications, such as obstacle detection and avoidance, and
 object tracking. Finally, the reverberation effect is still missing on
 our simulator to perform a more realistic sensing. The future inclusion
 of this phenomenon will probably change the reflected intensity model
-and the computation time must be considered again.
-
-Next steps will
+and the computation time must be considered again. Next steps will
 focus on \textcolor{blue}{to expand the underwater acoustic characteristics, such as additive
 noise and reverberation, and} qualitative and computation\hyp{}efficiency
 evaluations with other imaging sonar simulators and real images.
 
-\textcolor{blue}{Recently we had the oportunity to record a lot of imaging sonar data during tests. The
-target strucutres we were operating on, have been made by us ourselves and we have detailed models in
-simulation (see figure \ref{fig:real_sonar} and figure \ref{fig:fls_sim3}). We therefore plan to use this data
+\textcolor{blue}{Recently we had the opportunity to record a lot of imaging sonar data during tests. The
+target structures we were operating on, have been made by us ourselves and we have detailed models in
+simulation (see Figs. \ref{fig:fls_sim3} and \ref{fig:real_sonar}). We therefore plan to use this data
 in the  next months to analyse the quality of the simulation.}
 
 \begin{figure}[t]
