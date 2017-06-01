@@ -40,13 +40,13 @@
 
 \begin{abstract}
 
-\textcolor{blue}{Mainly when applied in the underwater environment, sonar simulation requires great computational effort due to the complexity of acoustic physics. For that, simulation of sonar operation allows to evaluate algorithms and control systems without going to the real underwater environment; that reduces the costs and risks of in-field experiments. This paper tackles with the problem of real-time underwater imaging sonar simulation, by using the OpenGL shading language chain on graphics processing unit. This proposed system is able to simulate two main types of sonar sensors: mechanical scanning imaging sonars and forward-looking sonars. The underwater scenario simulation is performed based on three frameworks: (i) OpenSceneGraph reproduces the ocean visual effects, (ii) Gazebo deals with physics effects, and (iii) the Robot Construction Kit controls the sonar in underwater environments. Our system exploits the rasterization pipeline in order to simulate the sonar devices, which are parameterized with the echo intensity, the distance to the target and the angular distortion, being all calculated over objects shapes in the 3D rendered scene. Sonar-intrinsic speckle noise and object material properties are also considered as part of the acoustic image. Our evaluation demonstrated that the proposed method is able to operate close or faster than the real-world devices' frame rate, as well as generating realistic sonar image quality in different virtual underwater scenarios.}
+\textcolor{blue}{Mainly when applied in the underwater environment, sonar simulation requires great computational effort due to the complexity of acoustic physics. For that, simulation of sonar operation allows to evaluate algorithms and control systems without going to the real underwater environment; that reduces the costs and risks of in-field experiments. This paper tackles with the problem of real-time underwater imaging sonar simulation, by using the OpenGL shading language chain on graphics processing unit. This proposed system is able to simulate two main types of sonar sensors: mechanical scanning imaging sonars and forward-looking sonars. The underwater scenario simulation is performed based on three frameworks: (i) OpenSceneGraph reproduces the ocean visual effects, (ii) Gazebo deals with physical forces, and (iii) the Robot Construction Kit controls the sonar in underwater environments. Our system exploits the rasterization pipeline in order to simulate the sonar devices, which are parameterized with the echo intensity, the distance to the target and the angular distortion, being all calculated over objects shapes in the 3D rendered scene. Sonar-intrinsic speckle noise and object material properties are also considered as part of the acoustic image. Our evaluation demonstrated that the proposed method is able to operate close or faster than the real-world devices' frame rate, as well as generating realistic sonar image quality in different virtual underwater scenarios.}
 
 \end{abstract}
 
 \begin{keyword}
 Simulated sensor data
-\sep sonar imaging
+\sep Sonar imaging
 \sep GPU-based processing
 \sep Robot Construction Kit (Rock)
 \sep Underwater robotics.
@@ -130,7 +130,7 @@ and forward-looking sonar (FLS).} The intensity measured back from the
 insonified objects depends on surface normal directions and reflectivity,
 producing more realistic simulated frames than binary representation as
 found in \cite{gu2013,kwak2015}. The speckle noise is modeled as a non-uniform Gaussian distribution and applied to the final sonar image, next to real sonar operation, differently to \cite{sac2015,demarco2015,gu2013,kwak2015,gueriot2010}. \textcolor{blue}{On the other hand, the additive noise is considered by the authors in \cite{sac2015,demarco2015}. Finally, we have decided to extend the physical phenomena in the simulator, obeying
-the usage in real-time experiments (e.g. decision-making algorithms and control system tuning). Knowing this real-time constraint, the high computational cost phenomena such as reverberation is not included at this point, differently of \cite{sac2015}.}
+the use in real-time experiments (e.g. decision-making algorithms and control system tuning). Knowing this real-time constraint, the high computational cost phenomena such as reverberation is not included at this point, differently of \cite{sac2015}.}
 
 The main goal here is to build quality and low time\hyp{}consuming acoustic frames, according to underwater sonar image formation and operation modes (see Section \ref{sonar:operation}). \textcolor{blue}{The shader matrix with depth, intensity and angular distortion parameters are extracted from underwater scene during the rasterization pipeline,} and subsequently fused to generate the simulated sonar data, as described in Section \ref{dev}. Qualitative and time evaluation results for two different sonar devices are presented in Section \ref{results}, \textcolor{blue}{allowing the use of the} proposed simulator by real-time applications.
 
@@ -231,10 +231,10 @@ The goal of our work is to simulate the two types of underwater sonar, discussed
 \subsection{Rendering underwater scene}
 \label{dev:uwscene}
 
-\textcolor{blue}{In Rock-Gazebo framework \cite{watanabe2015}, Gazebo handles with physical forces, while Rock's visualization tools are responsible by the scene rendering. The graphical data in Rock are based on OpenSceneGraph framework, an open source C/C++ 3D graphics toolkit built on OpenGL. The osgOcean framework is used to simulate the ocean visual effects, and the ocean buoyancy is defined by the Gazebo, as described in \cite{watanabe2015}. In our case, Rock-Gazebo integration provides the underwater scenario, allowing also real-time hardware-in-the-loop simulation with a virtual AUV.}
+\textcolor{blue}{In Rock-Gazebo framework \cite{watanabe2015}, Gazebo handles with physical forces, while Rock's visualization tools are responsible by the scene rendering. The graphical data in Rock are based on OpenSceneGraph framework, an open source C/C++ 3D graphics toolkit built on OpenGL. The osgOcean library is used to simulate the ocean visual effects. In our case, Rock-Gazebo integration provides the underwater scenario, allowing also real-time hardware-in-the-loop simulation with a virtual AUV.}
 
 All scene aspects, such as world model, robot parts (including sensors and
-joints) and other objects presented in the environment are defined by simulation description files (SDF), which use the SDFormat \cite{sdformat2017}, a XML format used to describe simulated models and environments for Gazebo. Visual and collision geometries of vehicle and sensor robot are also described in specific file formats. Each component described in the SDF file becomes a Rock component, which is based on the Orocos real-time toolkit (RTT) \cite{soetens2005}, providing I/O ports, properties and operations as communication layers. When the models are loaded, Rock-Gazebo creates I/O ports to allow real world or simulated system components interacting with the simulated models. A resulting scene sample of this integration is illustrated in Fig. \ref{fig:uwscene}.
+joints) and other virtual objects are defined by simulation description files (SDF), which use the SDFormat \cite{sdformat2017}, a XML format used to describe simulated models and environments for Gazebo. Visual and collision geometries of vehicle and sensor robot are also described in specific file formats. Each component described in the SDF file becomes a Rock component, which is based on the Orocos real-time toolkit (RTT) \cite{soetens2005}, providing I/O ports, properties and operations as communication layers. When the models are loaded, Rock-Gazebo creates I/O ports to allow real world or simulated system components interacting with the simulated models. A resulting scene sample of this integration is illustrated in Fig. \ref{fig:uwscene}.
 
 % ----------------------------------------------------------------------------------
 
@@ -244,7 +244,7 @@ joints) and other objects presented in the environment are defined by simulation
 The rendering pipeline can be customized by defining GPU shaders. A shader is written in OpenGL Shading Language (GLSL) \cite{rost2009}, a high-level language with a C-based syntax which enables more direct control of graphics pipeline, which avoids the use of low-level or hardware-specific languages. Shaders can describe the characteristics of either a vertex or a fragment (a single pixel). Vertex shaders are responsible by transforming the vertex position into a screen position by the rasterizer, generating texture coordinates for texturing, and lighting the vertex to determine each color. The rasterization results in a set of pixels to be processed by fragment shaders, which manipulate their locations, depth and alpha values, and interpolated parameters from the previous stages, such as colors and textures.
 
 \textcolor{blue}{In our work, the underwater scenes are sampled by a virtual camera (frame-by-frame), whose
-optical axis is aligned with the intended viewing \textbf{direction}, the coverage \textbf{range} and the \textbf{opening angle} of the simulated sonar device (see Fig. \ref{fig:sonar_sim}(i)). To simulate the sonar imaging by using virtual camera frames, three parameters are computed in fragment and vertex shaders, during the rendering pipeline. This way, we are able to use the precomputed geometric information during the image rasterization process on GPU. The three parameters to simulate the sonar using a virtual camera are, as illustrated in Fig. \ref{fig:sonar_sim}(ii):}
+optical axis is aligned with the intended \textbf{viewing direction}, the coverage \textbf{range} and the \textbf{opening angle} of the simulated sonar device (see Fig. \ref{fig:sonar_sim}(i)). To simulate the sonar imaging by using virtual camera frames, three parameters are computed in fragment and vertex shaders, during the rendering pipeline. This way, we are able to use the precomputed geometric information during the image rasterization process on GPU. The three parameters to simulate the sonar using a virtual camera are, as illustrated in Fig. \ref{fig:sonar_sim}(ii):}
 
 \begin{itemize}[]
     \item \textbf{Distance / Depth} is the camera focal length, calculated by the
@@ -258,7 +258,7 @@ optical axis is aligned with the intended viewing \textbf{direction}, the covera
     %operation.}
 \end{itemize}
 
-\textcolor{blue}{By default, the shader encodes the raster data in 8-bit color channels for Red, Green, Blue and Alpha (RGBA). We take this image data structure to store the intensity, depth and angular distortion parameters in RGB channels. The intensity parameter follows the real sonar common representation as 8-bit values; the depth is replaced by the native GLSL 32-bit depth buffer to avoid precision limitation during the distance histogram (see Fig. \ref{fig:sonar_sim}(iii)), described in subsection \ref{dev:sonardata}; as the projection angle range on shader is $0^{\circ}$ to $90^{\circ}$, for both directions, the angular distortion is represented by 8-bit values without loss of meaning. Also, all these three parameters in the shader matrix are normalized into the interval [0,1]. For the intensity parameter, zero means no energy and one means maximum echo energy; for depth, the minimum value denotes a close object, while the maximum value represents a far one, limited by the sonar maximum range; angle distortion is zero in image center column, and increases for both borders to present the half value of horizontal field of view.}
+\textcolor{blue}{By default, the shader encodes the raster data in 8-bit color channels for red, green, blue and alpha (RGBA). We take this image data structure to store the intensity, depth and angular distortion parameters in the RGB channels. The intensity parameter follows the real sonar common representation as 8-bit values; the depth is replaced by the native GLSL 32-bit depth buffer to avoid precision limitation during the distance histogram (see Fig. \ref{fig:sonar_sim}(iii)), described in subsection \ref{dev:sonardata}; as the projection angle range on shader is $0^{\circ}$ to $90^{\circ}$, for both directions, the angular distortion is represented by 8-bit values without loss of meaning. Also, all these three parameters in the shader matrix are normalized into the interval [0,1]. For the intensity parameter, zero means no energy and one means maximum echo energy; for depth, the minimum value denotes a close object, while the maximum value represents a far one, limited by the sonar maximum range; angle distortion is zero in image center column, and increases for both borders to present the half value of horizontal field of view.}
 
 In real world sensing, surfaces usually present irregularities
 and different reflectance values. To render that in a virtual scene, the
@@ -395,7 +395,7 @@ over time and the bin number is proportional to the sensor range. In other
 words, the initial bins represent the closest distances, while the latest
 bins are the farthest ones. Therefore a distance histogram (see Fig. \ref{fig:sonar_sim}(iii)) is computed in order to
 group the sub-image pixels with the respective bins, according to the
-depth \textcolor{blue}{shader matrix parameter and number of bins,
+depth \textcolor{blue}{parameter and number of bins,
 and calculate the accumulated intensity of each bin.}
 
 Due to the acoustic beam spreading and absorption in the water, the final
@@ -414,7 +414,7 @@ $x$ is the pixel location in the shader matrix, $N$ is the distance histogram
 value (number of pixels) of that bin, $S(i_{x})$ is a sigmoid function,
 and $i_{x}$ is the intensity value of the pixel $x$.
 
-\textcolor{blue}{Finally, the sonar image resolution needs to be big enough to contain all
+\textcolor{blue}{Finally, the sonar image resolution must be big enough to contain all
 information of the bins. For that, the number of bins involved is directly
 proportional to the sonar image resolution.}
 
@@ -447,40 +447,6 @@ to behave as a Gaussian random variable \textcolor{blue}{\cite{papoulis2002}}. A
 
 \textcolor{blue}{After the imaging sonar simulation process, from the virtual underwater scene to the degraded acoustic representation by noise, the resulting sonar data is encapsulated as Rock's sonar data type (see Fig. \ref{fig:sonar_sim}(vi)) and provided as I/O port of a Rock's component, allowing the interaction with other simulated models and applications.}
 
-% ----------------------------------------------------------------------------------
-
-\section{Simulation results and experimental analysis}
-\label{results}
-
-To evaluate our simulator, experiments were conducted by using a 3D model
-of an AUV equipped with an MSIS and an FLS. Different scenarios were casted and studied. The sonar device configurations used were summarized in
-Table \ref{table:sonar_settings}. In the experimental analysis, as the scene frames are being captured by
-the sonars, the resulting acoustic images are sequentially presented,
-on-the-fly \textcolor{blue}{(see Figs. \ref{fig:fls} and \ref{fig:msis})}.
-
-\subsection{Experimental evaluation}
-
-The virtual FLS from AUV was used to insonify the scenes from three distinct
-scenarios. A docking station, in parallel with a pipeline on the seabed,
-composes \textbf{the first scenario} (see Fig. \ref{fig:fls_scene1}); the
-target surface is well-defined in the simulated acoustic frame (see
-Fig. \ref{fig:fls_sim1}), even as the shadows and speckle noise; given that the docking station is metal-made, the texture and reflectivity were set, such
-that a higher intensity shape was resulted in comparison with the other targets.
-\textbf{The second scenario} presents the vehicle in front of a manifold model
-in a non-uniform seabed (see Fig. \ref{fig:fls_scene2}); the target model was
-insonified to generate the sonar frame from the underwater scene (see Fig. \ref{fig:fls_sim2}); the frontal
-face of the target, as well the portion of the seabed and the degraded data
-by noise, are clearly visible in the FLS image; also, a long acoustic shadow
-is formed behind the manifold, occluding part of the scene. \textbf{The
-third scenario} contains a sub-sea isolation valve (SSIV) structure, connected
-to a pipeline in the bottom (see Fig. \ref{fig:fls_scene3}); the simulated
-acoustic image, depicted in Fig. \ref{fig:fls_sim3}, also present shadows,
-material properties and speckle noise effects. Due to sensor configuration and
-robot position, the initial bins usually present a blind region in the three
-simulated scenes, caused by absence of objects at lower ranges, similar to real
-sonar images. It is noteworthy that the brightness of sea-floor decreases as the sea-floor is
-farther from sonar, because of the normal orientation of the surface.
-
 \begin{table}[t]
     \captionsetup{justification=justified}
     \caption{Sonar device configurations used on experimental evaluation.}
@@ -496,6 +462,17 @@ farther from sonar, because of the normal orientation of the surface.
         \end{tabular}
     \end{center}
 \end{table}
+
+% ----------------------------------------------------------------------------------
+
+\section{Simulation results and experimental analysis}
+\label{results}
+
+To evaluate our simulator, experiments were conducted by using a 3D model
+of an AUV equipped with an MSIS and an FLS. Different scenarios were casted and studied. The sonar device configurations used were summarized in
+Table \ref{table:sonar_settings}. In the experimental analysis, as the scene frames are being captured by
+the sonars, the resulting acoustic images are sequentially presented,
+on-the-fly \textcolor{blue}{(see Figs. \ref{fig:fls} and \ref{fig:msis})}.
 
 \begin{figure*}[!ht]
     \centering
@@ -537,6 +514,29 @@ farther from sonar, because of the normal orientation of the surface.
     representations of each scenario, respectively.}
     \label{fig:fls}
 \end{figure*}
+
+\subsection{Experimental evaluation}
+
+The virtual FLS from AUV was used to insonify the scenes from three distinct
+scenarios. A docking station, in parallel with a pipeline on the seabed,
+composes \textbf{the first scenario} (see Fig. \ref{fig:fls_scene1}); the
+target surface is well-defined in the simulated acoustic frame (see
+Fig. \ref{fig:fls_sim1}), even as the shadows and speckle noise; given that the docking station is metal-made, the texture and reflectivity were set, such
+that a higher intensity shape was resulted in comparison with the other targets.
+\textbf{The second scenario} presents the vehicle in front of a manifold model
+in a non-uniform seabed (see Fig. \ref{fig:fls_scene2}); the target model was
+insonified to generate the sonar frame from the underwater scene (see Fig. \ref{fig:fls_sim2}); the frontal
+face of the target, as well the portion of the seabed and the degraded data
+by noise, are clearly visible in the FLS image; also, a long acoustic shadow
+is formed behind the manifold, occluding part of the scene. \textbf{The
+third scenario} contains a sub-sea isolation valve (SSIV) structure, connected
+to a pipeline in the bottom (see Fig. \ref{fig:fls_scene3}); the simulated
+acoustic image, depicted in Fig. \ref{fig:fls_sim3}, also present shadows,
+material properties and speckle noise effects. Due to sensor configuration and
+robot position, the initial bins usually present a blind region in the three
+simulated scenes, caused by absence of objects at lower ranges, similar to real
+sonar images. It is noteworthy that the brightness of sea-floor decreases as the sea-floor is
+farther from sonar, because of the normal orientation of the surface.
 
 \begin{figure*}[!ht]
     \centering
