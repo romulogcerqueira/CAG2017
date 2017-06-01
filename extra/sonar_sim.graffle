@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2017-05-25 18:55:28 +0000</string>
+	<string>2017-06-01 11:51:28 +0000</string>
 	<key>Modifier</key>
 	<string>Jan Christian Albiez</string>
 	<key>NotesVisible</key>
@@ -418,7 +418,7 @@
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{180.78441340839197, 25.870885215463431}, {21, 26}}</string>
+					<string>{{172.28047616397669, 25.870885215463431}, {21, 26}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -468,11 +468,11 @@
 						<key>Text</key>
 						<string>{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
 {\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\colortbl;\red255\green255\blue255;}
 \deftab720
 \pard\pardeftab720\qc\partightenfactor0
 
-\f0\b\fs24 \cf2 (i)}</string>
+\f0\b\fs24 \cf0 (i)}</string>
 					</dict>
 					<key>Wrap</key>
 					<string>NO</string>
@@ -5255,58 +5255,6 @@ value}</string>
 					<integer>7407</integer>
 					<key>Layer</key>
 					<integer>1</integer>
-				</dict>
-				<dict>
-					<key>Bounds</key>
-					<string>{{428.03150796890259, 85.039372444152832}, {130.39370441436768, 11}}</string>
-					<key>Class</key>
-					<string>ShapedGraphic</string>
-					<key>FitText</key>
-					<string>Vertical</string>
-					<key>Flow</key>
-					<string>Resize</string>
-					<key>FontInfo</key>
-					<dict>
-						<key>Size</key>
-						<real>8</real>
-					</dict>
-					<key>ID</key>
-					<integer>7451</integer>
-					<key>Layer</key>
-					<integer>2</integer>
-					<key>Style</key>
-					<dict>
-						<key>fill</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>shadow</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-						<key>stroke</key>
-						<dict>
-							<key>Draws</key>
-							<string>NO</string>
-						</dict>
-					</dict>
-					<key>Text</key>
-					<dict>
-						<key>Pad</key>
-						<real>0.0</real>
-						<key>Text</key>
-						<string>{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
-{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
-{\colortbl;\red255\green255\blue255;}
-\deftab720
-\pard\pardeftab720\qc\partightenfactor0
-
-\f0\fs16 \cf0 rendering of three     channel picture}</string>
-						<key>VerticalPad</key>
-						<real>0.0</real>
-					</dict>
 				</dict>
 				<dict>
 					<key>Bounds</key>
@@ -28785,7 +28733,7 @@ value}</string>
 					<integer>3</integer>
 					<key>Points</key>
 					<array>
-						<string>{276.3779604434967, 48.188977718353264}</string>
+						<string>{276.3779604434967, 48.188977718353279}</string>
 						<string>{275.94954254804338, 68.340369031382124}</string>
 					</array>
 					<key>Style</key>
@@ -28817,7 +28765,7 @@ value}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{206.92913961410522, 19.842520236968994}, {138.89764165878296, 28.346457481384277}}</string>
+					<string>{{192.75591087341309, 19.842520236968994}, {167.24409914016724, 28.346457481384277}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>ID</key>
@@ -28848,7 +28796,7 @@ value}</string>
 \f0\fs20 \cf0 Sonar Parameters\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc\partightenfactor0
 
-\fs18 \cf0 opening angle, direction, range}</string>
+\fs18 \cf0 opening angle, viewing direction, range}</string>
 					</dict>
 				</dict>
 				<dict>
@@ -35065,7 +35013,7 @@ value}</string>
 			<string>Main</string>
 		</array>
 		<key>Frame</key>
-		<string>{{0, 4}, {1680, 1020}}</string>
+		<string>{{-0, 4}, {1919, 1053}}</string>
 		<key>ShowInfo</key>
 		<true/>
 		<key>ShowRuler</key>
@@ -35073,19 +35021,19 @@ value}</string>
 		<key>Sidebar</key>
 		<true/>
 		<key>SidebarWidth</key>
-		<integer>200</integer>
+		<integer>196</integer>
 		<key>TopSlabHeight</key>
 		<real>325</real>
 		<key>VisibleRegion</key>
-		<string>{{-245, -190.99999999999997}, {1274.3169100066948, 942.07648063959743}}</string>
+		<string>{{-1.9999999999999956, 0}, {787.00564971751407, 505.64971751412429}}</string>
 		<key>Zoom</key>
-		<real>0.91500002145767212</real>
+		<real>1.77</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
 				<string>Main</string>
+				<real>1.77</real>
 				<real>0.91500002145767212</real>
-				<real>1.8300000429153442</real>
 			</array>
 			<array>
 				<string>zeug</string>
