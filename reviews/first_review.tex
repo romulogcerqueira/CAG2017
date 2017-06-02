@@ -4,6 +4,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
+\usepackage{graphicx}
+% \usepackage{subfigure}
 
 \title{Response to the Reviewer's Comments}
 \begin{document}
@@ -39,7 +41,7 @@ errors of the same kind in the revised version.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Certainly, after the acceptance of the paper, we will add the url to
+\textbf{Certainly, after the acceptance of the paper, we will add the URL to
 download the simulator in the paper, making it public available.}
 
 \begin{verbatim}
@@ -62,9 +64,9 @@ download the simulator in the paper, making it public available.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{To find the pixel intensity, we multiply its normal angle value by the
+\textbf{To find the final pixel intensity, we multiply its normal angle value by the
 material reflectance $\rho$. This operation takes place in fragment shader.
-We rewrote lines 260--262 to make the idea clearer. Also, the Fig. 6 was
+We rewrote the sentences on subsection 3.2 to make the idea clearer. Also, the Fig. 6 was
 improved to take your consideration.}
 
 \begin{verbatim}
@@ -80,7 +82,7 @@ improved to take your consideration.}
 sonars to be simulated. The definition of the bin numbers, ranges etc. is done for each individual
 simulated sonar in the corresponding component which injects the sonar data into the full simulation.
 For example has the driver for a simulated TriTech Gemini sonar for the exact same parameters as the
-real sonar. From the point of view of the robot control the system can be very realistic.}
+real sonar. From the point of view of the robot control, the system can be very realistic.}
 
 \begin{verbatim}
 > Another interesting thing is related to the noise simulation. It does not appear
@@ -89,7 +91,7 @@ real sonar. From the point of view of the robot control the system can be very r
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{This issue is explained in lines 376--382. As we described in
+\textbf{This issue is explained in subsection 4.1. As we described in
 Section 3.4, the speckle noise modeled in this paper is a multiplicative one,
 following a non-uniform distribution. The resulting sonar data is composed by
 an element-wise multiplication between the raw data and the speckle noise. The
@@ -105,9 +107,9 @@ missing part.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{We have chosen to extend the underwater acoustic phenomena in the
-simulator obeying its usage by real-time applications. Processing the
+simulator obeying the use by real-time applications. Processing the
 reverberation in a sonar simulator is computationally costly, then its
-addition must consider the time consuming again. However, we took this problem
+addition must consider the time consuming again. We took this problem
 into account and addressed it as future work in the outlook section.}
 
 \begin{verbatim}
@@ -118,9 +120,19 @@ into account and addressed it as future work in the outlook section.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{We just now had the oportunity to record data with an imaging sonar of an object which we can 
-fully simulate. We will start to do a comparison and publish this later when we are satisfied with the 
-results.}
+\textbf{We just now had the opportunity to record data with an imaging sonar of an object which we can
+fully simulate (see Figs. 7(c) in the revised paper and \ref{fig:real_sonar} of this document). Therefore we
+plan to use this data next months to analyze the quality of the simulation and publish this later when
+the results are satisfied.}
+\newpage
+
+\begin{figure}[tb]
+    \includegraphics[width=0.7\columnwidth]{../figs/real_ssiv_03}
+    \centering
+    % \captionsetup{justification=centering}
+    \caption{Image of a Tritech Gemini 720i Imaging Sonar of a mock-up of a sub-sea structure.}
+    \label{fig:real_sonar}
+\end{figure}
 
 \begin{verbatim}
 >> REVIEWER #2 <<
@@ -161,7 +173,7 @@ under an open source license and may be downloaded from Github.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{This sentence was rewritten in our revised manuscript.}
+\textbf{This sentence was removed in our revised manuscript.}
 
 \begin{verbatim}
 > It is unclear to me, but each beam is for a complete column?
@@ -210,7 +222,7 @@ it clearer.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{A short sentence was inserted to explain the necessity of the integration of the
+\textbf{This sentence was rewritten in the revised version to explain the necessity of the integration of the
 sonar simulation into a framework and then the connection to Rock-Gazebo was made.
 That hopefully makes this paragraph a less confusing.}
 
@@ -334,7 +346,7 @@ the method.}
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
 \textbf{The rasterization was chosen because the geometric data from virtual
 scene are computed on optimized pipeline GPU embedded. With this, we handled
-these precomputed data to get the depth, intensity and angle properties needed
+these precomputed data to get the depth, intensity and angular distortion parameters needed
 to build the acoustic frame. In addition, we have rewritten the subsection 1.1
 to include these informations.}
 
@@ -358,7 +370,7 @@ to include these informations.}
 
 % \todo[inline, color=green!40]{Jan's answer}
 \textbf{The "3D shader matrix" is a 3-channel matrix which stores the 2D information
-about depth, intensity and angle from the captured OSG scene. We have rewritten this
+about depth, intensity and angular distortion from the captured OSG scene. We have rewritten this
 term on paper to make it clear.}
 
 \begin{verbatim}
@@ -374,7 +386,8 @@ n(x;\mu,\sigma) = \frac{1}{{\sigma \sqrt {2\pi } }}e^{{{ - \left( {x - \mu } \ri
 \end{equation*}
 
 \textbf{given mean $\mu$ and standard deviation $\sigma$. In the proposed approach,
-we defined $\mu = 0.4$ and $\sigma = 0.15$, and the modeled curve is presented in Fig. 3.}
+we defined $\mu = 0.4$ and $\sigma = 0.15$, and the modeled curve is presented in Fig. 4(v)
+in the paper.}
 
 \begin{verbatim}
 > Results
@@ -394,11 +407,11 @@ we defined $\mu = 0.4$ and $\sigma = 0.15$, and the modeled curve is presented i
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{With regards to other simulation systems, we have the problem that the freely available 
+\textbf{With regards to other simulation systems, we have the problem that the freely available
 simulators either don't fit our targeted niche of having a real-time simulation for robots or are
-bound to specific sonar they simulate. This is the one of the reasons we actually started our 
+bound to specific sonar they simulate. This is the one of the reasons we actually started our
 development.
-Real sonar data validation is incredible hard, since there are a lot of parameters to consider. We 
+Real sonar data validation is incredible hard, since there are a lot of parameters to consider. We
 will however conduct a qualitative comparison using data we were able to record very recently.
 A paragraph pointing this out has been added to the results section.}
 
