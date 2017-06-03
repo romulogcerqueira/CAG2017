@@ -132,7 +132,7 @@ Sonars are echo-ranging devices that use acoustic energy to locate and survey
 objects in a desired area. The sonar transducer emits pulses of sound waves
 (or ping) until they hit any object or be completely absorbed. When the
 acoustic signal collides with a surface, part of this energy is reflected,
-while other is refracted. The sonar data is built by plotting the echo measured back versus time of acoustic signal. The transducer reading in a given direction forms a \textit{beam}. A single beam transmitted from a sonar is illustrated in Fig. \ref{fig:sonar_geometry}. The horizontal and vertical beamwidths are represented by the azimuth $\psi$ and elevation $\theta$ angles, respectively, where each sampling along the beam is named as \textit{bin}. The sonar coverage area is defined by $R_{min}$ and $R_{max}$. Since the speed of sound underwater is known, or can be measured, the time delay between the emitted pulses and the respective echoes (named time-of-flight) reveals how far the objects are (distance $r$), as well as how fast they are moving. The backscattered acoustic power in each bin determines the intensity value.
+while other is refracted. The sonar data is built by plotting the echo measured back versus time of acoustic signal. The transducer reading in a given direction forms a \textit{beam}. A single beam transmitted from a sonar is illustrated in Fig. \ref{fig:sonar_geometry}. The horizontal and vertical beamwidths are represented by the azimuth $\psi$ and elevation $\theta$ angles, respectively, where each sampling along the beam is named as \textit{bin}. The sonar coverage area is defined by $R_{min}$ and $R_{max}$. Since the speed of sound underwater is known, or can be measured, the time delay between the emitted pulses and the respective echoes is named as time-of-flight and reveals how far the objects are (distance $r$), as well as how fast they are moving. The backscattered acoustic power in each bin determines the intensity value.
 
 With different azimuth directions, the array of transducer readings forms the
 final sonar image. Since all incoming signals converge to the same point, the
@@ -240,9 +240,7 @@ A rendering pipeline can be customized by defining GPU shaders. A shader is writ
     \item \textcolor{blue}{\textbf{Angular distortion} means the sonar's field of view angle in the horizontal direction.}
 \end{itemize}
 
-%%% O que é "projection angle range"? Está vago.
-%%%Luciano: precisa deixar sempre claro no que se refere a "both directions". Essas "both directions" está vaga. Direção precisa ser claramente estabelecidade de onde para onde.
-\textcolor{blue}{By default, the shader encodes the raster data in 8-bit color channels for red, green, blue and alpha (RGBA). In our simulator, this image data structure is used to store the intensity, depth and angular distortion parameters to render the sonar from a virtual camera, in the RGB channels. The intensity parameter follows the real sonar common representation as 8-bit values; the depth is replaced by the native GLSL 32-bit depth buffer to avoid precision limitation during the calculation of the distance histogram (see Fig. \ref{fig:sonar_sim}(iii)); as the projection angle range on a shader matrix varies from $0^{\circ}$ to $90^{\circ}$, for both directions, the angular distortion is represented by 8-bit values without loss of precision. Also, all these three parameters in the shader matrix are normalized into the interval [0,1]. For the intensity parameter, zero means no energy, while one means maximum echo energy; for depth, the minimum value denotes a close object, while the maximum value represents a far one, limited by the sonar maximum range; angle distortion is zero in the center of the image, increasing for both sided borders until the half value of horizontal field of view.}
+\textcolor{blue}{By default, the shader encodes the raster data in 8-bit color channels for red, green, blue and alpha (RGBA). In our simulator, this image data structure is used to store the intensity, depth and angular distortion parameters to render the sonar from a virtual camera, in the RGB channels. The intensity parameter follows the real sonar common representation as 8-bit values; the depth is replaced by the native GLSL 32-bit depth buffer to avoid precision limitation during the calculation of the distance histogram (see Fig. \ref{fig:sonar_sim}(iii)); as the field of view angle varies from $0^{\circ}$ to $90^{\circ}$, from the image center to both side directions, the angular distortion is represented by 8-bit values without loss of precision. Also, all these three parameters in the shader matrix are normalized into the interval [0,1]. For the intensity parameter, zero means no energy, while one means maximum echo energy; for depth, the minimum value denotes a close object, while the maximum value represents a far one, limited by the sonar maximum range; angle distortion is zero in the center of the image, increasing for both sided borders until the half value of horizontal field of view.}
 
 \begin{figure*}[!ht]
     \centering
@@ -295,8 +293,7 @@ resources for the same level of detail, compared with the displacement mapping
 technique, because the geometry remains unchanged. Since \textcolor{blue}{normal maps} are built in tangent space, interpolating the normal vertex and the texture, tangent, bi-tangent and normal (TBN) matrices are computed to convert the normal values into the world space. \textcolor{blue}{The visual differences of applying normal mapping in the actual scenes are illustrated in Figs. \ref{fig:normal_0} and \ref{fig:normal_1}, in the shader representation, in Figs. \ref{fig:normal_2} and \ref{fig:normal_3}, and the final sonar image, in Figs. \ref{fig:normal_4} and \ref{fig:normal_5}}. The reflectance allows to properly describe the intensity received back from observable objects in shader processing, according to the material
 properties (for instance, aluminum has more reflectivity than wood and plastic).
 When an object has the reflectivity property defined, the reflectance value
-$\rho$ is passed to the fragment shader and processed \textcolor{blue}{on GPU. So, the final pixel intensity represents the product of surface normal angle by the reflectance value $\rho$. The reflectance affects the shader representation, as depicted in Figs. \ref{fig:reflectance:1}, \ref{fig:reflectance:0_35}, \ref{fig:reflectance:1_40} and \ref{fig:reflectance:2_12}), with a final sonar image shown in Figs. \ref{fig:reflectance:view:1}, \ref{fig:reflectance:view:0_35}, \ref{fig:reflectance:view:1_40} and \ref{fig:reflectance:view:2_12}. At the end of sonar rendering step, the shader provides a 3-channel matrix composed by intensity, depth and angular distortion parameters.}
-%%%Lucian: Essa frase "At the end of sonar rendering step, the shader provides a 3-channel matrix composed by intensity, depth and angular distortion parameters." parece confundir tudo. Esses parâmetros não eram usados para renderizar o sonar a partir da câmera virtual? Para que dizer que "the shader provides a 3-channel matrix..."????? Precisa dizer alguma coisa sobre o quanto esses parâmetros afetam a renderização, etc. Pense nisso!!!!
+$\rho$ is passed to the fragment shader and processed \textcolor{blue}{on GPU. So, the final pixel intensity represents the product of surface normal angle by the reflectance value $\rho$. The reflectance affects the shader representation, as depicted in Figs. \ref{fig:reflectance:1}, \ref{fig:reflectance:0_35}, \ref{fig:reflectance:1_40} and \ref{fig:reflectance:2_12}), with a final sonar image shown in Figs. \ref{fig:reflectance:view:1}, \ref{fig:reflectance:view:0_35}, \ref{fig:reflectance:view:1_40} and \ref{fig:reflectance:view:2_12}.}
 
 \begin{figure}[!ht]
     \centering
@@ -355,7 +352,6 @@ $\rho$ is passed to the fragment shader and processed \textcolor{blue}{on GPU. S
 
 
 % ----------------------------------------------------------------------------------
-%%%Mudei ligeiramente este título! "operation of the sonar device"
 \subsection{Simulating operation of the sonar device}
 \label{dev:sonardata}
 
@@ -389,7 +385,6 @@ and $i_{x}$ is the intensity value of the pixel $x$.
 \textcolor{blue}{Finally, the sonar image resolution must be big enough to contain all information of the bins. For that, the number of bins involved is directly proportional to the sonar image resolution.}
 
 % ----------------------------------------------------------------------------------
-%%%coloquei essa subseção como subseção da 3.3, pois ainda se refere a sonar operation
 \subsubsection{Noise model}
 \label{dev:noise}
 
