@@ -59,7 +59,7 @@ mistakes off the same kind in the revised version. Indeed, we carefully revised 
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{To find the final pixel intensity, we multiply its normal angle value by the material reflectance $\rho$. This operation takes place in fragment shader. We rewrote the sentences on subsection 3.2 to make the idea clearer. Also, the Fig. 6 was modified to take this consideration.}
+\textbf{To find the final pixel intensity, we multiply the surface normal angle by the material reflectance $\rho$. This operation takes place in fragment shader. We rewrote the sentences on subsection 3.2 to make the idea clearer. Also, the Fig. 6 was modified to take this consideration.}
 
 \begin{verbatim}
 > About the simulation resolution, the number of bins are dependent of the
@@ -71,7 +71,8 @@ mistakes off the same kind in the revised version. Indeed, we carefully revised 
 
 %\todo[inline, color=green!40]{Jan's answer}
 %%%Luciano 03/06/2017: não entendi a última parte da resposta; a parte do "driver"!!!!!
-\textbf{The simulator itself is as freely parameterizable as possible to allow for a wide range of imaging sonars to be simulated. The definition of the bin numbers, ranges etc. is done for each individual simulated sonar in the corresponding component which injects the sonar data into the full simulation. For example has the driver for a simulated TriTech Gemini sonar for the exact same parameters as the real sonar. From the point of view of the robot control, the system can be very realistic.}
+%%%Rômulo 03/06/2017: reescrevi essa última parte.
+\textbf{The simulator itself is as freely parameterizable as possible to allow for a wide range of imaging sonars to be simulated. The definition of the bin numbers, ranges etc. is done for each individual simulated sonar in the corresponding component which injects the sonar data into the full simulation. For instance, the simulated FLS and MSIS devices, presented in Section 4, have the exact same parameters and operation modes as the real sonars (Tritech Gemini 720i and Tritech Micron DST). From the point of view of the robot control, the system can be very realistic.}
 
 \begin{verbatim}
 > Another interesting thing is related to the noise simulation. It does not appear
@@ -81,7 +82,7 @@ mistakes off the same kind in the revised version. Indeed, we carefully revised 
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{This issue is explained in subsection 4.1. As we described in
-Section 3.4, the speckle noise modeled in this paper is a multiplicative one,
+subsection 3.3.1, the speckle noise modeled in this paper is a multiplicative one,
 following a non-uniform distribution. The resulting sonar data is composed by
 an element-wise multiplication between the raw data and the speckle noise. The
 insertion of additive noise is already addressed as future work to solve this
@@ -96,11 +97,12 @@ missing part.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 %%%Luciano 03/06/2017: O que é "outlook section"?
+%%%Rômulo 03/06/2017: Refere-se à última seção do paper "Conclusion and future work". Mudei isso aqui.
 \textbf{We have chosen to extend the underwater acoustic phenomena in the
 simulator obeying the use by real-time applications. Processing the
 reverberation in a sonar simulator is computationally costly, then its
 addition must consider the time consuming again. We took this problem
-into account and addressed it as future work in the outlook section.}
+into account and addressed it as future work in the Section 5.}
 
 \begin{verbatim}
 > It is hard to validate a simulator, however, I believe the works lake in
@@ -111,7 +113,8 @@ into account and addressed it as future work in the outlook section.}
 
 %\todo[inline, color=green!40]{Jan's answer}
 %%%Luciano 03/06/2017: Tem que revisar esta resposta. Já não condiz com o texto!!!!!
-\textbf{We just now had the opportunity to record data with an imaging sonar of an object which we can fully simulate (see Figs. 7(c) in the revised paper and \ref{fig:real_sonar} of this document). Therefore we plan to use this data next months to analyze the quality of the simulation and publish this later when the results are satisfied.}
+%%%Rômulo 03/06/2017: A última sentença do texto diz que "Future works will focus on qualitative and time consuming comparison with other sonar simulators and with real acoustic images.". Não sei se é adequado incluir isto no texto desta forma, ou apenas dizendo que os trabalhos futuros incluem comparação e análise detalhadas com imagens reais (como está agora).
+\textbf{We just now had the opportunity to record data with an imaging sonar of an object which we can fully simulate (see Figs. 7(c) and 7(f) in the revised paper and Fig. \ref{fig:real_sonar} of this document). Therefore we plan to use this data next months to analyze the quality of the simulation and publish this later when the results are satisfied.}
 \newpage
 
 \begin{figure}[tb]
@@ -132,9 +135,12 @@ into account and addressed it as future work in the outlook section.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
+%%% Rômulo 03/06/2017: Reescrevi este parágrafo sobre o problema de limitação.
+\textbf{The 8-bit channel representation only causes precision problems with the depth parameter. In this case, we replaced the original depth information by the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this information was not addressed in the first version of the paper. We clarified this point in the revised version.}
 
-\textbf{The only problem caused by the limitation of the 8-bit channel
-representation is in the Euclidean distance from camera center information (let us call this information as depth). In this case, we replaced the original depth information by the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this information was not addressed in the first version of the paper. We clarified this issue in the revised version. }
+% The 8-bit channel representation only causes problem with the 
+% The only problem caused by the limitation of the 8-bit channel
+% representation is in the Euclidean distance from camera center information (let us call this information as depth). In this case, we replaced the original depth information by the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this information was not addressed in the first version of the paper. We clarified this issue in the revised version. }
 
 \textbf{Indeed, CUDA and OpenCL are both good alternatives to implement
 the proposed approach. However, we have chosen to use GLSL for three main reasons:
@@ -193,6 +199,7 @@ it clearer.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 %%%Luciano 03/06/2017: rever se está realmente claro essa questão do energy accumulated. Acho que não, ainda.
+%%%Rômulo 03/06/2017: eu retirei esse termo do texto para evitar esse tipo de confusão. Onde estava escrito "energy accumulated", eu reescrevi o texto.
 \textbf{We rewrote this paragraph to clarify these issues.}
 
 \begin{verbatim}
@@ -207,6 +214,7 @@ it clearer.}
 
 %\todo[inline, color=green!40]{Jan's answer}
 %%%Luciano 03/06/2017: rever a resposta. Mudamos isso depois.
+%%%Rômulo 03/06/2017: acredito que a resposta ainda condiz com o questionamento do revisor.
 \textbf{This sentence was rewritten in the revised version to explain the necessity of the integration of the sonar simulation into a framework and then the connection to Rock-Gazebo was made. That hopefully makes this paragraph a less confusing.}
 
 \begin{verbatim}
@@ -376,7 +384,7 @@ n(x;\mu,\sigma) = \frac{1}{{\sigma \sqrt {2\pi } }}e^{{{ - \left( {x - \mu } \ri
 
 %\todo[inline, color=green!40]{Jan's answer}
 \textbf{With regards to other simulation systems, we have the problem that the freely available simulators either don't fit our targeted niche of having a real-time simulation for robots or are bound to specific sonar they simulate. This is the one of the reasons we actually started our development. Real sonar data validation is incredible hard, since there are a lot of parameters to consider. We
-will however conduct a qualitative comparison using data we were able to record very recently. A paragraph pointing this out has been added to the results section.}
+will however conduct a qualitative comparison using data we were able to record very recently.} %A paragraph pointing this out has been added to the results section.}
 
 \begin{verbatim}
 > --- lines 370-373
@@ -390,7 +398,7 @@ will however conduct a qualitative comparison using data we were able to record 
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Additive noise has a far more sever impact on the image and therefore on any recognition algorithm running on that image. It is therefore very important not to divert too far from the real world, which is why we e.g. haven't just added a Gaussian additive noise. There is ongoing work to integrate it, but we are not finished. We added a short sentence in the test explaining this situation.}
+\textbf{Additive noise has a far more sever impact on the image and therefore on any recognition algorithm running on that image. So It is very important not to divert too far from the real world, which is why we e.g. haven't just added a Gaussian additive noise. There is ongoing work to integrate it, but we are not finished. We added a short sentence in the text explaining this situation.}
 
 \begin{verbatim}
 > Here I make an observation regarding the proposed technique. As was
@@ -419,6 +427,7 @@ pipeline on GPU to compute the acoustic frame instead of simulating sound pulse 
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 %%%Luciano 03/06/2017: Isso está bem explicado no texto? Veja ai.
+%%%Rômulo 03/06/2017: Eu inclui uma referência no texto sobre isso. Está descrito no final da subseção dos resultados qualitativos.
 \textbf{Multipath means that a signal propagates between transmitter and receiver along several different paths, resulting in fading and reverberation effects. We included the reference [22] in the paper.}
 
 \begin{verbatim}

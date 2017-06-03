@@ -116,7 +116,7 @@ we take advantage of precomputed geometric data during the rasterization
 pipeline to compute the acoustic frame. In addition, all raster data are handled on GPU, accelerating then the simulation process with the guarantee of
 real-time response, in contrast to the methods found in
 \cite{bell1997,coiras2009,sac2015,demarco2015}. Although the systems found in \cite{bell1997,coiras2009,sac2015,demarco2015,gu2013,kwak2015,gueriot2010} focused on the simulation of specific sonar device, our simulator is able to reproduce two kinds of sonar devices: mechanical scanning imaging sonar (MSIS)
-and forward-looking sonar (FLS).} The intensity measured back from the
+and forward-looking sonar (FLS). The intensity measured back from the
 insonified objects depends on surface normal directions and reflectivity,
 producing more realistic simulated frames than binary representation, this latter
 found in \cite{gu2013,kwak2015}. The speckle noise is modeled as a non-uniform Gaussian distribution and applied to our final sonar image, which approaches to real-world sonar operation, differently to \cite{sac2015,demarco2015,gu2013,kwak2015,gueriot2010}. \textcolor{blue}{On the other hand, we did not exploit the additive noise as it was considered in \cite{sac2015,demarco2015}. Finally, it is noteworthy that our proposed system simulates physical phenomena since they are constrained to real-time (e.g. decision-making algorithms and control system tuning). Aware of this real-time constraint, the high computational cost phenomena such as reverberation is not included at this point, differently of \cite{sac2015,gueriot2010}.}
