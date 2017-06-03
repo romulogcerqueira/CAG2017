@@ -132,7 +132,7 @@ Sonars are echo-ranging devices that use acoustic energy to locate and survey
 objects in a desired area. The sonar transducer emits pulses of sound waves
 (or ping) until they hit any object or be completely absorbed. When the
 acoustic signal collides with a surface, part of this energy is reflected,
-while other is refracted. The sonar data is built by plotting the echo measured back versus time of acoustic signal. The transducer reading in a given direction forms a \textit{beam}. A single beam transmitted from a sonar is illustrated in Fig. \ref{fig:sonar_geometry}. The horizontal and vertical beamwidths are represented by the azimuth $\psi$ and elevation $\theta$ angles, respectively, where each sampling along the beam is named as \textit{bin}. The sonar coverage area is defined by $R_{min}$ and $R_{max}$. Since the speed of sound underwater is known, or can be measured, the time delay between the emitted pulses and the respective echoes reveals how far the objects are (distance $r$), as well as how fast they are moving. The backscattered acoustic power in each bin determines the intensity value.
+while other is refracted. The sonar data is built by plotting the echo measured back versus time of acoustic signal. The transducer reading in a given direction forms a \textit{beam}. A single beam transmitted from a sonar is illustrated in Fig. \ref{fig:sonar_geometry}. The horizontal and vertical beamwidths are represented by the azimuth $\psi$ and elevation $\theta$ angles, respectively, where each sampling along the beam is named as \textit{bin}. The sonar coverage area is defined by $R_{min}$ and $R_{max}$. Since the speed of sound underwater is known, or can be measured, the time delay between the emitted pulses and the respective echoes (named time-of-flight) reveals how far the objects are (distance $r$), as well as how fast they are moving. The backscattered acoustic power in each bin determines the intensity value.
 
 With different azimuth directions, the array of transducer readings forms the
 final sonar image. Since all incoming signals converge to the same point, the
@@ -232,22 +232,17 @@ joints) and other virtual objects are defined by simulation description files (S
 
 A rendering pipeline can be customized by defining GPU shaders. A shader is written in OpenGL Shading Language (GLSL) \cite{rost2009}, a high-level language with a C-based syntax, which enables more direct control of graphics pipeline, avoiding the use of low-level or hardware-specific languages. Shaders can describe the characteristics of either a vertex or a fragment (a single pixel). Vertex shaders are responsible by transforming the vertex position into a screen position by the rasterizer, generating texture coordinates for texturing, and lighting the vertex to determine each color. The rasterization results, in a set of pixels to be processed by fragment shaders, manipulate pixel location, depth and alpha values, and interpolated parameters from the previous stages, such as colors and textures.
 
-%%%Luciano: mudei de "three 2D parameters" -> "three parameters"
-%%% to simulate the sonar device => "render sonar device"
 \textcolor{blue}{In our work, the underwater scenes are sampled by a virtual camera (frame-by-frame), whose optical axis is aligned with the \textbf{opening angle}, the intended \textbf{viewing direction} and the coverage \textbf{range} of the simulated sonar device (see Fig. \ref{fig:sonar_sim}(i)). To simulate the sonar imaging by using virtual camera frames, three parameters are computed in fragment and vertex shaders, during the rendering pipeline. This way, we are able to use the precomputed geometric information during the image rasterization process on GPU. The three parameters to render the sonar device using a virtual camera are illustrated in Fig. \ref{fig:sonar_sim}(ii), and are described as follows:}
 
 \begin{itemize}[]
-    \item \textbf{Distance / Depth} is the camera focal length, calculated by the Euclidean distance to the object surface point; 
-    \item \textbf{Intensity} presents the echo reflection energy based
-    on object surface normal angle up to the camera; 
-    \item \textbf{Angular distortion} is the angle formed from the camera
-    center column up to the camera boundary column, for both directions. \end{itemize}
+    \item \textcolor{blue}{\textbf{Distance / Depth} simulates the time-of-flight of acoustic pulse and is formed by the Euclidean distance between the camera center and the object surface point;}
+    \item \textbf{Intensity} represents the acoustic echo reflection energy based on object surface normal angle up to the camera;
+    \item \textcolor{blue}{\textbf{Angular distortion} means the sonar's field of view angle in the horizontal direction.}
+\end{itemize}
 
-%%%Luciano: precisa deixar sempre claro no que se refere a "both directions". Essas "both directions" está vaga. Direção precisa ser claramente estabelecidade de onde para onde.
 %%% O que é "projection angle range"? Está vago.
-%%%"increasing for both borders to present the half value of horizontal field of view" both boders = "both sided borders"? 
-\textcolor{blue}{By default, the shader encodes the raster data in 8-bit color channels for red, green, blue and alpha (RGBA). In our simulator, this image data structure is used to store the intensity, depth and angular distortion parameters to render the sonar from a virtual camera, in the RGB channels. The intensity parameter follows the real sonar common representation as 8-bit values; the depth is replaced by the native GLSL 32-bit depth buffer to avoid precision limitation during the calculation of the distance histogram (see Fig. \ref{fig:sonar_sim}(iii)); as the projection angle range on a shader matrix varies from $0^{\circ}$ to $90^{\circ}$, for both directions, the angular distortion is represented by 8-bit values without loss of precision. Also, all these three parameters in the shader matrix are normalized into the interval [0,1]. For the intensity parameter, zero means no energy, while one means maximum echo energy; for depth, the minimum value denotes a close object, while the maximum value represents a far one, limited by the sonar maximum range; angle distortion is zero in the center of the image, increasing for both borders to present the half value of horizontal field of view.}
-%%%To presente é o melhor verbo ai em cima? Não se entende o que quer dizer com: "increasing for both borders "to present" the half value of horizontal field of view"!!!!
+%%%Luciano: precisa deixar sempre claro no que se refere a "both directions". Essas "both directions" está vaga. Direção precisa ser claramente estabelecidade de onde para onde.
+\textcolor{blue}{By default, the shader encodes the raster data in 8-bit color channels for red, green, blue and alpha (RGBA). In our simulator, this image data structure is used to store the intensity, depth and angular distortion parameters to render the sonar from a virtual camera, in the RGB channels. The intensity parameter follows the real sonar common representation as 8-bit values; the depth is replaced by the native GLSL 32-bit depth buffer to avoid precision limitation during the calculation of the distance histogram (see Fig. \ref{fig:sonar_sim}(iii)); as the projection angle range on a shader matrix varies from $0^{\circ}$ to $90^{\circ}$, for both directions, the angular distortion is represented by 8-bit values without loss of precision. Also, all these three parameters in the shader matrix are normalized into the interval [0,1]. For the intensity parameter, zero means no energy, while one means maximum echo energy; for depth, the minimum value denotes a close object, while the maximum value represents a far one, limited by the sonar maximum range; angle distortion is zero in the center of the image, increasing for both sided borders until the half value of horizontal field of view.}
 
 \begin{figure*}[!ht]
     \centering
@@ -301,7 +296,7 @@ technique, because the geometry remains unchanged. Since \textcolor{blue}{normal
 properties (for instance, aluminum has more reflectivity than wood and plastic).
 When an object has the reflectivity property defined, the reflectance value
 $\rho$ is passed to the fragment shader and processed \textcolor{blue}{on GPU. So, the final pixel intensity represents the product of surface normal angle by the reflectance value $\rho$. The reflectance affects the shader representation, as depicted in Figs. \ref{fig:reflectance:1}, \ref{fig:reflectance:0_35}, \ref{fig:reflectance:1_40} and \ref{fig:reflectance:2_12}), with a final sonar image shown in Figs. \ref{fig:reflectance:view:1}, \ref{fig:reflectance:view:0_35}, \ref{fig:reflectance:view:1_40} and \ref{fig:reflectance:view:2_12}. At the end of sonar rendering step, the shader provides a 3-channel matrix composed by intensity, depth and angular distortion parameters.}
-%%%Lucian: Essa frase "At the end of sonar rendering step, the shader provides a 3-channel matrix composed by intensity, depth and angular distortion parameters." parece confundir tudo. Esses parâmetros não eram usados para renderizar o sonar a partir da câmera virtual? Para que dizer que "the shader provides a 3-channel matrix..."????? Precisa dizer alguma coisa sobre o quanto esses parâmetros afetam a renderização, etc. Pense nisso!!!! 
+%%%Lucian: Essa frase "At the end of sonar rendering step, the shader provides a 3-channel matrix composed by intensity, depth and angular distortion parameters." parece confundir tudo. Esses parâmetros não eram usados para renderizar o sonar a partir da câmera virtual? Para que dizer que "the shader provides a 3-channel matrix..."????? Precisa dizer alguma coisa sobre o quanto esses parâmetros afetam a renderização, etc. Pense nisso!!!!
 
 \begin{figure}[!ht]
     \centering
@@ -592,8 +587,6 @@ farther from sonar, because of the normal orientation of the surface.
     \end{center}
 \end{table*}
 
-%%Luciano: Essa frase: "using an MSIS located in the back of the AUV with a vertical orientation, the scene was scanned to produce the acoustic visualization" - parece óbvia demais. Qual o sentido dela no final deste parágrafo?
-% Rômulo: Os dois primeiros experimentos ocorreram com o MSIS montado horizontalmente, enquanto o último ele foi posicionado para leitura vertical
 The MSIS was also simulated in three different experiments. The robot in a
 big textured tank composes \textbf{the first scene} (see Fig.
 \ref{fig:msis_scene1}); similar to the first scenario of FLS experiment,
