@@ -12,11 +12,7 @@
 
 \maketitle
 
-We thank the reviewers for their insightful and useful feedback. We have
-revised our paper in light of their comments. Please, find
-below our replies and comments about each of the issues raised, and how
-we modified the paper to address them. All changes in the text are in blue
-in this revised version.
+We thank the reviewers for their insightful and useful feedback. We have revised our paper in light of their comments. Please, find below our replies and comments about each of the issues raised, and how we modified the paper to address them. Beyond the suggested reviews, we also changes some parts of the paper to adhere to the suggestions. To make clear where we modified, all changes in the text are in blue in this revised version.
 
 \begin{verbatim}
 >> REVIEWER #1 <<
@@ -31,18 +27,17 @@ in this revised version.
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Done. We corrected the referred typos and other
-errors of the same kind in the revised version.}
+\textbf{All corrected. Not only the cited typos, but also other
+mistakes off the same kind in the revised version. Indeed, we carefully revised the whole text.}
 
 \begin{verbatim}
-> The contribution of the work is interesting for the community, mainly if the
+> The contribution of the work is interesting for the community, mainly if the 
 > simulator will become freely available. It can increase the potential of the
 > work in terms of impact.
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Certainly, after the acceptance of the paper, we will add the URL to
-download the simulator in the paper, making it public available.}
+\textbf{Certainly, on the acceptance of the paper, we will make the simulator publicly available.}
 
 \begin{verbatim}
 > About the work, Figure 3 is confused and needs to be improved. The authors
@@ -64,10 +59,7 @@ download the simulator in the paper, making it public available.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{To find the final pixel intensity, we multiply its normal angle value by the
-material reflectance $\rho$. This operation takes place in fragment shader.
-We rewrote the sentences on subsection 3.2 to make the idea clearer. Also, the Fig. 6 was
-improved to take your consideration.}
+\textbf{To find the final pixel intensity, we multiply its normal angle value by the material reflectance $\rho$. This operation takes place in fragment shader. We rewrote the sentences on subsection 3.2 to make the idea clearer. Also, the Fig. 6 was modified to take this consideration.}
 
 \begin{verbatim}
 > About the simulation resolution, the number of bins are dependent of the
@@ -78,11 +70,8 @@ improved to take your consideration.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{The simulator itself is as freely parameterizable as possible to allow for a wide range of imaging
-sonars to be simulated. The definition of the bin numbers, ranges etc. is done for each individual
-simulated sonar in the corresponding component which injects the sonar data into the full simulation.
-For example has the driver for a simulated TriTech Gemini sonar for the exact same parameters as the
-real sonar. From the point of view of the robot control, the system can be very realistic.}
+%%%Luciano 03/06/2017: não entendi a última parte da resposta; a parte do "driver"!!!!!
+\textbf{The simulator itself is as freely parameterizable as possible to allow for a wide range of imaging sonars to be simulated. The definition of the bin numbers, ranges etc. is done for each individual simulated sonar in the corresponding component which injects the sonar data into the full simulation. For example has the driver for a simulated TriTech Gemini sonar for the exact same parameters as the real sonar. From the point of view of the robot control, the system can be very realistic.}
 
 \begin{verbatim}
 > Another interesting thing is related to the noise simulation. It does not appear
@@ -106,6 +95,7 @@ missing part.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
+%%%Luciano 03/06/2017: O que é "outlook section"?
 \textbf{We have chosen to extend the underwater acoustic phenomena in the
 simulator obeying the use by real-time applications. Processing the
 reverberation in a sonar simulator is computationally costly, then its
@@ -120,14 +110,12 @@ into account and addressed it as future work in the outlook section.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{We just now had the opportunity to record data with an imaging sonar of an object which we can
-fully simulate (see Figs. 7(c) in the revised paper and \ref{fig:real_sonar} of this document). Therefore we
-plan to use this data next months to analyze the quality of the simulation and publish this later when
-the results are satisfied.}
+%%%Luciano 03/06/2017: Tem que revisar esta resposta. Já não condiz com o texto!!!!!
+\textbf{We just now had the opportunity to record data with an imaging sonar of an object which we can fully simulate (see Figs. 7(c) in the revised paper and \ref{fig:real_sonar} of this document). Therefore we plan to use this data next months to analyze the quality of the simulation and publish this later when the results are satisfied.}
 \newpage
 
 \begin{figure}[tb]
-    \includegraphics[width=0.7\columnwidth]{../figs/real_ssiv_03}
+    \includegraphics[width=0.7\columnwidth]{figs/real_ssiv}
     \centering
     % \captionsetup{justification=centering}
     \caption{Image of a Tritech Gemini 720i Imaging Sonar of a mock-up of a sub-sea structure.}
@@ -145,14 +133,10 @@ the results are satisfied.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 
-\textbf{Good points. The only problem caused by the limitation of the 8-bit channel
-representation is in the Euclidean distance from camera center information (let us call
-this information as depth). In this case, we replace the original depth information by
-the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this
-information was not addressed in the first version of the paper. We clarified this issue
-in the revised version. }
+\textbf{The only problem caused by the limitation of the 8-bit channel
+representation is in the Euclidean distance from camera center information (let us call this information as depth). In this case, we replaced the original depth information by the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this information was not addressed in the first version of the paper. We clarified this issue in the revised version. }
 
-\textbf{Indeed, CUDA and OpenCL are both good alternatives ways to implement
+\textbf{Indeed, CUDA and OpenCL are both good alternatives to implement
 the proposed approach. However, we have chosen to use GLSL for three main reasons:
 1) native from OpenGL, avoiding to install additional packages;
 2) hardware and backward compatibility;
@@ -164,8 +148,7 @@ the proposed approach. However, we have chosen to use GLSL for three main reason
 \end{verbatim}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
-\textbf{Conditioned to the acceptance of the paper, the simulator will be available
-under an open source license and may be downloaded from Github.}
+\textbf{We added as much details as possible in this revised version. Conditioned to the acceptance of the paper, the simulator will be available under an open source license and may be downloaded from Github.}
 
 \begin{verbatim}
 > This sentence seems to be from a decade ago paper…: Modern graphics hardware
@@ -209,6 +192,7 @@ it clearer.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
+%%%Luciano 03/06/2017: rever se está realmente claro essa questão do energy accumulated. Acho que não, ainda.
 \textbf{We rewrote this paragraph to clarify these issues.}
 
 \begin{verbatim}
@@ -222,9 +206,8 @@ it clearer.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{This sentence was rewritten in the revised version to explain the necessity of the integration of the
-sonar simulation into a framework and then the connection to Rock-Gazebo was made.
-That hopefully makes this paragraph a less confusing.}
+%%%Luciano 03/06/2017: rever a resposta. Mudamos isso depois.
+\textbf{This sentence was rewritten in the revised version to explain the necessity of the integration of the sonar simulation into a framework and then the connection to Rock-Gazebo was made. That hopefully makes this paragraph a less confusing.}
 
 \begin{verbatim}
 > The Introduction section contains some text that should be in the Related
@@ -232,9 +215,7 @@ That hopefully makes this paragraph a less confusing.}
 \end{verbatim}
 
 %\todo[inline, color=yellow!40]{Luciano's answer}
-\textbf{We decided to include the related work continuously inside the introduction
-without a dedicated subsection. We think that it makes the text more uniform and fluid
-in the introduction.}
+\textbf{We decided to include the related work continuously inside the introduction without a dedicated subsection. We think that it makes the text more uniform and fluid in the introduction.}
 
 \begin{verbatim}
 > Technically, bump maps are different from normal maps. Bump maps are defined as
@@ -245,26 +226,21 @@ in the introduction.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{In fact, the proposed approach uses normal maps to simulate geometric surface
-irregularities by passing RGB textures and modifying the normal vectors. We revised the
-manuscript to avoid this mistake.}
+\textbf{In fact, the proposed approach uses normal maps to simulate geometric surface irregularities by passing RGB textures and modifying the normal vectors. We revised the manuscript to change this.}
 
 \begin{verbatim}
 > Some image labels are too small.
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{The paper have followed the journal's LaTeX template. It is not possible to modify
-this point.}
+\textbf{The paper have followed the journal's LaTeX template. It is not possible to modify this point.}
 
 \begin{verbatim}
 > No need to put "the {first|second|third|last} {scenario|scene}" in bold on
 > lines 322, 327, 334, 343, 347-348, 354-355.
 \end{verbatim}
 
-\textbf{The rationale in putting the sentences in bold was to highlight the beginning
-of the explanations about each scene/scenario. This helps the reader to follow our
-description.}
+\textbf{The rationale in putting the sentences in bold was to highlight the beginning of the explanations about each scene/scenario. This helps the reader to follow our description.}
 
 \begin{verbatim}
 > Contributions and limitations
@@ -278,7 +254,7 @@ description.}
 > abstract.
 \end{verbatim}
 
-\textbf{We added the use of GPU in the abstract.}
+\textbf{We added the use of GPU in the abstract. In fact, we completely revised the abstract to fit to the suggested changes.}
 
 
 \begin{verbatim}
@@ -298,8 +274,7 @@ description.}
 \end{verbatim}
 
 % \todo[inline, color=green!40]{Jan's answer}
-\textbf{Thank you for catching this point. We have rewritten the sentences
-and the paragraph to avoid such confusion and make them clearer.}
+\textbf{We have rewritten the sentences and the paragraph to avoid such confusion and make them clearer.}
 
 \begin{verbatim}
 > ---> The authors claim that the proposed technique overcomes the "main
@@ -328,8 +303,7 @@ subsection 1.1 to avoid such confusion in the revised paper.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{We tried to incorporate all your suggestions and hope to clear our description of
-the method.}
+\textbf{We tried to incorporate all your suggestions and hope to clear out our description of the method.}
 
 \begin{verbatim}
 > --- lines 74-78
@@ -345,10 +319,8 @@ the method.}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
 \textbf{The rasterization was chosen because the geometric data from virtual
-scene are computed on optimized pipeline GPU embedded. With this, we handled
-these precomputed data to get the depth, intensity and angular distortion parameters needed
-to build the acoustic frame. In addition, we have rewritten the subsection 1.1
-to include these informations.}
+scene are computed on optimized pipeline GPU embedded. With this, we handled with
+these precomputed data to get the depth, intensity and angular distortion parameters needed to build the acoustic frame. In addition, we have rewritten the subsection 1.1 to include these informations.}
 
 \begin{verbatim}
 > The method takes advantage of the rasterization pipeline in order to build
@@ -369,9 +341,7 @@ to include these informations.}
 \end{verbatim}
 
 % \todo[inline, color=green!40]{Jan's answer}
-\textbf{The "3D shader matrix" is a 3-channel matrix which stores the 2D information
-about depth, intensity and angular distortion from the captured OSG scene. We have rewritten this
-term on paper to make it clear.}
+\textbf{The "3D shader matrix" is a 3-channel matrix which stores the information about depth, intensity and angular distortion from the captured OSG scene. We have rewritten this term on paper to make it clear.}
 
 \begin{verbatim}
 > I've found the noise model too arbitrary. How good is this approximation?
@@ -385,9 +355,7 @@ distribution:}
 n(x;\mu,\sigma) = \frac{1}{{\sigma \sqrt {2\pi } }}e^{{{ - \left( {x - \mu } \right)^2 } \mathord{\left/ {\vphantom {{ - \left( {x - \mu } \right)^2 } {2\sigma ^2 }}} \right. \kern-\nulldelimiterspace} {2\sigma ^2 }}},
 \end{equation*}
 
-\textbf{given mean $\mu$ and standard deviation $\sigma$. In the proposed approach,
-we defined $\mu = 0.4$ and $\sigma = 0.15$, and the modeled curve is presented in Fig. 4(v)
-in the paper.}
+\textbf{given mean $\mu$ and standard deviation $\sigma$. In the proposed approach, we defined $\mu = 0.4$ and $\sigma = 0.15$, and the modeled curve is presented in Fig. 4(v) in the paper.}
 
 \begin{verbatim}
 > Results
@@ -407,13 +375,8 @@ in the paper.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{With regards to other simulation systems, we have the problem that the freely available
-simulators either don't fit our targeted niche of having a real-time simulation for robots or are
-bound to specific sonar they simulate. This is the one of the reasons we actually started our
-development.
-Real sonar data validation is incredible hard, since there are a lot of parameters to consider. We
-will however conduct a qualitative comparison using data we were able to record very recently.
-A paragraph pointing this out has been added to the results section.}
+\textbf{With regards to other simulation systems, we have the problem that the freely available simulators either don't fit our targeted niche of having a real-time simulation for robots or are bound to specific sonar they simulate. This is the one of the reasons we actually started our development. Real sonar data validation is incredible hard, since there are a lot of parameters to consider. We
+will however conduct a qualitative comparison using data we were able to record very recently. A paragraph pointing this out has been added to the results section.}
 
 \begin{verbatim}
 > --- lines 370-373
@@ -427,10 +390,7 @@ A paragraph pointing this out has been added to the results section.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Additive noise has a far more sever impact on the image and therefore on any recognition
-algorithm running on that image. It is therefore very important not to divert too far from the real world,
-which is why we e.g. haven't just added a Gaussian additive noise. There is ongoing work to integrate it,
-but we are not finished. We added a short sentence in the test explaining this.}
+\textbf{Additive noise has a far more sever impact on the image and therefore on any recognition algorithm running on that image. It is therefore very important not to divert too far from the real world, which is why we e.g. haven't just added a Gaussian additive noise. There is ongoing work to integrate it, but we are not finished. We added a short sentence in the test explaining this situation.}
 
 \begin{verbatim}
 > Here I make an observation regarding the proposed technique. As was
@@ -447,10 +407,7 @@ but we are not finished. We added a short sentence in the test explaining this.}
 \textbf{Good point. We have decided to extend the physical phenomena in the
 simulator obeying its usage in real-time conditions. Knowing that, our approach
 is optimized by taking precomputed geometric data during the rasterization
-pipeline on GPU to compute the acoustic frame instead of simulating sound pulse propagation
-with ray-tracing approach. Computing the multipath reflection in sonar simulation
-is computationally costly, thus we need to consider the time consuming again by modeling
-and including phenomena such as reverberation.}
+pipeline on GPU to compute the acoustic frame instead of simulating sound pulse propagation with ray-tracing approach. Computing the multi-path reflection in sonar simulation is computationally costly, thus we need to consider the time consuming again by modeling and including phenomena such as reverberation. This will be made in the future.}
 
 \begin{verbatim}
 > --- lines 373-375
@@ -461,9 +418,8 @@ and including phenomena such as reverberation.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Multipath means that a signal propagates between transmitter and receiver along
-several different paths, resulting in fading and reverberation effects. We included
-the reference [22] in the paper.}
+%%%Luciano 03/06/2017: Isso está bem explicado no texto? Veja ai.
+\textbf{Multipath means that a signal propagates between transmitter and receiver along several different paths, resulting in fading and reverberation effects. We included the reference [22] in the paper.}
 
 \begin{verbatim}
 > Decision
@@ -498,8 +454,7 @@ satisfied this time.}
 \end{verbatim}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
-\textbf{We thank for your feedback. We have addressed the other reviewers' comments in the revised
-version,and we hope your expectations continue to be satisfied.}
+\textbf{We thank for your feedback. We have addressed the other reviewers' comments in the revised version, and we hope your expectations continue to be satisfied.}
 
 \end{document}
 
