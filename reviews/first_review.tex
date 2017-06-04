@@ -5,7 +5,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{graphicx}
-% \usepackage{subfigure}
 
 \title{Response to the Reviewer's Comments}
 \begin{document}
@@ -49,7 +48,7 @@ mistakes off the same kind in the revised version. Indeed, we carefully revised 
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Done. We corrected the names in the cited figure (now Fig. 4 in the revised paper) to fit to the text.}
+\textbf{Done. We improved the terms in the cited figure (now Fig. 4 in the revised paper) to fit to the text.}
 
 \begin{verbatim}
 > In Fig. 6, it is not clear the effect of the parameter "p". How does the
@@ -70,9 +69,7 @@ mistakes off the same kind in the revised version. Indeed, we carefully revised 
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-%%%Luciano 03/06/2017: não entendi a última parte da resposta; a parte do "driver"!!!!!
-%%%Rômulo 03/06/2017: reescrevi essa última parte.
-\textbf{The simulator itself is as freely parameterizable as possible to allow for a wide range of imaging sonars to be simulated. The definition of the bin numbers, ranges etc. is done for each individual simulated sonar in the corresponding component which injects the sonar data into the full simulation. For instance, the simulated FLS and MSIS devices, presented in Section 4, have the exact same parameters and operation modes as the real sonars (Tritech Gemini 720i and Tritech Micron DST). From the point of view of the robot control, the system can be very realistic.}
+\textbf{The simulator itself is as freely parameterizable as possible to allow for a wide range of imaging sonars to be simulated. The definition of the number of bins, ranges etc. is done for each individual simulated sonar in the corresponding component, which injects the sonar data into the full simulation. For instance, the simulated FLS and MSIS devices, presented in Section 4, have the exact same parameters and operation modes as the real sonars (Tritech Gemini 720i and Tritech Micron DST). From the point of view of the robot control, the system can be considered very realistic.}
 
 \begin{verbatim}
 > Another interesting thing is related to the noise simulation. It does not appear
@@ -96,8 +93,6 @@ missing part.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-%%%Luciano 03/06/2017: O que é "outlook section"?
-%%%Rômulo 03/06/2017: Refere-se à última seção do paper "Conclusion and future work". Mudei isso aqui.
 \textbf{We have chosen to extend the underwater acoustic phenomena in the
 simulator obeying the use by real-time applications. Processing the
 reverberation in a sonar simulator is computationally costly, then its
@@ -112,15 +107,12 @@ into account and addressed it as future work in the Section 5.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-%%%Luciano 03/06/2017: Tem que revisar esta resposta. Já não condiz com o texto!!!!!
-%%%Rômulo 03/06/2017: A última sentença do texto diz que "Future works will focus on qualitative and time consuming comparison with other sonar simulators and with real acoustic images.". Não sei se é adequado incluir isto no texto desta forma, ou apenas dizendo que os trabalhos futuros incluem comparação e análise detalhadas com imagens reais (como está agora).
-\textbf{We just now had the opportunity to record data with an imaging sonar of an object which we can fully simulate (see Figs. 7(c) and 7(f) in the revised paper and Fig. \ref{fig:real_sonar} of this document). Therefore we plan to use this data next months to analyze the quality of the simulation and publish this later when the results are satisfied.}
+\textbf{Just now, we had the opportunity to record data with a real imaging sonar of an object which we can fully simulate (see Figs. 7(c) and 7(f) in the revised paper and Fig. \ref{fig:real_sonar} of this document). Therefore we plan to use this data next months to analyze the quality of the simulation and publish this later, when the results are satisfied.}
 \newpage
 
 \begin{figure}[tb]
     \includegraphics[width=0.7\columnwidth]{figs/real_ssiv}
     \centering
-    % \captionsetup{justification=centering}
     \caption{Image of a Tritech Gemini 720i Imaging Sonar of a mock-up of a sub-sea structure.}
     \label{fig:real_sonar}
 \end{figure}
@@ -135,12 +127,7 @@ into account and addressed it as future work in the Section 5.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-%%% Rômulo 03/06/2017: Reescrevi este parágrafo sobre o problema de limitação.
-\textbf{The 8-bit channel representation only causes precision problems with the depth parameter. In this case, we replaced the original depth information by the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this information was not addressed in the first version of the paper. We clarified this point in the revised version.}
-
-% The 8-bit channel representation only causes problem with the 
-% The only problem caused by the limitation of the 8-bit channel
-% representation is in the Euclidean distance from camera center information (let us call this information as depth). In this case, we replaced the original depth information by the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this information was not addressed in the first version of the paper. We clarified this issue in the revised version. }
+\textbf{The 8-bit channel representation only causes precision problems with the pulse distance parameter. In this case, we replaced the original information by the native GLSL depth buffer, which has 32-bit floating-point values. In fact, this information was not addressed in the first version of the paper. We clarified this point in the revised version.}
 
 \textbf{Indeed, CUDA and OpenCL are both good alternatives to implement
 the proposed approach. However, we have chosen to use GLSL for three main reasons:
@@ -198,8 +185,6 @@ it clearer.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-%%%Luciano 03/06/2017: rever se está realmente claro essa questão do energy accumulated. Acho que não, ainda.
-%%%Rômulo 03/06/2017: eu retirei esse termo do texto para evitar esse tipo de confusão. Onde estava escrito "energy accumulated", eu reescrevi o texto.
 \textbf{We rewrote this paragraph to clarify these issues.}
 
 \begin{verbatim}
@@ -213,8 +198,6 @@ it clearer.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-%%%Luciano 03/06/2017: rever a resposta. Mudamos isso depois.
-%%%Rômulo 03/06/2017: acredito que a resposta ainda condiz com o questionamento do revisor.
 \textbf{This sentence was rewritten in the revised version to explain the necessity of the integration of the sonar simulation into a framework and then the connection to Rock-Gazebo was made. That hopefully makes this paragraph a less confusing.}
 
 \begin{verbatim}
@@ -234,7 +217,7 @@ it clearer.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{In fact, the proposed approach uses normal maps to simulate geometric surface irregularities by passing RGB textures and modifying the normal vectors. We revised the manuscript to change this.}
+\textbf{In fact, the proposed approach uses normal maps to simulate geometric surface irregularities by passing RGB textures and modifying the normal vectors. We revised the manuscript to correct this.}
 
 \begin{verbatim}
 > Some image labels are too small.
@@ -295,7 +278,7 @@ it clearer.}
 \end{verbatim}
 
 % \todo[inline, color=green!40]{Jan's answer}
-\textbf{We addressed your consideration in the text and rewrite the
+\textbf{We addressed your consideration in the text and review the
 subsection 1.1 to avoid such confusion in the revised paper.}
 
 \begin{verbatim}
@@ -328,7 +311,7 @@ subsection 1.1 to avoid such confusion in the revised paper.}
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
 \textbf{The rasterization was chosen because the geometric data from virtual
 scene are computed on optimized pipeline GPU embedded. With this, we handled with
-these precomputed data to get the depth, intensity and angular distortion parameters needed to build the acoustic frame. In addition, we have rewritten the subsection 1.1 to include these informations.}
+these precomputed data to get the pulse distance, echo intensity and sonar field-of-view parameters needed to build the acoustic frame. In addition, we have reviewed the subsection 1.1 to include these informations.}
 
 \begin{verbatim}
 > The method takes advantage of the rasterization pipeline in order to build
@@ -349,7 +332,7 @@ these precomputed data to get the depth, intensity and angular distortion parame
 \end{verbatim}
 
 % \todo[inline, color=green!40]{Jan's answer}
-\textbf{The "3D shader matrix" is a 3-channel matrix which stores the information about depth, intensity and angular distortion from the captured OSG scene. We have rewritten this term on paper to make it clear.}
+\textbf{The "3D shader matrix" is a 3-channel matrix which stores the sonar rendering parameters of pulse distance, echo intensity and sonar field-of-view from the captured OSG scene. We have rewritten this term on paper to make it clear.}
 
 \begin{verbatim}
 > I've found the noise model too arbitrary. How good is this approximation?
@@ -383,8 +366,7 @@ n(x;\mu,\sigma) = \frac{1}{{\sigma \sqrt {2\pi } }}e^{{{ - \left( {x - \mu } \ri
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{With regards to other simulation systems, we have the problem that the freely available simulators either don't fit our targeted niche of having a real-time simulation for robots or are bound to specific sonar they simulate. This is the one of the reasons we actually started our development. Real sonar data validation is incredible hard, since there are a lot of parameters to consider. We
-will however conduct a qualitative comparison using data we were able to record very recently.} %A paragraph pointing this out has been added to the results section.}
+\textbf{With regards to other simulation systems, we have the problem that the freely available simulators either don't fit our targeted niche of having a real-time simulation for robots or are bound to specific sonar they simulate. This is the one of the reasons we actually started our development. Real sonar data validation is incredible hard, since there are a lot of parameters to consider. However we will conduct a qualitative comparison using data we were able to record very recently (see Fig. 1 in this document).}
 
 \begin{verbatim}
 > --- lines 370-373
@@ -398,7 +380,7 @@ will however conduct a qualitative comparison using data we were able to record 
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Additive noise has a far more sever impact on the image and therefore on any recognition algorithm running on that image. So It is very important not to divert too far from the real world, which is why we e.g. haven't just added a Gaussian additive noise. There is ongoing work to integrate it, but we are not finished. We added a short sentence in the text explaining this situation.}
+\textbf{Additive noise has a far more sever impact on the image and therefore on any recognition algorithm running on that image. So it is very important not to divert too far from the real world, which is why we e.g. haven't just added a Gaussian additive noise. There is ongoing work to integrate it, but we are not finished. We added a short sentence in the text explaining this situation.}
 
 \begin{verbatim}
 > Here I make an observation regarding the proposed technique. As was
@@ -413,7 +395,7 @@ will however conduct a qualitative comparison using data we were able to record 
 
 % \todo[inline, color=green!40]{Jan's answer}
 \textbf{Good point. We have decided to extend the physical phenomena in the
-simulator obeying its usage in real-time conditions. Knowing that, our approach
+simulator obeying the use in real-time conditions. Knowing that, our approach
 is optimized by taking precomputed geometric data during the rasterization
 pipeline on GPU to compute the acoustic frame instead of simulating sound pulse propagation with ray-tracing approach. Computing the multi-path reflection in sonar simulation is computationally costly, thus we need to consider the time consuming again by modeling and including phenomena such as reverberation. This will be made in the future.}
 
@@ -426,8 +408,6 @@ pipeline on GPU to compute the acoustic frame instead of simulating sound pulse 
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-%%%Luciano 03/06/2017: Isso está bem explicado no texto? Veja ai.
-%%%Rômulo 03/06/2017: Eu inclui uma referência no texto sobre isso. Está descrito no final da subseção dos resultados qualitativos.
 \textbf{Multipath means that a signal propagates between transmitter and receiver along several different paths, resulting in fading and reverberation effects. We included the reference [22] in the paper.}
 
 \begin{verbatim}
