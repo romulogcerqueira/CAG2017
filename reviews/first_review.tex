@@ -11,7 +11,7 @@
 
 \maketitle
 
-We thank the reviewers for their insightful and useful feedback. We have revised our paper in light of their comments. Please, find below our replies and comments about each of the issues raised, and how we modified the paper to address them. Beyond the suggested reviews, we also changes some parts of the paper to adhere to the suggestions. To make clear where we modified, all changes in the text are in blue in this revised version.
+We thank the reviewers for their insightful and useful feedback. We have revised our paper in light of their comments. Please, find below our replies and comments about each of the issues raised, and how we modified the paper to address them. Beyond the suggested reviews, we also made changes in some parts of the paper to adhere to the suggestions, turning the paper more coherent and cohesive. To make clear where we modified, all changes in the text are in blue in this revised version.
 
 \begin{verbatim}
 >> REVIEWER #1 <<
@@ -27,7 +27,7 @@ We thank the reviewers for their insightful and useful feedback. We have revised
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{All corrected. Not only the cited typos, but also other
-mistakes off the same kind in the revised version. Indeed, we carefully revised the whole text.}
+mistakes of the same kind in the revised version. Indeed, we carefully revised the whole text.}
 
 \begin{verbatim}
 > The contribution of the work is interesting for the community, mainly if the 
@@ -48,7 +48,7 @@ mistakes off the same kind in the revised version. Indeed, we carefully revised 
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Done. We improved the terms in the cited figure (now Fig. 4 in the revised paper) to fit to the text.}
+\textbf{Done. We improved the terms in the cited figure (now Fig. 4 in the revised paper) to fit to the text. We also completely reformulated the text referring to Fig. 4 to clearly explain in a higher level of understanding.}
 
 \begin{verbatim}
 > In Fig. 6, it is not clear the effect of the parameter "p". How does the
@@ -58,7 +58,7 @@ mistakes off the same kind in the revised version. Indeed, we carefully revised 
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{To find the final pixel intensity, we multiply the surface normal angle by the material reflectance $\rho$. This operation takes place in fragment shader. We rewrote the sentences on subsection 3.2 to make the idea clearer. Also, the Fig. 6 was modified to take this consideration.}
+\textbf{To find the final pixel intensity, we multiply the surface normal angle by the material reflectance $\rho$. This operation takes place in fragment shader. We rewrote the sentences in section 3.2 to make the idea clearer. Also, Figure 6 was modified to take this consideration.}
 
 \begin{verbatim}
 > About the simulation resolution, the number of bins are dependent of the
@@ -94,10 +94,10 @@ missing part.}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
 \textbf{We have chosen to extend the underwater acoustic phenomena in the
-simulator obeying the use by real-time applications. Processing the
+simulator, obeying the use in real-time applications. Processing the
 reverberation in a sonar simulator is computationally costly, then its
 addition must consider the time consuming again. We took this problem
-into account and addressed it as future work in the Section 5.}
+into account and addressed it as future work in the Section 5, as suggested.}
 
 \begin{verbatim}
 > It is hard to validate a simulator, however, I believe the works lake in
@@ -107,7 +107,7 @@ into account and addressed it as future work in the Section 5.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Just now, we had the opportunity to record data with a real imaging sonar of an object which we can fully simulate (see Figs. 7(c) and 7(f) in the revised paper and Fig. \ref{fig:real_sonar} of this document). Therefore we plan to use this data next months to analyze the quality of the simulation and publish this later, when the results are satisfied.}
+\textbf{Just now, we had the opportunity to record data with a real imaging sonar of an object which we can fully simulate (see Figs. 7(c) and 7(f) in the revised paper and Fig. \ref{fig:real_sonar}, in this document). Therefore we plan to use this data next months to analyze the quality of the simulation and publish this later, when the results are satisfied.}
 \newpage
 
 \begin{figure}[tb]
@@ -198,7 +198,7 @@ it clearer.}
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{This sentence was rewritten in the revised version to explain the necessity of the integration of the sonar simulation into a framework and then the connection to Rock-Gazebo was made. That hopefully makes this paragraph a less confusing.}
+\textbf{This sentence was rewritten in the revised version to explain the necessity of the integration of the sonar simulation into a framework, and then the connection to Rock-Gazebo was made. That hopefully makes this paragraph less confusing.}
 
 \begin{verbatim}
 > The Introduction section contains some text that should be in the Related
@@ -206,7 +206,7 @@ it clearer.}
 \end{verbatim}
 
 %\todo[inline, color=yellow!40]{Luciano's answer}
-\textbf{We decided to include the related work continuously inside the introduction without a dedicated subsection. We think that it makes the text more uniform and fluid in the introduction.}
+\textbf{We decided to include the related work continuously inside the introduction without a dedicated subsection. We believe that it makes the text more uniform and fluid in the introduction.}
 
 \begin{verbatim}
 > Technically, bump maps are different from normal maps. Bump maps are defined as
@@ -224,7 +224,7 @@ it clearer.}
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{The paper have followed the journal's LaTeX template. It is not possible to modify this point.}
+\textbf{The paper have followed the LaTeX template provided by the journal. It is not possible to modify this point.}
 
 \begin{verbatim}
 > No need to put "the {first|second|third|last} {scenario|scene}" in bold on
@@ -310,8 +310,8 @@ subsection 1.1 to avoid such confusion in the revised paper.}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
 \textbf{The rasterization was chosen because the geometric data from virtual
-scene are computed on optimized pipeline GPU embedded. With this, we handled with
-these precomputed data to get the pulse distance, echo intensity and sonar field-of-view parameters needed to build the acoustic frame. In addition, we have reviewed the subsection 1.1 to include these informations.}
+scene are computed on optimized pipeline GPU embedded. With that, we handled with
+these precomputed data to get the pulse distance, echo intensity and sonar field-of-view parameters needed to build the acoustic frame (these terms were renamed from distance/depth, angular distortion and intensity in the first version of the paper). In addition, we have reviewed the subsection 1.1 to include this information.}
 
 \begin{verbatim}
 > The method takes advantage of the rasterization pipeline in order to build
@@ -380,7 +380,7 @@ n(x;\mu,\sigma) = \frac{1}{{\sigma \sqrt {2\pi } }}e^{{{ - \left( {x - \mu } \ri
 \end{verbatim}
 
 %\todo[inline, color=green!40]{Jan's answer}
-\textbf{Additive noise has a far more sever impact on the image and therefore on any recognition algorithm running on that image. So it is very important not to divert too far from the real world, which is why we e.g. haven't just added a Gaussian additive noise. There is ongoing work to integrate it, but we are not finished. We added a short sentence in the text explaining this situation.}
+\textbf{Additive noise has a far more sever impact on the image and therefore on any recognition algorithm running on that image. So it is very important not to divert too far from the real world, which is why we e.g. haven't just added a Gaussian additive noise. There is an ongoing work to integrate it, but we are not finished. We added a short sentence in the text explaining this situation.}
 
 \begin{verbatim}
 > Here I make an observation regarding the proposed technique. As was
@@ -395,9 +395,9 @@ n(x;\mu,\sigma) = \frac{1}{{\sigma \sqrt {2\pi } }}e^{{{ - \left( {x - \mu } \ri
 
 % \todo[inline, color=green!40]{Jan's answer}
 \textbf{Good point. We have decided to extend the physical phenomena in the
-simulator obeying the use in real-time conditions. Knowing that, our approach
+simulator obeying the use of real-time conditions. Aware of that, our approach
 is optimized by taking precomputed geometric data during the rasterization
-pipeline on GPU to compute the acoustic frame instead of simulating sound pulse propagation with ray-tracing approach. Computing the multi-path reflection in sonar simulation is computationally costly, thus we need to consider the time consuming again by modeling and including phenomena such as reverberation. This will be made in the future.}
+pipeline on GPU to compute the acoustic frame, instead of simulating sound pulse propagation with ray-tracing approach. Computing the multi-path reflection in sonar simulation is computationally costly, thus we need to consider the time consuming again by modeling and including phenomena such as reverberation. This will be made in the future.}
 
 \begin{verbatim}
 > --- lines 373-375
@@ -408,7 +408,7 @@ pipeline on GPU to compute the acoustic frame instead of simulating sound pulse 
 \end{verbatim}
 
 % \todo[inline, color=red!40]{Rômulo's answer}
-\textbf{Multipath means that a signal propagates between transmitter and receiver along several different paths, resulting in fading and reverberation effects. We included the reference [22] in the paper.}
+\textbf{Multipath means that a signal propagates between transmitter and receiver along several different paths, resulting in fading and reverberation effects. We included the reference [22] in the paper, explaining it better.}
 
 \begin{verbatim}
 > Decision
@@ -423,9 +423,7 @@ pipeline on GPU to compute the acoustic frame instead of simulating sound pulse 
 \end{verbatim}
 
 % \todo[inline, color=blue!40]{Undefined responsible's answer}
-\textbf{We thank for your feedback. We have addressed your comments and the other
-reviewers' ones in the revised manuscript and we hope your expectations are
-satisfied this time.}
+\textbf{Many thanks for your feedback. We have addressed your comments and the other reviewers' comments in the revised manuscript, and we hope to have your expectations satisfied this time.}
 
 \begin{verbatim}
 >> REVIEWER #4 <<
