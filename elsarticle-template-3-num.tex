@@ -594,8 +594,25 @@ proportional to sonar image resolution, we can conclude that the number of bins 
 
 \subsection{Evaluation of sonar image quality}
 
-Numerically assessing the performance of a sonar simulator is a non-trivial task. As sonar simulators must work as trustworthy environment to avoid in-field experiments, the goal of the quantitative evaluation should be to demonstrating that the real-world sonar image can be aligned with the synthetic one. This image alignment must carry out by considering a real-world and a virtual scene, both insonified by real and virtual sonar devices, respectively, in the exact same conditions. Since our simulator consider a sonar equipping an AUV, the pose of the vehicle 
-Among other metrics, image alignment can be inferred by 
+Numerically assessing the performance of a sonar simulator is a non-trivial task. As sonar simulators must work as trustworthy environment to avoid in-field experiments, the goal of the quantitative evaluation should be to demonstrating that the real-world sonar image can be aligned with the synthetic one. This image alignment must carry out by considering a real-world and a virtual scene, both insonified by real and virtual sonar devices, respectively, in the exact same conditions. Since our simulator consider a sonar equipping an AUV, the pose of the vehicle
+Among other metrics, image alignment can be inferred by
+
+\begin{figure*}[!ht]
+    \centering
+    \setcounter{subfigure}{0}
+    \subfigure[]{
+        \includegraphics[width=0.4\paperwidth,height=6cm]{figs/eval_ssiv_real}
+        \label{fig:eval:ssiv:real}
+    }
+    \setcounter{subfigure}{1}
+    \subfigure[]{
+        \includegraphics[width=0.4\paperwidth,height=6cm]{figs/eval_ssiv_sim}
+        \label{fig:eval:ssiv:sim}
+    }
+    \captionsetup{justification=justified}
+    \caption{XXXXXXXXXXXXXXX.}
+    \label{fig:eval:real}
+\end{figure*}
 
 % ----------------------------------------------------------------------------------
 
