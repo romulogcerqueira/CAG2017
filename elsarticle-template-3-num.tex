@@ -132,29 +132,14 @@ elevation arc at a fixed range, as depicted in Fig. \ref{fig:sonar_geometry}.
 In the acoustic representation, the 3D information is lost in the projection
 into a 2D image.
 
+% ----------------------------------------------------------------------------------
+
 \begin{figure}[t]
     \includegraphics[width=\columnwidth]{figs/sonar_geometry_2}
     \captionsetup{justification=justified}
     \caption{Imaging sonar geometry. By a projection process, all 3D points  belonging to the same elevation arc (represented as dashd orange line) will be represented to the same image point in the 2D plane. Range $r$ and azimuth angle $\psi$ are measured, and elevation angle $\theta$ is lost. Sonar coverage area is defined by $R_{min}$ and $R_{max}$.}
     \label{fig:sonar_geometry}
 \end{figure}
-
-% ----------------------------------------------------------------------------------
-
-\subsection{Sonar characteristics}
-\label{sonar:characteristics}
-
-Although sonar devices overcome main limitations of optical sensors, they
-present more difficult data interpretation due to:
-
-\begin{enumerate}[a)]
-    \item \textbf{Shadowing}: This effect is caused by objects blocking the
-sound waves transmission, and causing regions behind them, without acoustic feedback. These regions are defined by a black spot in the resulting sonar image, occluding part of the scene;
-    \item \textbf{Non-uniform resolution}: The amount of pixels used to represent an echo intensity record in the Cartesian coordinate system grows as its range increases. This situation causes image distortions and object flatness;
-    \item \textbf{Changes in viewpoint}: Imaging the same scene from different viewpoints can cause occlusions, shadows movements and significant  changes of observable objects \cite{hurtos2014}. For instance, when an    outstanding object is insonified, its shadow is shorter, as the sonar becomes closer;
-    \item \textbf{Low signal-to-noise ratio (SNR)}: sonars suffer from low SNR mainly due the very-long-range scanning, and the presence of speckle noise introduced by acoustic wave interferences \cite{abbott1979};
-    \item \textbf{Reverberation}: This phenomenon is caused when multiple acoustic waves, returning from the same object, are detected over the same ping, producing duplicated objects.
-\end{enumerate}
 
 % ----------------------------------------------------------------------------------
 \begin{figure*}[t]
@@ -173,6 +158,27 @@ sound waves transmission, and causing regions behind them, without acoustic feed
     \captionsetup{justification=justified}
     \label{fig:sonar_devices}
 \end{figure*}
+
+% ----------------------------------------------------------------------------------
+
+\subsection{Sonar characteristics}
+\label{sonar:characteristics}
+
+Although sonar devices overcome main limitations of optical sensors, they
+present more difficult data interpretation due to:
+
+\begin{enumerate}[a)]
+    \item \textbf{Shadowing}: This effect is caused by objects blocking the
+sound waves transmission, and causing regions behind them, without acoustic feedback. These regions are defined by a black spot in the resulting sonar image, occluding part of the scene;
+    \item \textbf{Non-uniform resolution}: The amount of pixels used to represent an echo intensity record in the Cartesian coordinate system grows as its range increases. This situation causes image distortions and object flatness;
+    \item \textbf{Changes in viewpoint}: Imaging the same scene from different viewpoints can cause occlusions, shadows movements and significant  changes of observable objects \cite{hurtos2014}. For instance, when an    outstanding object is insonified, its shadow is shorter, as the sonar becomes closer;
+    \item \textbf{Low signal-to-noise ratio (SNR)}: sonars suffer from low SNR mainly due the very-long-range scanning, and the presence of speckle noise introduced by acoustic wave interferences \cite{abbott1979};
+    \item \textbf{Reverberation}: This phenomenon is caused when multiple acoustic waves, returning from the same object, are detected over the same ping, producing duplicated objects.
+\end{enumerate}
+
+
+
+% ----------------------------------------------------------------------------------
 
 \subsection{Types of underwater sonar devices}
 \label{sonar:devices}
@@ -584,27 +590,6 @@ using an MSIS located in the back of the AUV with a vertical orientation, the sc
 All the experimental scenarios was defined in order to provide enough variability of specific phenomena usually found in real sonar images, such as acoustic shadows, noise interference, surface irregularities and properties, distortion during the acquisition process and changes of acoustic intensities. However, the speckle noise application is restricted to regions with acoustic intensity, as shown in Figs. \ref{fig:fls_sim3} and \ref{fig:msis_sim1}. This fact is due to our sonar model be multiplicative (defined in Eq. \ref{eq:2}). In real sonar images, the noise also granulates the shadows and blind regions. The sonar simulator can be improved by inserting an additive noise to our model.
 The impact of incorporating additive noise on the image is more severe than that of multiplicative, and we decided to collect more data before including a specific additive noise in our simulator, at this moment. A second feature missing in our simulated acoustic images are the ghost effects caused by reverberation. This lacking part can be addressed by implementation of a multi-path propagation model \cite{huang2015b}, where the signal propagates along several different paths, resulting in fading and reverberation effects. Simulating the multi-path reflection is computationally costly, thus we need more time to modeling and including the reverberation phenomenon, to consider the real-time constraints.
 
-\subsection{Computational time}
-
-Performance evaluation of the simulator was assessed by considering the suitability to run real-time applications. The experiments were performed on a Intel Core i7 3540M processor, running at 3 GHz with 16GB DDR3 RAM memory and NVIDIA NVS 5200M video card, with Ubuntu 16.04 64 bits operating system. The elapsed time of each sonar data is stored to compute the average time, standard deviation and frame rate metrics, after $500$ iterations. The results found is summarized in Tables \ref{table:fls} and \ref{table:msis}. After changing the sonar rendering parameters, such as number of bins, number of beams and field-of-view, the proposed approach generated the sonar samples with a high
-frame rate, for both sonar types, in comparison to real-world sonars. For instance, the Tritech Gemini 720i, a real forward-looking sonar sensor, with a field-of-view of $120^{\circ}$ by $20^{\circ}$ and 256 beams, presents a maximum update rate of 15 frames per second; so, the obtained results allow the use of the sonar simulator for real-time applications. Also, the MSIS data used in the simulator is able to complete a $360^{\circ}$ scan sufficiently fast in comparison with a real sonar as Tritech Micron DST. For the FLS device, these rates are superior to the rates lists by DeMarco \textit{et al} \cite{demarco2015} ($330 ms$) and Saç \textit{et al} \cite{sac2015} ($2.5 min$). For MSIS type, to the best of our knowledge, there is no previous work for comparison.
-
-According to previous results, since the number of bins is directly
-proportional to sonar image resolution, we can conclude that the number of bins used affects the computational time; when the number of bins increases, the simulator will have a bigger scene frame to compute and to generate the sonar data.
-
-\subsection{Quality evaluation of the simulated sonar image}
-
-Numerically assessing the performance of a sonar simulator is a non-trivial task. As sonar simulators must work as trustworthy environment to avoid in-field experiments, the goal of the quantitative evaluation should be to demonstrating that the real-world sonar image can be aligned with the synthetic one. Just two out of the six works analyzed in Section \ref{} perform quantitative evaluation of the proposed simulators, but only with respect to computational time.
-
-Image alignment must be carried out by considering a real-world and a virtual scene, both insonified by real and virtual sonar devices, respectively, in the exact same conditions. In other words, same conditions mean that we have to guarantee the same pose of the AUV in the real and virtual scenarios, which, in turn, should present the same elements being insonified; measuring the alignment of the images (real and virtual) works as comparing how much the simulated sonar image is similar to the real one with respect to pixel intensity and location.
-
-The process of measuring the alignment (similarity) of two images can be performed by a set of measures, such as: mutual information, entropy, peak signal-to-noise ratio (PSNR), structural similarity index measure (SSIM), and interesting point detectors and distances (\textit{e.g.}, scale invariant feature transform - SIFT). To evaluate the alignment between the real and virtual images, we attempted to model a real scene insonified by our AUV under the sea. Figure \ref{} illustrated the two scenarios used to perform the evaluation. After the scenes were modeled, a pair of sonar images were produced: one from the real sonar device and another one from the simulated sonar device, for each scene (see Figs. \ref{} and \ref{}). After that, we applied the five aforementioned alignment metrics to compute the degree of similarity between each pair of images. 
-%%% Colocar os resultados em tabelas
-%%%Analisar os resultados:
-%%% - Se forem bons: ótimo
-%%% - Caso contrário, analisar a dificuldade do alinhamento por conta de não garantir a mesma "pose" dos AUVS nas cenas real e simulada - provavelmente deve ir por aqui. reforçar também que os outros trabalhos seguem pela linha de "human visual analysis para verificar o realismo e que as imagens de sonar dos trabalhos analisados não são "boas"
-
-
 
 \begin{figure*}[!ht]
     \centering
@@ -622,6 +607,26 @@ The process of measuring the alignment (similarity) of two images can be perform
     \caption{XXXXXXXXXXXXXXX.}
     \label{fig:eval:real}
 \end{figure*}
+
+\subsection{Computational time}
+
+Performance evaluation of the simulator was assessed by considering the suitability to run real-time applications. The experiments were performed on a Intel Core i7 3540M processor, running at 3 GHz with 16GB DDR3 RAM memory and NVIDIA NVS 5200M video card, with Ubuntu 16.04 64 bits operating system. The elapsed time of each sonar data is stored to compute the average time, standard deviation and frame rate metrics, after $500$ iterations. The results found is summarized in Tables \ref{table:fls} and \ref{table:msis}. After changing the sonar rendering parameters, such as number of bins, number of beams and field-of-view, the proposed approach generated the sonar samples with a high
+frame rate, for both sonar types, in comparison to real-world sonars. For instance, the Tritech Gemini 720i, a real forward-looking sonar sensor, with a field-of-view of $120^{\circ}$ by $20^{\circ}$ and 256 beams, presents a maximum update rate of 15 frames per second; so, the obtained results allow the use of the sonar simulator for real-time applications. Also, the MSIS data used in the simulator is able to complete a $360^{\circ}$ scan sufficiently fast in comparison with a real sonar as Tritech Micron DST. For the FLS device, these rates are superior to the rates lists by DeMarco \textit{et al} \cite{demarco2015} ($330 ms$) and Saç \textit{et al} \cite{sac2015} ($2.5 min$). For MSIS type, to the best of our knowledge, there is no previous work for comparison.
+
+According to previous results, since the number of bins is directly
+proportional to sonar image resolution, we can conclude that the number of bins used affects the computational time; when the number of bins increases, the simulator will have a bigger scene frame to compute and to generate the sonar data.
+
+\subsection{Quality evaluation of the simulated sonar image}
+
+Numerically assessing the performance of a sonar simulator is a non-trivial task. As sonar simulators must work as trustworthy environment to avoid in-field experiments, the goal of the quantitative evaluation should be to demonstrating that the real-world sonar image can be aligned with the synthetic one. Just two out of the six works analyzed in Section \ref{introduction} perform quantitative evaluation of the proposed simulators, but only with respect to computational time.
+
+Image alignment must be carried out by considering a real-world and a virtual scene, both insonified by real and virtual sonar devices, respectively, in the exact same conditions. In other words, same conditions mean that we have to guarantee the same pose of the AUV in the real and virtual scenarios, which, in turn, should present the same elements being insonified; measuring the alignment of the images (real and virtual) works as comparing how much the simulated sonar image is similar to the real one with respect to pixel intensity and location.
+
+The process of measuring the alignment (similarity) of two images can be performed by a set of measures, such as: mutual information, entropy, peak signal-to-noise ratio (PSNR), structural similarity index measure (SSIM), and interesting point detectors and distances (\textit{e.g.}, scale invariant feature transform - SIFT). To evaluate the alignment between the real and virtual images, we attempted to model a real scene insonified by our AUV under the sea. Figure \ref{} illustrated the two scenarios used to perform the evaluation. After the scenes were modeled, a pair of sonar images were produced: one from the real sonar device and another one from the simulated sonar device, for each scene (see Figs. \ref{} and \ref{}). After that, we applied the five aforementioned alignment metrics to compute the degree of similarity between each pair of images.
+%%% Colocar os resultados em tabelas
+%%%Analisar os resultados:
+%%% - Se forem bons: ótimo
+%%% - Caso contrário, analisar a dificuldade do alinhamento por conta de não garantir a mesma "pose" dos AUVS nas cenas real e simulada - provavelmente deve ir por aqui. reforçar também que os outros trabalhos seguem pela linha de "human visual analysis para verificar o realismo e que as imagens de sonar dos trabalhos analisados não são "boas"
 
 % ----------------------------------------------------------------------------------
 
