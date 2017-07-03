@@ -592,10 +592,19 @@ frame rate, for both sonar types, in comparison to real-world sonars. For instan
 According to previous results, since the number of bins is directly
 proportional to sonar image resolution, we can conclude that the number of bins used affects the computational time; when the number of bins increases, the simulator will have a bigger scene frame to compute and to generate the sonar data.
 
-\subsection{Evaluation of sonar image quality}
+\subsection{Quality evaluation of the simulated sonar image}
 
-Numerically assessing the performance of a sonar simulator is a non-trivial task. As sonar simulators must work as trustworthy environment to avoid in-field experiments, the goal of the quantitative evaluation should be to demonstrating that the real-world sonar image can be aligned with the synthetic one. This image alignment must carry out by considering a real-world and a virtual scene, both insonified by real and virtual sonar devices, respectively, in the exact same conditions. Since our simulator consider a sonar equipping an AUV, the pose of the vehicle
-Among other metrics, image alignment can be inferred by
+Numerically assessing the performance of a sonar simulator is a non-trivial task. As sonar simulators must work as trustworthy environment to avoid in-field experiments, the goal of the quantitative evaluation should be to demonstrating that the real-world sonar image can be aligned with the synthetic one. Just two out of the six works analyzed in Section \ref{} perform quantitative evaluation of the proposed simulators, but only with respect to computational time.
+
+Image alignment must be carried out by considering a real-world and a virtual scene, both insonified by real and virtual sonar devices, respectively, in the exact same conditions. In other words, same conditions mean that we have to guarantee the same pose of the AUV in the real and virtual scenarios, which, in turn, should present the same elements being insonified; measuring the alignment of the images (real and virtual) works as comparing how much the simulated sonar image is similar to the real one with respect to pixel intensity and location.
+
+The process of measuring the alignment (similarity) of two images can be performed by a set of measures, such as: mutual information, entropy, peak signal-to-noise ratio (PSNR), structural similarity index measure (SSIM), and interesting point detectors and distances (\textit{e.g.}, scale invariant feature transform - SIFT). To evaluate the alignment between the real and virtual images, we attempted to model a real scene insonified by our AUV under the sea. Figure \ref{} illustrated the two scenarios used to perform the evaluation. After the scenes were modeled, a pair of sonar images were produced: one from the real sonar device and another one from the simulated sonar device, for each scene (see Figs. \ref{} and \ref{}). After that, we applied the five aforementioned alignment metrics to compute the degree of similarity between each pair of images. 
+%%% Colocar os resultados em tabelas
+%%%Analisar os resultados:
+%%% - Se forem bons: ótimo
+%%% - Caso contrário, analisar a dificuldade do alinhamento por conta de não garantir a mesma "pose" dos AUVS nas cenas real e simulada - provavelmente deve ir por aqui. reforçar também que os outros trabalhos seguem pela linha de "human visual analysis para verificar o realismo e que as imagens de sonar dos trabalhos analisados não são "boas"
+
+
 
 \begin{figure*}[!ht]
     \centering
